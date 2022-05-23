@@ -1,0 +1,560 @@
+<section class="findJob">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="mainHeading" data-aos="fade-up">
+            <h2>Explore Jobs</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="searchFormBlock" data-aos="fade-up">
+        <div class="row">
+          <div class="col-sm-12">
+            <div class="row">
+              <div class="col-sm-3 col-xs-12">
+                <input
+                  type="text"
+                  class="form-control form-control--key"
+                  [(ngModel)]="keyword"
+                  placeholder="Title"
+                />
+              </div>
+              <div class="col-sm-3 col-xs-12">
+                <!-- <input
+                  type="text"
+                  class="form-control form-control--loc"
+                  [(ngModel)]="location"
+                  placeholder="Location"
+                /> -->
+                <input
+                  ngx-google-places-autocomplete
+                  id="placeAutocomplete"
+                  class="form-control form-control--loc"
+                  placeholder="Location"
+                  (onAddressChange)="handleAddressChange($event)"
+                />
+              </div>
+              <div class="col-sm-3 col-xs-12">
+                <div class="formtabBox">
+                  <img src="assets/images/search-icon01.png" alt="" />
+                  <select
+                    (change)="onSearch()"
+                    [disabled]="
+                      lat.length == 0 || lng.length == 0 || location.length == 0
+                    "
+                    [(ngModel)]="selectedRadius"
+                    class="form-select form-control--exp"
+                  >
+                    <option value="">Radius</option>
+                    <option *ngFor="let exp of radius" [value]="exp.key">
+                      {{ exp.value }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-3 col-xs-12">
+                <angular2-multiselect
+                  [data]="category_list"
+                  [(ngModel)]="selectedItems"
+                  [settings]="dropdownSettings"
+                  (onSelect)="onItemSelect($event)"
+                  (onDeSelect)="OnItemDeSelect($event)"
+                  (onDeSelectAll)="onDeSelectAll($event)"
+                >
+                  <c-badge>
+                    <ng-template let-item="item">
+                      <img
+                        [src]="item.category_image"
+                        style="width: 16px; margin-right: 10px"
+                      />
+                      <label style="margin: 0px">{{
+                        item.category_name
+                      }}</label>
+                    </ng-template>
+                  </c-badge>
+                  <c-item>
+                    <ng-template let-item="item">
+                      <img
+                        [src]="item.category_image"
+                        style="
+                          width: 30px;
+                          border: 1px solid #efefef;
+                          margin-right: 20px;
+                        "
+                      />
+                      <label>{{ item.category_name }}</label>
+                    </ng-template>
+                  </c-item>
+                </angular2-multiselect>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8 col-md-9">
+          <ul class="filterRow">
+            <li class="timeSelect">
+              <select
+                (change)="onSearch()"
+                [(ngModel)]="shortType"
+                class="form-select"
+              >
+                <option *ngFor="let sd of sortDataList" [value]="sd.key">
+                  {{ sd.value }}
+                </option>
+              </select>
+            </li>
+            <li class="limitSearchArea">
+              <h2>Limit search to:</h2>
+
+              <!-- <label class="form-check"
+            >Contractor
+            <input
+              (change)="onSearch()"
+              type="checkbox"
+              [(ngModel)]="is_contractor"
+            />
+            <span class="checkmark"></span>
+          </label> -->
+              <div class="formchkArea">
+                <label class="form-check"
+                  >Full time
+                  <input
+                    (change)="onSearch()"
+                    type="checkbox"
+                    [(ngModel)]="is_full_time"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+                <label class="form-check"
+                  >Part time
+                  <input
+                    (change)="onSearch()"
+                    type="checkbox"
+                    [(ngModel)]="is_part_time"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+                <label class="form-check"
+                  >Temporary
+                  <input
+                    (change)="onSearch()"
+                    type="checkbox"
+                    [(ngModel)]="is_temporary"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+                <label class="form-check"
+                  >Hourly
+                  <input
+                    (change)="onSearch()"
+                    type="checkbox"
+                    [(ngModel)]="is_hourly"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+                <label class="form-check"
+                  >Contractor / Booth rent
+                  <input
+                    (change)="onSearch()"
+                    type="checkbox"
+                    [(ngModel)]="is_booth_rent"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-4 col-md-3">
+          <div class="searchBtnBlock">
+            <a
+              href="javascript:void(0);"
+              (click)="onReset()"
+              class="btn btnSearch"
+              >Reset</a
+            >
+            <button (click)="onSearch()" class="btn btnSearch" type="button">
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="cardArea">
+        <div *ngFor="let job of job_list" class="card explr" data-aos="fade-up">
+          <div class="photo jobimg">
+            <img
+              alt="Image placeholder"
+              [src]="job.company_image"
+              onerror="this.src='assets/images/user.png';"
+            />
+          </div>
+          <div class="content">
+            <div class="topRow">
+              <div class="leftSide --exptext">
+                <h2 *ngIf="!can_apply">{{ job.job_title }}</h2>
+                <h2
+                  style="cursor: pointer"
+                  *ngIf="can_apply"
+                  (click)="onViewJobDetails(job)"
+                >
+                  {{ job.job_title }}
+                </h2>
+                <p class="ageTxt">{{ job.category_name }}</p>
+                <p>
+                  <img src="assets/images/loc.png" alt="" />
+                  {{ job.job_location }}
+                </p>
+              </div>
+              <div class="rightSide">
+                <span
+                  style="white-space: nowrap; background-color: #a4a89f"
+                  *ngIf="job.is_full_time == 'True'"
+                  class="tag tag--semiPink"
+                >
+                  Full Time
+                </span>
+                <span
+                  style="white-space: nowrap; background-color: #807680"
+                  *ngIf="job.is_part_time == 'True'"
+                  class="tag tag--semiPink"
+                >
+                  Part Time
+                </span>
+                <span
+                  style="white-space: nowrap; background-color: #a2bfca"
+                  *ngIf="job.is_hourly == 'True'"
+                  class="tag tag--semiPink"
+                >
+                  Hourly
+                </span>
+                <span
+                  style="white-space: nowrap; background-color: #393a10"
+                  *ngIf="job.is_booth_rent == 'True'"
+                  class="tag tag--semiPink"
+                >
+                  Booth Rent
+                </span>
+                <span
+                  style="
+                    white-space: nowrap;
+                    color: #000;
+                    background-color: #eff0f1;
+                  "
+                  *ngIf="job.is_contractor == 'True'"
+                  class="tag tag--semiPink"
+                >
+                  Contractor
+                </span>
+                <span
+                  style="white-space: nowrap; background-color: #242324"
+                  *ngIf="job.is_temporary == 'True'"
+                  type=""
+                  class="tag tag--semiPink"
+                >
+                  Temporary
+                </span>
+              </div>
+            </div>
+            <article>
+              {{ job.job_summary }}
+            </article>
+            <div class="btmRow">
+              <button
+                *ngIf="!job.is_applied"
+                type="button"
+                (click)="onJobApply(job)"
+                class="btn applybtn"
+              >
+                Apply
+              </button>
+              <button
+                *ngIf="job.is_applied"
+                type="button"
+                class="btn appliedbtn"
+              >
+                Application Sent
+              </button>
+              <button
+                id="viewJob"
+                style="display: none"
+                type="button"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                View job
+              </button>
+
+              <button
+                (click)="onViewJobDetails(job)"
+                type="button"
+                class="btn applybtn"
+              >
+                View Details
+              </button>
+
+              <span class="date"
+                >{{ homeService.convertDate(job.entry_date) | date }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="job_list.length == 0" class="card explr" data-aos="fade-up">
+          No jobs found using your criteria.
+        </div>
+        <div class="content">
+          <a
+            *ngIf="loadmore"
+            href="javascript:void(0);"
+            (click)="onLoadMore()"
+            class="btn loadBtn"
+            >Load more
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-body" *ngIf="jobData.job_title">
+        <section class="detailsArea modalcontnt">
+          <div class="container-fluid">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4 col-md-3">
+                  <div class="jobLogoArea">
+                    <div class="logo">
+                      <!-- <img src="assets/images/searchListLogo01.png" alt="" /> -->
+
+                      <img
+                        alt="Image placeholder"
+                        [src]="jobData.company_image"
+                        class="w-100"
+                        onerror="this.src='assets/images/recruiter_th01.png';"
+                      />
+                    </div>
+                    <!-- <p>{{ jobData.company_name }}</p> -->
+                    <!-- <button type="button" class="btn" data-waves>Login</button> -->
+                  </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                  <div class="detailsPnl">
+                    <div class="rightSide">
+                      <h1 class="jobheading">
+                        {{ jobData.job_title }}
+                        <span
+                          style="
+                            width: 100%;
+                            display: block;
+                            margin-top: 10px;
+                            font-size: 16px;
+                            color: black;
+                            font-weight: normal;
+                          "
+                          >{{ jobData.category_name }}</span
+                        >
+                      </h1>
+
+                      <div class="jobtags">
+                        <button
+                          style="white-space: nowrap; background-color: #a4a89f"
+                          *ngIf="jobData.is_full_time"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Full Time
+                        </button>
+                        <button
+                          style="white-space: nowrap; background-color: #807680"
+                          *ngIf="jobData.is_part_time"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Part Time
+                        </button>
+                        <button
+                          style="white-space: nowrap; background-color: #a2bfca"
+                          *ngIf="jobData.is_hourly"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Hourly
+                        </button>
+                        <button
+                          style="white-space: nowrap; background-color: #393a10"
+                          *ngIf="jobData.is_booth_rent"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Booth Rent
+                        </button>
+                        <button
+                          style="
+                            white-space: nowrap;
+                            color: #000;
+                            background-color: #eff0f1;
+                          "
+                          *ngIf="jobData.is_contractor"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Contractor
+                        </button>
+                        <button
+                          style="white-space: nowrap; background-color: #242324"
+                          *ngIf="jobData.is_temporary"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Temporary
+                        </button>
+                      </div>
+                    </div>
+                    <ul class="addressRow" data-aos="fade-up">
+                      <li>
+                        <img src="assets/images/home-small.png" alt="" />
+                        <a
+                          *ngIf="
+                            validURL(jobData.company_website) &&
+                            jobData.company_website
+                          "
+                          target="_blank"
+                          href="{{ '//' + jobData.company_website }}"
+                        >
+                          {{ jobData.company_name }}</a
+                        >
+                        <a
+                          *ngIf="
+                            !validURL(jobData.company_website) &&
+                            jobData.company_website
+                          "
+                          target="_blank"
+                          href="{{ 'https://' + jobData.company_website }}"
+                          >{{ jobData.company_name }}</a
+                        >
+                        <div *ngIf="!jobData.company_website">
+                          {{ jobData.company_name }}
+                        </div>
+                      </li>
+                      <li>
+                        <img src="assets/images/location-small.png" alt="" />
+                        {{ jobData.job_location }}
+                      </li>
+                      <li>
+                        <img src="assets/images/calender-small.png" alt="" />
+                        {{ jobData.job_post_is_created | date }}
+                      </li>
+                    </ul>
+                    <div class="jobPara" data-aos="fade-up">
+                      <h2>Job Details</h2>
+                      <p>
+                        {{ jobData.job_summary }}
+                      </p>
+                    </div>
+                    <div
+                      *ngIf="jobData.job_duties?.length != 0"
+                      class="jobPara"
+                      data-aos="fade-up"
+                    >
+                      <h2>JOB DUTIES / RESPONSIBILITIES</h2>
+                      <p>
+                        {{ jobData.job_duties }}
+                      </p>
+                    </div>
+                    <div
+                      *ngIf="jobData.job_skills.length != 0"
+                      class="jobPara"
+                      data-aos="fade-up"
+                    >
+                      <h2>JOB QUALIFICATIONS</h2>
+                      <p>
+                        {{ jobData.job_skills }}
+                      </p>
+                    </div>
+                    <div class="jobPara" data-aos="fade-up">
+                      <h2>CONTACT INFORMATION</h2>
+                      <p *ngIf="jobData.job_phone.length != 0" class="semi-lg">
+                        <img src="assets/images/contactIcn01_th01.png" alt="" />
+                        <a href="tel:{{ jobData.job_phone }}" target="_blank"
+                          >{{ jobData.job_phone }}
+                        </a>
+                      </p>
+                      <p *ngIf="jobData.job_email.length != 0" class="semi-lg">
+                        <img src="assets/images/contactIcn02_th01.png" alt="" />
+                        <a
+                          href="mailto:{{ jobData.job_email }}"
+                          target="_blank"
+                        >
+                          {{ jobData.job_email }}</a
+                        >
+                      </p>
+                      <p *ngIf="jobData.instagram.length != 0" class="semi-lg">
+                        <img src="assets/images/contactIcn03_th01.png" alt="" />
+                        <a
+                          target="_blank"
+                          href="{{ '//' + jobData.instagram }}"
+                          >{{ jobData.instagram }}</a
+                        >
+                      </p>
+                      <p *ngIf="jobData.facebook.length != 0" class="semi-lg">
+                        <img src="assets/images/contactIcn04_th01.png" alt="" />
+                        <a
+                          target="_blank"
+                          href="{{ '//' + jobData.facebook }}"
+                          >{{ jobData.facebook }}</a
+                        >
+                      </p>
+                    </div>
+                    <div class="jobPara d-flex justify-content-between">
+                      <button
+                        *ngIf="!selectedJob.is_applied"
+                        class="btn applybtn"
+                        style="height: 57px"
+                        type="button"
+                        (click)="onJobApply(selectedJob)"
+                      >
+                        Apply
+                      </button>
+                      <button
+                        *ngIf="selectedJob.is_applied"
+                        class="btn applybtn"
+                       style="background-color:grey; padding: 14px 30px;"  
+                        type="button"
+                      >
+                        Application Sent
+                      </button>
+
+                      <button
+                        type="button"
+                        class="btn applybtn"
+                        id="closePopup"
+                        data-waves
+                        data-aos="fade-up"
+                        data-bs-dismiss="modal"
+                      >
+                        Close
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+.detailsArea .detailsPnl .jobtags .btn {
+  padding: 5px 15px !important;
+  margin-left: 5px;
+  margin-bottom: 5px;
+}
+.detailsArea .detailsPnl .jobtags .btn:last-child {
+  margin-right: 0px;
+}
+.rightSide {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.jobtags {
+  width: 50%;
+  display: block;
+  float: left;
+}
+.jobheading {
+  width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+  .rightSide {
+    flex-direction: column;
+  }
+  .jobheading,
+  .jobtags {
+    width: 100%;
+  }
+  .detailsArea .detailsPnl .jobtags .btn {
+    padding: 5px 10px !important;
+    margin-left: 5px !important;
+    font-size: 12px;
+  }
+  .prvBtn{
+    width: 100%;
+    margin-bottom: 15px;
+  }
+  .rowBtns{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  .detailsArea .detailsPnl .jobPara h2{
+    font-size: 18px;
+  }
+  .detailsArea .detailsPnl .jobPara p{
+    text-align: left;
+  }
+  .detailsArea .detailsPnl .jobPara p.semi-lg{
+    align-items: center;
+  }
+  .rowBtns .prvBtn{
+    order: 2 !important;
+  }
+  .detailsArea .detailsPnl .btn{
+    margin-bottom: 0 !important;
+  }
+}
+@media only screen and (max-width: 800px) and (min-width: 560px){
+  .rowBtns .prvBtn{
+    order: 2 !important;
+    margin-top: 0;
+  }
+  .prvBtn{
+    margin-right: 0 !important;
+  }
+}

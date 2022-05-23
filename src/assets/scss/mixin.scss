@@ -1,0 +1,61 @@
+@mixin flexBase {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin gridBase {
+  display: grid;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin blockBase {
+  display: block;
+  float: left;
+}
+@mixin area {
+  width: 100%;
+  display: block;
+  float: left;
+  margin-bottom: 150px;
+}
+@mixin listBase {
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+@mixin buttonLarge {
+  padding: 16px 80px;
+  background: #42bfdd;
+  border-radius: 10px;
+  color: #070600;
+  font-weight: 500;
+}
+@mixin tableHead {
+  border-bottom: 2px solid rgba(187, 230, 228, 0.4) !important;
+  color: #070600;
+  font:500 20px/30px 'Poppins', sans-serif;
+  background-color: #fff;
+}
+@mixin tableDiv {
+  border-bottom: 2px solid rgba(187, 230, 228, 0.4) !important;
+  color: #070600;
+  font:400 18px/27px 'Poppins', sans-serif;
+  
+}
+
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+}

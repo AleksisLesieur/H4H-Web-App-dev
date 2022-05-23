@@ -1,0 +1,32 @@
+.form-control.ng-invalid.ng-touched {
+  border-color: red !important;
+}
+.input-error {
+  width: 100%;
+  padding: 12px 20px !important;
+  height: auto;
+  background: #fff;
+  color: #000;
+  font-weight: 500;
+  border-radius: 10px !important;
+  border: 2px solid red;
+}
+.cheackbox{
+  margin-bottom: 20px;
+  float: left;
+}
+.chkrow{
+  display: flex; justify-content: flex-end;
+}
+
+@media only screen and (max-width: 600px) {
+  .cheackbox{
+    margin-left: 24px;
+  }
+}
+@media only screen and (max-width: 800px) and (min-width: 560px){
+  .chkrow{
+    justify-content: flex-start;
+    margin-left: 15px;
+  }
+}

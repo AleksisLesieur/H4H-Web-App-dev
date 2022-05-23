@@ -1,0 +1,409 @@
+<section *ngIf="!viewConfirm" class="loginArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div (click)="autoFill()" class="pgHdng" data-aos="fade-up">
+          <h2>Sign up</h2>
+        </div>
+        <!-- Nav tabs -->
+        <div class="LoginTabArea">
+          <ul
+            class="nav nav-tabs loginTab"
+            id="myTab"
+            role="tablist"
+            data-aos="fade-up"
+          >
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active waves-effect"
+                id="home-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#home"
+                type="button"
+                role="tab"
+                aria-controls="home"
+                aria-selected="true"
+              >
+                <img src="assets/images/applicant_th01.png" alt="" />
+                <h5>Applicant</h5>
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link waves-effect"
+                id="profile-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#profile"
+                type="button"
+                role="tab"
+                aria-controls="profile"
+                aria-selected="false"
+              >
+                <img src="assets/images/recruiter_th01.png" alt="" />
+                <h5>Recruiter</h5>
+              </button>
+            </li>
+          </ul>
+
+          <!-- Tab panes -->
+          <div class="tab-content" data-aos="fade-up">
+            <div
+              class="tab-pane active"
+              id="home"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <div class="mb-3">
+                <label for="" class="form-label">First Name *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon03.png" alt="" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="userData.user_fname"
+                    aria-describedby="helpId"
+                    placeholder="Enter your First Name"
+                    style="text-transform: capitalize"
+                  />
+                </div>
+
+                <!-- <small id="helpId" class="form-text text-muted"
+                  >Help text</small
+                > -->
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Last Name *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon03.png" alt="" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="userData.user_lname"
+                    aria-describedby="helpId"
+                    placeholder="Enter your Last Name"
+                    style="text-transform: capitalize"
+                  />
+                </div>
+
+                <!-- <small id="helpId" class="form-text text-muted"
+                  >Help text</small
+                > -->
+              </div>
+              <!-- <div class="mb-3">
+                <label for="" class="form-label">Username *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon03.png" alt="" />
+                  <input
+                    type="email"
+                    class="form-control"
+                    [(ngModel)]="userData.username"
+                    aria-describedby="helpId"
+                    placeholder="Enter your username"
+                  />
+                </div>
+              </div> -->
+              <div class="mb-3">
+                <label for="" class="form-label">Email address *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon01.png" alt="" />
+                  <input
+                    type="email"
+                    class="form-control"
+                    [(ngModel)]="userData.email"
+                    aria-describedby="helpId"
+                    placeholder="Enter your email"
+                  />
+                </div>
+
+                <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Password *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon02.png" alt="" />
+                  <input
+                    [type]="viewPassword ? 'text' : 'password'"
+                    class="form-control"
+                    [(ngModel)]="userData.password"
+                    aria-describedby="helpId"
+                    placeholder="Enter your password"
+                  />
+                  <img
+                    *ngIf="viewPassword"
+                    (click)="onViewPassword()"
+                    src="assets/images/vis.png"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="!viewPassword"
+                    (click)="onViewPassword()"
+                    src="assets/images/visno.png"
+                    alt=""
+                  />
+                </div>
+                <small id="emailHelp" class="form-text text-muted"
+                  >Password should be at least 8 characters long</small
+                >
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Verify password *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon02.png" alt="" />
+                  <input
+                    [type]="viewCPassword ? 'text' : 'password'"
+                    class="form-control"
+                    [(ngModel)]="userData.cpassword"
+                    aria-describedby="helpId"
+                    placeholder="Repeat your password"
+                  />
+                  <img
+                    *ngIf="viewCPassword"
+                    (click)="onCViewPassword()"
+                    src="assets/images/vis.png"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="!viewCPassword"
+                    (click)="onCViewPassword()"
+                    src="assets/images/visno.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                (click)="onCandidateSignUp()"
+                class="btn filled"
+                data-waves
+              >
+                Sign up
+              </button>
+
+              <a
+                href="javascript:void(0);"
+                routerLink="/auth/login"
+                class="link"
+                data-waves
+                >Log In</a
+              >
+            </div>
+            <div
+              class="tab-pane"
+              id="profile"
+              role="tabpanel"
+              aria-labelledby="profile-tab"
+            >
+              <div class="mb-3">
+                <label for="" class="form-label">First Name *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon03.png" alt="" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="userData.user_fname"
+                    aria-describedby="helpId"
+                    placeholder="Enter your First Name"
+                    style="text-transform: capitalize"
+                  />
+                </div>
+
+                <!-- <small id="helpId" class="form-text text-muted"
+                  >Help text</small
+                > -->
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Last Name *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon03.png" alt="" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="userData.user_lname"
+                    aria-describedby="helpId"
+                    placeholder="Enter your Last Name"
+                    style="text-transform: capitalize"
+                  />
+                </div>
+
+                <!-- <small id="helpId" class="form-text text-muted"
+                  >Help text</small
+                > -->
+              </div>
+              <!-- <div class="mb-3">
+                <label for="" class="form-label">Username *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon03.png" alt="" />
+                  <input
+                    type="email"
+                    class="form-control"
+                    [(ngModel)]="userData.username"
+                    aria-describedby="helpId"
+                    placeholder="Enter your username"
+                  />
+                </div>
+              </div> -->
+              <div class="mb-3">
+                <label for="" class="form-label"
+                  >The name of the company*</label
+                >
+                <div class="field">
+                  <img src="assets/images/formicons/icon04.png" alt="" />
+                  <input
+                    type="text"
+                    class="form-control"
+                    [(ngModel)]="userData.company_name"
+                    aria-describedby="helpId"
+                    placeholder="Enter the name of the company"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Email address *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon01.png" alt="" />
+                  <input
+                    type="email"
+                    class="form-control"
+                    [(ngModel)]="userData.email"
+                    aria-describedby="helpId"
+                    placeholder="Enter your email"
+                  />
+                </div>
+
+                <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+              </div>
+
+              <div class="mb-3">
+                <label for="" class="form-label">Password *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon02.png" alt="" />
+                  <input
+                    [type]="viewPassword ? 'text' : 'password'"
+                    class="form-control"
+                    [(ngModel)]="userData.password"
+                    aria-describedby="helpId"
+                    placeholder="Enter your password"
+                  />
+                  <img
+                    *ngIf="viewPassword"
+                    (click)="onViewPassword()"
+                    src="assets/images/vis.png"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="!viewPassword"
+                    (click)="onViewPassword()"
+                    src="assets/images/visno.png"
+                    alt=""
+                  />
+                </div>
+                <small id="emailHelp" class="form-text text-muted"
+                  >Password should be at least 8 characters long</small
+                >
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Verify password *</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon02.png" alt="" />
+                  <input
+                    [type]="viewCPassword ? 'text' : 'password'"
+                    class="form-control"
+                    [(ngModel)]="userData.cpassword"
+                    aria-describedby="helpId"
+                    placeholder="Repeat your password"
+                  />
+                  <img
+                    *ngIf="viewCPassword"
+                    (click)="onCViewPassword()"
+                    src="assets/images/vis.png"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="!viewCPassword"
+                    (click)="onCViewPassword()"
+                    src="assets/images/visno.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                (click)="onEmployerSignUp()"
+                class="btn filled"
+                data-waves
+              >
+                Sign up
+              </button>
+
+              <a
+                href="javascript:void(0);"
+                routerLink="/auth/login"
+                class="link"
+                data-waves
+                >Log In</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="viewConfirm" class="loginArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="pgHdng" style="padding-top: 100px" data-aos="fade-up">
+          <h2>Confirm User</h2>
+        </div>
+        <!-- Nav tabs -->
+        <!-- <div class="LoginTabArea">
+          <h4 style="text-align: center">
+            Please enter the code we just sent to your email
+          </h4>
+          <div class="tab-content" data-aos="fade-up">
+            <div>
+              <div class="mb-3">
+                <label for="" class="form-label">Email address </label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon01.png" alt="" />
+                  <input
+                    type="email"
+                    class="form-control"
+                    [(ngModel)]="userData.email"
+                    aria-describedby="helpId"
+                    placeholder="Enter your email"
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Code </label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon02.png" alt="" />
+                  <input
+                    type="email"
+                    class="form-control"
+                    [(ngModel)]="verification_code"
+                    aria-describedby="helpId"
+                    placeholder="Enter your Code"
+                  />
+                </div>
+              </div>
+              <button
+                type="button"
+                (click)="onConfirmCode()"
+                class="btn filled"
+                data-waves
+              >
+                Verify Account
+              </button>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>

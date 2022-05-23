@@ -1,0 +1,215 @@
+<!-- <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+</ngx-spinner> -->
+<section *ngIf="!changePassword" class="loginArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="pgHdng" data-aos="fade-up">
+          <h2>Log in</h2>
+        </div>
+        <!-- Nav tabs -->
+        <div class="LoginTabArea">
+          <!-- Tab panes -->
+          <div class="tab-content" data-aos="fade-up">
+            <div
+              class="tab-pane active"
+              id="home"
+              role="tabpanel"
+              aria-labelledby="home-tab"
+            >
+              <form [formGroup]="loginForm">
+                <div class="mb-3">
+                  <label for="" class="form-label">Email Address*</label>
+                  <div
+                    [ngClass]="
+                      cLogin && loginForm.controls.email.errors
+                        ? 'field f_error'
+                        : 'field'
+                    "
+                  >
+                    <img src="assets/images/formicons/icon01.png" alt="" />
+                    <input
+                      type="text"
+                      id="user_email"
+                      formControlName="email"
+                      class="form-control"
+                      placeholder="Enter your email"
+                    />
+                  </div>
+
+                  <!-- <small id="helpId" class="form-text text-muted">Help text</small> -->
+                </div>
+                <div class="mb-3">
+                  <label for="" class="form-label">Password*</label>
+                  <div
+                    [ngClass]="
+                      cLogin && loginForm.controls.password.errors
+                        ? 'field f_error'
+                        : 'field'
+                    "
+                  >
+                    <img src="assets/images/formicons/icon02.png" alt="" />
+                    <input
+                      [type]="viewPassword ? 'text' : 'password'"
+                      id="user_password"
+                      class="form-control"
+                      formControlName="password"
+                      placeholder="Enter your password"
+                    />
+                    <img
+                      *ngIf="viewPassword"
+                      (click)="onViewPassword()"
+                      src="assets/images/vis.png"
+                      alt=""
+                    />
+                    <img
+                      *ngIf="!viewPassword"
+                      (click)="onViewPassword()"
+                      src="assets/images/visno.png"
+                      alt=""
+                    />
+                  </div>
+                </div>
+
+                <div
+                  *ngIf="
+                    cLogin &&
+                    (loginForm.controls.email.errors ||
+                      loginForm.controls.password.errors)
+                  "
+                  class="row mt-2 justify-content-md-start"
+                >
+                  <div class="col-sm-1"></div>
+                  <div class="col-sm-10">
+                    <div class="infoCard mb-3">
+                      <div class="icon">
+                        <img src="images/erorr.png" alt="" />
+                      </div>
+                      <div class="contnt">
+                        <h2>Required fields / Invalid Input.</h2>
+                        <h3>
+                          You need to fill valid input in the fields highlighted
+                          in red
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  (click)="onSignIn()"
+                  class="btn filled"
+                  id="login_btn"
+                  data-waves
+                >
+                  Log in
+                </button>
+
+                <a
+                  href="javascript:void(0);"
+                  routerLink="/auth/sign-up"
+                  class="link"
+                  id="signup_btn"
+                  data-waves
+                  >Sign Up</a
+                >
+                <a
+                  href="javascript:void(0);"
+                  routerLink="/auth/forgot-password"
+                  class="link"
+                  id="forgotpass_btn"
+                  data-waves
+                  >Forgot Password</a
+                >
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="changePassword" class="loginArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="pgHdng" data-aos="fade-up">
+          <h2>Change Password</h2>
+        </div>
+        <!-- Nav tabs -->
+        <div class="LoginTabArea">
+          <div class="tab-content" data-aos="fade-up">
+            <div>
+              <div class="mb-3">
+                <label for="" class="form-label">New Password</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon02.png" alt="" />
+                  <input
+                    [type]="viewNewPassword ? 'text' : 'password'"
+                    [(ngModel)]="newPassword"
+                    class="form-control"
+                    aria-describedby="helpId"
+                    placeholder="Enter your new password"
+                  />
+                  <img
+                    *ngIf="viewNewPassword"
+                    (click)="viewNewPassword = false"
+                    src="assets/images/vis.png"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="!viewNewPassword"
+                    (click)="viewNewPassword = true"
+                    src="assets/images/visno.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="" class="form-label">Confirm New Password</label>
+                <div class="field">
+                  <img src="assets/images/formicons/icon02.png" alt="" />
+                  <input
+                    [type]="viewConfirmPassword ? 'text' : 'password'"
+                    [(ngModel)]="confirmPassword"
+                    class="form-control"
+                    aria-describedby="helpId"
+                    placeholder="Confirm your new password"
+                  />
+                  <img
+                    *ngIf="viewConfirmPassword"
+                    (click)="viewConfirmPassword = false"
+                    src="assets/images/vis.png"
+                    alt=""
+                  />
+                  <img
+                    *ngIf="!viewConfirmPassword"
+                    (click)="viewConfirmPassword = true"
+                    src="assets/images/visno.png"
+                    alt=""
+                  />
+                </div>
+              </div>
+
+              <button
+                type="button"
+                (click)="onUpdatePassword()"
+                class="btn filled"
+                data-waves
+              >
+                Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

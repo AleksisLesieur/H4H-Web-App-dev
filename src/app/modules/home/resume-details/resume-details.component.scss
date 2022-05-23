@@ -1,0 +1,312 @@
+.resumeTag {
+  color: #eff0f1;
+  line-height: 21px;
+  padding: 6px 20px;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.hdrow {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.hdrow .jobheading {
+  display: block;
+  float: left;
+  width: 50%;
+  color: #234d57;
+  font-size: 24px;
+  font-weight: 500;
+  margin: 0 0 18px 0;
+  text-align: left;
+}
+.hdrow .jobtags {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.blockDataArea {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 15px;
+}
+.blockDataArea .blockData {
+  border: 1px solid #ddd;
+  padding: 15px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  margin-bottom: 15px;
+}
+.blockDataArea .blockData:hover {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.resume_TopArea {
+  width: 100%;
+  display: block;
+  float: left;
+  margin: 0 0 2em 0;
+  .resumeUserphto {
+    width: 100%;
+    display: block;
+    margin: 0 0 1.5em 0;
+    img {
+      border-radius: 15px;
+      width: 100%;
+      height: 170px;
+      object-fit: contain;
+    }
+  }
+  .resumeTopcntnt {
+    width: 100%;
+    display: block;
+    float: left;
+    margin: 0 0 1.5em 0;
+    .hdngArea {
+      width: 100%;
+      display: block;
+      float: left;
+      margin: 0 0 15px 0;
+      h2 {
+        width: 100%;
+        display: block;
+        float: left;
+        margin: 0 0 0 0;
+        color: #234d57;
+        font-size: 42px;
+        font-weight: 500;
+        font-family: Rubik;
+      }
+    }
+    .subpointarea {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      float: left;
+      margin: 0 0 20px 0;
+      padding: 0;
+      list-style-type: none;
+      li {
+        float: left;
+        display: block;
+        margin-bottom: 10px;
+        margin-right: 10px;
+        img {
+          margin-right: 4px;
+          color: #000;
+          font-size: 18px;
+          font-weight: 400;
+        }
+      }
+    }
+    .tabrow {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      .tab-badge {
+        padding: 5px 10px;
+        font-size: 14px;
+        margin-right: 10px;
+        border-radius: 5px;
+        text-transform: uppercase;
+      }
+    }
+  }
+}
+.portfolioArea {
+  width: 100%;
+  display: block;
+  float: left;
+  margin: 0 0 2em 0;
+  .hdng {
+    width: 100%;
+    display: block;
+    float: left;
+    margin: 0 0 1em 0;
+    h2 {
+      width: 100%;
+      display: block;
+      float: left;
+      margin: 0;
+      color: #234d57;
+      font-size: 20px;
+      font-weight: 700;
+    }
+  }
+  .portfolioblock {
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    align-items: center;
+    margin: 0 0 1.5em 0;
+    grid-gap: 15px;
+    .photo {
+      width: 100%;
+      text-align: center;
+      img {
+        width: 280px;
+        height: 280px;
+        border-radius: 10px;
+      }
+    }
+  }
+  .article {
+    width: 100%;
+    display: block;
+    float: left;
+    margin: 0 0 1.5em 0;
+    p {
+      width: 100%;
+      display: block;
+      float: left;
+      margin: 0 0 10px 0;
+      font-style: 18px;
+      line-height: 27px;
+    }
+  }
+  
+}
+.bottomresume-area {
+  width: 100%;
+  display: block;
+  float: left;
+  margin: 0 0 2em 0;
+  .item {
+    width: 100%;
+    display: block;
+    float: left;
+    margin-bottom: 10px;
+    h2 {
+      width: 100%;
+      display: block;
+      float: left;
+      margin: 0 0 15px 0;
+      color: #234d57;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    p{
+      width: 100%;
+      display: block;
+      float: left;
+      margin: 0 0 15px 0;
+      font-size: 18px;
+      line-height: 27px;
+    }
+  }
+}
+
+ .resume_TopArea{
+  border-bottom: 2px solid #a4a89f ;
+}
+
+
+
+
+@media screen and (max-width: 991px) and (min-width: 769px) {
+  .hdrow {
+    width: 100%;
+    flex-direction: column;
+  }
+  .hdrow .jobheading {
+    width: 100%;
+  }
+  .hdrow .jobtags {
+    width: 100%;
+    justify-content: flex-start;
+  }
+  .resumeTag {
+    margin-left: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .hdrow {
+    width: 100%;
+    flex-direction: column;
+  }
+  .hdrow .jobheading {
+    width: 100%;
+  }
+  .hdrow .jobtags {
+    width: 100%;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+  }
+  .resumeTag {
+    margin-left: 0;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .blockDataArea {
+    grid-template-columns: 100%;
+  }
+  .resume_TopArea .resumeUserphto img{
+    width: 100%;
+    margin: 0 auto;
+    display: table;
+    float: none;
+  }
+  .resume_TopArea .resumeTopcntnt .subpointarea{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .resume_TopArea .resumeTopcntnt .hdngArea h2{
+    font-size: 32px;
+    text-align: center;
+  }
+  .resume_TopArea .resumeTopcntnt .tabrow{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .resume_TopArea .resumeTopcntnt .tabrow .tab-badge{
+    margin-bottom: 15px;
+    font-size: 12px;
+  }
+  .portfolioArea .portfolioblock{
+    grid-template-columns: auto;
+  }
+  .portfolioArea .portfolioblock .photo img{
+    width: 100%;
+    height: auto;
+  }
+  .bottomresume-area .item p{
+    display: flex;
+    align-items: baseline;
+  }
+  .bottomresume-area .item p a{
+    word-break: break-all;
+    padding-left: 5px;
+  }
+
+}
+
+@media only screen and (max-width: 800px) and (min-width: 560px){
+  .portfolioArea .portfolioblock{
+    display: flex;
+  }
+  .portfolioArea .portfolioblock .photo{
+    width: 60px;
+  }
+  .portfolioArea .portfolioblock .photo img{
+    width: 100%;
+  }
+}
+
+
+.backbtn, .backbtn:hover{
+  background: #54909e !important;
+  color: #fff !important;
+}

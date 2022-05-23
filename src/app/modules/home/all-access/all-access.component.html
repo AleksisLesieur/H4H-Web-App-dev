@@ -1,0 +1,123 @@
+<section class="findResumeArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 col-sm-12">
+          <div class="accessContentArea">
+            <div class="photo">
+              <img src="assets/images/accessPlanItem03_th01.png" alt="" />
+            </div>
+            <div class="cntnt">
+              <h2>Simple</h2>
+              <span>Job post only</span>
+              <!-- <p>
+                Have job candidates chase you! Post job and achieve high
+                visibility directly to the people you want! Instantly promote
+                your job opening to countless individuals with the skills you
+                are looking for
+              </p> -->
+              <ul class="postlist">
+                <li>Contact candidates directly</li>
+                <li>Invite candidates to apply to your job post</li>
+                <li>Search resumes with the skills that you are looking for</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-12">
+          <div class="accessContentArea">
+            <div class="photo">
+              <img src="assets/images/accessPlanItem02_th01.png" alt="" />
+            </div>
+            <div class="cntnt">
+              <h2>Plus</h2>
+              <span>Job post + resume search</span>
+              <!-- <p>
+                Find candidates even faster. Invite individuals to apply to your
+                job post. Don’t wait for individuals to contact you. Search
+                specific resume with the skills that you are looking for. View
+                contact info. Contact the resume owners directky through our
+                multiple ways of contact options
+              </p> -->
+              <ul class="postlist">
+                <li>Contact candidates directly</li>
+                <li>Invite candidates to apply to your job post</li>
+                <li>Search resumes with the skills that you are looking for</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="accessPlanArea">
+        <div class="row">
+          <div *ngFor="let pl of package_list" class="col-sm-6 col-lg-3">
+            <div class="pckgBox">
+              <h2>{{ pl.package_name }}</h2>
+              <h3><sup>$</sup>{{ pl.package_price }}</h3>
+              <div
+                class="offer"
+                *ngIf="
+                  pl.package_discount_rate &&
+                  pl.package_discount_rate.length != 0
+                "
+              >
+                Save <br />{{ pl.package_discount_rate }}%
+              </div>
+              <button
+                type="button"
+                (click)="onPlanSelect(pl)"
+                class="btn selectBtn"
+              >
+                Select
+              </button>
+              <div class="packgList">
+                <h2>Package includes:</h2>
+                <ul>
+                  <li *ngFor="let pd of pl.package_description; let i = index">
+                    {{ pd }}
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-sm-4">
+            <div class="item" data-aos="fade-up">
+              <h3><sup>$</sup>75</h3>
+              <p>
+                All access pass<br />
+                2 Weeks
+              </p>
+              <button type="button" class="btn" data-waves>Select</button>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="item" data-aos="fade-up">
+              <h3><sup>$</sup>100</h3>
+              <p>
+                All access pass
+                <br />
+                1 Month
+              </p>
+              <button type="button" class="btn" data-waves>Select</button>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="item" data-aos="fade-up">
+              <h3><sup>$</sup>300</h3>
+              <p>
+                All access pass
+                <br />
+                1 Year
+              </p>
+              <button type="button" class="btn" data-waves>Select</button>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>

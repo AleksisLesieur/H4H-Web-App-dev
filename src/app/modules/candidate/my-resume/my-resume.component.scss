@@ -1,0 +1,200 @@
+.default {
+  color: #548ea2 !important;
+  padding-right: 10px;
+}
+.listbox{
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  padding: 0 0;
+  display: grid;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  grid-template-columns: auto auto;
+  li{
+    font-size: 14px;
+    padding: 0 4px;
+    white-space: nowrap;
+    a{
+      color: #548ea2;
+      &:hover{
+        text-decoration: none;
+      }
+    }
+  }
+}
+table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+
+// table caption {
+//   font-size: 1.5em;
+//   margin: .5em 0 .75em;
+// }
+
+table tr {
+  background-color: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+
+table th,
+table td {
+  padding: .625em;
+  text-align: center;
+}
+
+table th {
+  font-size: .85em;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.tabAreaBlock{
+  width: 100%;
+  display: block;
+  float: left;
+  margin: 2rem 0 5rem 0;
+}
+.tabAreaBlock .nav-tabs{
+  border: none;
+}
+
+.tabAreaBlock .nav-tabs .nav-link.active, 
+.tabAreaBlock .nav-tabs .nav-item.show .nav-link{
+  border: 1px solid #548ea2;
+  background: #548ea2;
+  color: #fff !important; 
+font-weight: 700;
+box-shadow: -7px 9px 21px -11px rgba(0,0,0,0.52);
+-webkit-box-shadow: -7px 9px 21px -11px rgba(0,0,0,0.52);
+-moz-box-shadow: -7px 9px 21px -11px rgba(0,0,0,0.52);
+}
+.tabAreaBlock .nav-tabs .nav-item .nav-link{
+  border: 1px solid #54909e;
+  border-radius:25px;
+  color: #54909e;
+  
+}
+.tabAreaBlock .nav-tabs .nav-item .nav-link:first-child{
+  margin-right: 15px;
+}
+
+
+
+
+
+
+
+
+@media screen and (max-width: 1000px) {
+  .listbox{
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .listbox{
+    flex-direction: column;
+  }
+
+  table {
+    border: 0;
+  }
+
+  table caption {
+    font-size: 1.3em;
+  }
+  
+  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+  
+  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  
+  table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+  .listviews{
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+  
+  table td::before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  table td:last-child {
+    border-bottom: 0;
+  }
+  .tabAreaBlock .nav-tabs{
+    flex-direction: column;
+  }
+  .nav-tabs .nav-item{
+    text-align: center;
+    margin-bottom: 12px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 992px) and (min-width: 769px){
+  .listbox li{
+    font-size: 11px;
+  }
+}
+
+@media only screen and (min-width: 769px){
+  .mobblock{
+    display: none;
+  }
+}
+@media only screen and (max-width: 768px){
+  // .mainContentArea .table td.byclr ul{
+  //   all: unset;
+  //   list-style-type: none;
+  // }
+  .hideblock{
+    display: none;
+  }
+  .mobblock{
+    display: block;
+  }
+}

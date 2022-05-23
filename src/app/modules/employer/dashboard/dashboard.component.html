@@ -1,0 +1,173 @@
+<section class="mainContentArea" id="main">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="pgHeading" data-aos="fade-up">
+        <h2>
+          Dashboard
+          <!-- <span style="cursor: pointer" onclick="openNav()">☰</span> -->
+        </h2>
+      </div>
+      <div class="col-sm-12">
+        <div class="col">
+          <div class="dashboardTabArea">
+            <!-- Nav tabs -->
+            <ul
+              class="nav nav-tabs"
+              id="myTab"
+              role="tablist"
+              data-aos="fade-up"
+            >
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link active"
+                  id="home-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#home"
+                  type="button"
+                  role="tab"
+                  aria-controls="home"
+                  aria-selected="true"
+                >
+                  My Subscriptions
+                </button>
+              </li>
+              <li class="nav-item" role="presentation">
+                <button
+                  class="nav-link"
+                  id="profile-tab"
+                  data-bs-toggle="tab"
+                  data-bs-target="#profile"
+                  type="button"
+                  role="tab"
+                  aria-controls="profile"
+                  aria-selected="false"
+                >
+                  All Subscriptions
+                </button>
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div
+                class="tab-pane active fade-in"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <div class="table-responsive">
+                  <table class="table table-hover" data-aos="fade-up">
+                    <thead>
+                      <tr>
+                        <th>Package Name</th>
+                        <th>Remaining</th>
+                        <th>Duration</th>
+                        <th>Auto-Renew</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr
+                        *ngFor="let pl of my_package_list; let i = index"
+                        [ngStyle]="{
+                          'background-color': i != 0 ? 'white' : '#F0F0F0'
+                        }"
+                      >
+                        <td scope="row">
+                          {{ pl.package_name }}
+                          <img
+                            *ngIf="i == '0'"
+                            src="assets/images/checked.png"
+                            alt="Default Resume"
+                            width="25"
+                            height="25"
+                          />
+                        </td>
+                        <td>{{ pl.remaining_days }} days</td>
+                        <td>{{ pl.package_duration }} days</td>
+                        <td
+                          [style.color]="
+                            pl.is_autorenew == 1 && i == 0 ? 'green' : 'red'
+                          "
+                        >
+                          {{ pl.is_autorenew == 1 ? "Enabled" : "Disabled" }}
+                        </td>
+                        <td>
+                          <a
+                            *ngIf="pl.is_autorenew != '1'"
+                            type="button"
+                            style="padding: 0px 10px"
+                            (click)="onAutoRenew(pl, i)"
+                            class="prvBtn"
+                            >Enable</a
+                          >
+                          <a
+                            *ngIf="pl.is_autorenew == '1'"
+                            type="button"
+                            style="padding: 0px 10px"
+                            (click)="onAutoRenew(pl, i)"
+                            class="prvBtn"
+                            >Disable</a
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div
+                class="tab-pane fade"
+                id="profile"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+              >
+                <div class="accessPlanArea">
+                  <div class="row">
+                    <div
+                      *ngFor="let pl of package_list"
+                      class="col-sm-6 col-lg-3"
+                    >
+                      <div class="pckgBox">
+                        <h2>{{ pl.package_name }}</h2>
+                        <h3><sup>$</sup>{{ pl.package_price }}</h3>
+                        <div
+                          class="offer"
+                          *ngIf="
+                            pl.package_discount_rate &&
+                            pl.package_discount_rate.length != 0
+                          "
+                        >
+                          Save <br />{{ pl.package_discount_rate }}%
+                        </div>
+                        <button
+                          type="button"
+                          (click)="onPlanSelect(pl)"
+                          class="btn selectBtn"
+                        >
+                          Select
+                        </button>
+                        <div class="packgList">
+                          <h2>Package includes:</h2>
+                          <ul>
+                            <li
+                              *ngFor="
+                                let pd of pl.package_description;
+                                let i = index
+                              "
+                            >
+                              {{ pd }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

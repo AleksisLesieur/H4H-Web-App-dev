@@ -1,0 +1,128 @@
+.accessContentArea {
+  width: 100%;
+  min-height: 370px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  background: #eff0f1;
+  padding: 30px;
+  box-sizing: border-box;
+  margin: 0 0 20px 0;
+  border-radius: 10px;
+  .photo {
+    margin-right: 25px;
+  }
+  .cntnt {
+    width: 80%;
+    h2 {
+      width: 100%;
+      color: #000;
+      font-size: 38px;
+      margin: 0 0 5px 0;
+      font-weight: 600;
+      font-family: "Poppins", sans-serif;
+    }
+    span {
+      width: 100%;
+      color: #000;
+      font-size: 24px;
+      margin: 0 0 15px 0;
+      font-weight: 500;
+      font-family: "Poppins", sans-serif;
+    }
+    p {
+      width: 100%;
+      color: #000;
+      font-size: 15px;
+      font-weight: 400;
+      font-family: "Poppins", sans-serif;
+    }
+  }
+}
+.offer {
+  width: 74px;
+  height: 74px;
+  top: 14%;
+  right: 21px;
+  position: absolute;
+  float: right;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 400;
+  font-family: "Poppins", sans-serif;
+  background: url(../../../../assets/images/offersticker.png) no-repeat 0 0;
+  -ms-transform: rotate(20deg); /* IE 9 */
+  transform: rotate(20deg);
+}
+@media only screen and (max-width: 1366px) {
+  .accessContentArea {
+    min-height: 449px;
+  }
+  .accessPlanArea .pckgBox {
+    min-height: 39em;
+  }
+  .offer {
+    right: 12px;
+  }
+}
+@media only screen and (max-width: 991px) {
+  .offer {
+    top: 12%;
+    right: 50px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .accessContentArea {
+    min-height: auto;
+  }
+  .offer {
+    top: 12%;
+    right: 50px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .accessContentArea,
+  .accessPlanArea .pckgBox {
+    min-height: auto;
+  }
+  .offer {
+    right: 22px;
+  }
+
+  .accessContentArea {
+    flex-direction: column;
+    .photo {
+      width: 100%;
+      text-align: center;
+    }
+    .cntnt {
+      width: 100%;
+      h2 {
+        text-align: center;
+        font-size: 25px;
+        margin-top: 10px;
+      }
+      span {
+        width: 100%;
+        float: left;
+        font-size: 18px;
+        text-align: center;
+      }
+      p {
+        font-size: 14px;
+        text-align: center;
+        min-height: 294px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 562px) {
+  .accessContentArea .cntnt p {
+    min-height: auto;
+  }
+}

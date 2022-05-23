@@ -1,0 +1,2661 @@
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+@import "base";
+@import "mediaquiries";
+@import "mixin.scss";
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,400&display=swap");
+// font-family: 'Rubik', sans-serif;
+// font-family: 'Poppins', sans-serif;
+html {
+  @include smallDevices {
+    overflow-x: hidden;
+  }
+}
+body {
+  font: 100% $fontBase;
+  font-weight: 400;
+  color: $colorBase;
+  @include smallDevices {
+    overflow-x: hidden;
+  }
+}
+p {
+  color: #070600;
+  font: 400 14px/21px $fontBase;
+}
+.btn,
+button {
+  &:focus {
+    outline: 0;
+    box-shadow: none;
+  }
+}
+
+header {
+  width: $fullWidth;
+  padding-top: 40px;
+  margin-bottom: 65px;
+  transition: 0.2s;
+  position: relative;
+  top: 0;
+  z-index: 9999;
+  background: #fff;
+  &.fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding-top: 5px;
+    box-shadow: $boxShadowSemi;
+    .navbar-brand {
+      img {
+        width: 50%;
+      }
+    }
+  }
+  @include smallDevices {
+    padding-top: 5px;
+    margin-bottom: 15px;
+  }
+  .navigateBar {
+    .navigateMenu {
+      .nav-link {
+        font: 400 14px $fontBase;
+        color: $colorBase;
+        padding-left: 24px;
+        padding-right: 24px;
+        @include largeDevices {
+          white-space: nowrap;
+        }
+        @include smallDevices {
+          text-align: center;
+        }
+        &.active,
+        &:hover {
+          color: $activeColorBase;
+        }
+      }
+    }
+
+    .hdrNotifyBlock {
+      @include listBase;
+      @include flexBase;
+      @include smallDevices {
+        justify-content: center;
+      }
+      li {
+        padding: 0 10px;
+        position: relative;
+        .noty {
+          position: absolute;
+          right: 5px;
+          top: -14px;
+          z-index: 9999;
+          background: #ff66b3;
+          width: 15px;
+          height: 15px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+  .my-acount {
+    @include smallDevices {
+      margin: 0 auto;
+    }
+    .accTxt {
+      color: #ff66b3;
+      &.active,
+      &:hover {
+        color: $activeColorBase;
+      }
+    }
+  }
+
+  .hdr-login-btn {
+    background: #ff66b3;
+    padding: 12px 30px;
+    border-radius: 10px;
+    color: #f0f6f6;
+    font-weight: 500;
+    font-size: 14px;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    &:hover {
+      box-shadow: $boxShadowSemi;
+    }
+    @include smallDevices {
+      margin: 0 auto;
+      display: table;
+      float: none;
+    }
+  }
+}
+
+.banner {
+  @include area;
+  @include smallDevices {
+    margin-bottom: 45px;
+  }
+  .banrPnl {
+    @include flexBase;
+    width: $fullWidth;
+    @include smallDevices {
+      flex-direction: column;
+    }
+    .leftBox {
+      @include blockBase;
+      width: $fifty;
+
+      @include smallDevices {
+        width: $fullWidth;
+      }
+
+      h2 {
+        @include blockBase;
+        width: $fullWidth;
+        margin: 0 0 42px 0;
+        padding: 0;
+        font-family: $fontBaseSecondary;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 62px;
+        line-height: 67px;
+        color: #084b83;
+        margin-bottom: 28px;
+        @include smallDevices {
+          font-size: 25px;
+          line-height: 35px;
+          text-align: center;
+          margin-bottom: 25px;
+        }
+        span {
+          color: #ff66b3;
+        }
+      }
+      p {
+        @include blockBase;
+        width: $fullWidth;
+        color: #070600;
+        font-size: 18px;
+        margin-bottom: 40px;
+        @include smallDevices {
+          text-align: center;
+          margin-bottom: 22px;
+        }
+      }
+      .bnr-btn {
+        padding: 12px 50px;
+        background: #42bfdd;
+        color: #070600;
+        font-size: 14px;
+        border-radius: 10px;
+        -webkit-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+        &:hover {
+          box-shadow: $boxShadowSemi;
+        }
+        @include smallDevices {
+          margin: 0 auto 2em;
+          display: table;
+        }
+      }
+    }
+    .rightBox {
+      @include flexBase;
+      width: $fifty;
+      @include smallDevices {
+        width: $fullWidth;
+      }
+    }
+  }
+}
+
+.midItemAtrea {
+  @include area;
+  @include smallDevices {
+    margin-bottom: 80px;
+  }
+
+  .itemRow {
+    @include listBase;
+    @include flexBase;
+    padding: 0 6em;
+
+    @include smallDevices {
+      flex-direction: column;
+      padding: 0 1em;
+    }
+    li {
+      width: 23.5%;
+      @include flexBase;
+      background: #f0f6f6;
+      border-radius: $roundBase;
+      height: 320px;
+      @include smallDevices {
+        width: $fullWidth;
+        margin-bottom: 20px;
+      }
+    }
+    .item {
+      @include flexBase;
+
+      width: $fullWidth;
+
+      justify-content: center;
+      padding: 30px;
+      box-sizing: border-box;
+      flex-direction: column;
+
+      .icnBox {
+        position: relative;
+        margin-bottom: 40px;
+        span {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+      }
+      h3 {
+        @include blockBase;
+        margin: 0;
+        padding: 0;
+        color: #084b83;
+        font-size: 24px;
+        line-height: 36px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+.midSearchArea {
+  @include area;
+  background: url(../images/searchbg.png) no-repeat 45% 60%;
+  padding: 150px 0;
+  background-size: cover;
+  background-attachment: fixed;
+  @include smallDevices {
+    padding: 50px 0;
+    margin-bottom: 80px;
+  }
+  h1 {
+    @include blockBase;
+    margin: 0 0 20px 0;
+    padding: 0 6em;
+    text-align: center;
+    color: #084b83;
+    font-size: 42px;
+    line-height: 50px;
+    font-weight: 500;
+    box-sizing: border-box;
+    font-family: $fontBaseSecondary;
+    @include smallDevices {
+      padding: 0;
+      font-size: 30px;
+      line-height: 40px;
+    }
+  }
+  .btnRow {
+    @include flexBase;
+    justify-content: center;
+    margin-bottom: 50px;
+    .findBtn {
+      border-radius: $roundBase;
+      padding: 12px 0;
+      box-sizing: border-box;
+      font-size: 14px;
+      color: #070600;
+      width: 200px;
+      border: 1px solid transparent;
+      -webkit-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+
+      &:hover {
+        box-shadow: $boxShadowSemi;
+      }
+
+      &--job {
+        background-color: $themeColor;
+        margin-right: 10px;
+        &:hover {
+          border: 1px solid $themeColor;
+          background: none;
+        }
+      }
+      &--empl {
+        border: 1px solid $themeColor;
+        &:hover {
+          background-color: $themeColor;
+        }
+      }
+    }
+  }
+  .searchFormBlock {
+    @include flexBase;
+    width: $fullWidth;
+    @include smallDevices {
+      flex-direction: column;
+    }
+    .form-control {
+      border: 2px solid #bbe6e4;
+      border-radius: $roundBase;
+      padding: 15px;
+      color: rgba(7, 6, 0, 0.5);
+      @include smallDevices {
+        margin-bottom: 15px;
+      }
+      &:focus {
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+      }
+      &--key {
+        background: #fff url(../images/search-icon01.png) no-repeat 6% 45%;
+        padding-left: 45px;
+      }
+      &--loc {
+        background: #fff url(../images/search-icon02.png) no-repeat 6% 45%;
+        padding-left: 45px;
+      }
+      &--selct {
+        background: #fff url(../images/search-icon03.png) no-repeat 6% 45%;
+        padding-left: 45px;
+      }
+    }
+    .btnSearch {
+      @include blockBase;
+      padding: 16px 55px;
+      color: #f0f6f6;
+      background: #42bfdd;
+      border-radius: $roundBase;
+      box-sizing: border-box;
+      margin-left: 15px;
+      -webkit-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      &:hover {
+        box-shadow: $boxShadowSemi;
+      }
+      @include smallDevices {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.thumbArea {
+  @include area;
+  @include smallDevices {
+    margin-bottom: 80px;
+  }
+  .thumbPnl {
+    width: $fullWidth;
+    @include flexBase;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+    @include smallDevices {
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    .thumb {
+      border: 5px solid #ff66b3;
+      border-radius: 22px;
+      background: #ff66b3;
+      position: relative;
+      -webkit-transition: all 0.8s ease-in-out;
+      transition: all 0.8s ease-in-out;
+      .photoContent {
+        display: none;
+      }
+      img {
+        border-radius: 22px;
+      }
+      &--ltop {
+        margin-bottom: 48px;
+        &:hover {
+          margin-bottom: 4px;
+          margin-bottom: 25px;
+        }
+        img {
+          width: 198px;
+          height: 154px;
+        }
+        &:hover .photoContent {
+          background: #ff66b3;
+          width: 100%;
+          @include flexBase;
+          justify-content: center;
+          flex-direction: column;
+          padding-bottom: 8px;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+
+          h3 {
+            color: #000000;
+            font-size: 18px;
+            line-height: 26px;
+            font-weight: 500;
+            margin-top: 20px;
+          }
+          h4 {
+            color: #000000;
+            font-size: 14px;
+            line-height: 21px;
+          }
+        }
+      }
+      &--lbottom {
+        margin-bottom: 48px;
+        &:hover {
+          margin-bottom: 4px;
+          margin-bottom: 25px;
+        }
+        img {
+          width: 336px;
+          height: 272px;
+        }
+        &:hover .photoContent {
+          background: #ff66b3;
+          width: 100%;
+          @include flexBase;
+          justify-content: center;
+          flex-direction: column;
+          padding-bottom: 8px;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+
+          h3 {
+            color: #000000;
+            font-size: 18px;
+            line-height: 26px;
+            font-weight: 500;
+            margin-top: 20px;
+          }
+          h4 {
+            color: #000000;
+            font-size: 14px;
+            line-height: 21px;
+          }
+        }
+      }
+      &--mtop {
+        margin-top: 48px;
+        align-self: center;
+        @include smallDevices {
+          margin-top: 0;
+          margin-bottom: 40px;
+        }
+        img {
+          width: 364px;
+          height: 238px;
+        }
+        &:hover {
+          margin-bottom: 4px;
+        }
+
+        &:hover .photoContent {
+          background: #ff66b3;
+          width: 100%;
+          @include flexBase;
+          justify-content: center;
+          flex-direction: column;
+          padding-bottom: 25px;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+
+          h3 {
+            color: #000000;
+            font-size: 18px;
+            line-height: 26px;
+            font-weight: 500;
+            margin-top: 20px;
+          }
+          h4 {
+            color: #000000;
+            font-size: 14px;
+            line-height: 21px;
+          }
+        }
+      }
+      &--rtop {
+        margin-bottom: 48px;
+        align-self: flex-start;
+        @include smallDevices {
+          align-self: center;
+          margin-bottom: 25px;
+        }
+        &:hover {
+          margin-bottom: 4px;
+        }
+        img {
+          width: 198px;
+          height: 154px;
+        }
+        &:hover .photoContent {
+          background: #ff66b3;
+          width: 100%;
+          @include flexBase;
+          justify-content: center;
+          flex-direction: column;
+          padding-bottom: 8px;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+
+          h3 {
+            color: #000000;
+            font-size: 18px;
+            line-height: 26px;
+            font-weight: 500;
+            margin-top: 20px;
+          }
+          h4 {
+            color: #000000;
+            font-size: 14px;
+            line-height: 21px;
+          }
+        }
+      }
+      &--rbottom {
+        margin-bottom: 48px;
+        align-self: flex-start;
+        @include smallDevices {
+          align-self: center;
+          margin-bottom: 25px;
+        }
+        &:hover {
+          margin-bottom: 4px;
+        }
+        img {
+          width: 336px;
+          height: 272px;
+        }
+        &:hover .photoContent {
+          background: #ff66b3;
+          width: 100%;
+          @include flexBase;
+          justify-content: center;
+          flex-direction: column;
+          padding-bottom: 8px;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+
+          h3 {
+            color: #000000;
+            font-size: 18px;
+            line-height: 26px;
+            font-weight: 500;
+            margin-top: 20px;
+          }
+          h4 {
+            color: #000000;
+            font-size: 14px;
+            line-height: 21px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.employeesArea {
+  @include area;
+  @include smallDevices {
+    margin: 0 0 30px 0;
+  }
+  .empBlock {
+    @include blockBase;
+    width: $fullWidth;
+    margin-top: 8em;
+    @include smallDevices {
+      margin-top: 0;
+    }
+    h2 {
+      @include blockBase;
+      width: $fullWidth;
+      margin: 0 0 50px 0;
+      padding: 0;
+      color: #084b83;
+      font-size: 42px;
+      font-weight: 500;
+      font-family: $fontBaseSecondary;
+      @include smallDevices {
+        text-align: center;
+        font-size: 30px;
+        margin: 0 0 30px 0;
+      }
+    }
+    p {
+      @include blockBase;
+      width: $fullWidth;
+      margin-bottom: 42px;
+      padding: 0;
+      color: #070600;
+      font-size: 18px;
+      line-height: 27px;
+      font-weight: 500;
+      @include smallDevices {
+        font-size: 16px;
+        line-height: 25px;
+        margin-bottom: 22px;
+        text-align: center;
+      }
+      span {
+        color: #ff66b3;
+      }
+    }
+    .jobBtn {
+      padding: 14px 60px;
+      border-radius: $roundBase;
+      background: $themeColor;
+      color: #070600;
+      font-size: 14px;
+      font-weight: 500;
+      -webkit-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      &:hover {
+        box-shadow: $boxShadowSemi;
+      }
+      @include smallDevices {
+        margin: 0 auto;
+        display: table;
+      }
+    }
+  }
+  .poster {
+    width: $fullWidth;
+    @include blockBase;
+    @include smallDevices {
+      margin-top: 50px;
+    }
+    img {
+      width: $fullWidth;
+    }
+  }
+}
+
+.stylishArea {
+  @include area;
+  @include smallDevices {
+    margin-bottom: 30px;
+  }
+  .heading {
+    width: $fullWidth;
+    @include blockBase;
+    h2 {
+      width: $fullWidth;
+      @include blockBase;
+      text-align: center;
+      margin: 0 0 50px 0;
+      padding: 0 0 0 0;
+      font-size: 42px;
+      line-height: 51px;
+      font-weight: 500;
+      color: #084b83;
+      font-family: $fontBaseSecondary;
+      @include smallDevices {
+        font-size: 30px;
+        line-height: 40px;
+        margin: 0 0 30px 0;
+      }
+      span {
+        color: #ff66b3;
+      }
+    }
+  }
+  .numberArea {
+    width: $fullWidth;
+    @include blockBase;
+    padding: 0 10em;
+    @include smallDevices {
+      padding: 0 1em;
+    }
+    .numBlock {
+      width: $fullWidth;
+      @include flexBase;
+      flex-direction: column;
+      @include smallDevices {
+        margin-bottom: 20px;
+      }
+      h2 {
+        width: $fullWidth;
+        @include blockBase;
+        margin: 0 0 22px 0;
+        padding: 0;
+        color: #42bfdd;
+        font-size: 31px;
+        line-height: 38px;
+        font-weight: 500;
+        text-align: center;
+        font-family: $fontBaseSecondary;
+        @include smallDevices {
+          margin: 0 0 15px 0;
+        }
+      }
+      p {
+        width: $fullWidth;
+        @include blockBase;
+        text-align: center;
+        color: #070600;
+        font-size: 18px;
+        line-height: 27px;
+        padding: 0 1.5em;
+      }
+    }
+  }
+}
+
+.packageArea {
+  width: 100%;
+  @include area;
+  @include smallDevices {
+    margin-bottom: 80px;
+  }
+  .heading {
+    width: $fullWidth;
+    @include blockBase;
+    h2 {
+      width: $fullWidth;
+      @include blockBase;
+      margin: 0 0 30px 0;
+      padding: 0 0 0 0;
+      font-size: 42px;
+      line-height: 51px;
+      font-weight: 500;
+      color: #084b83;
+      font-family: $fontBaseSecondary;
+      @include smallDevices {
+        font-size: 30px;
+        line-height: 40px;
+        text-align: center;
+      }
+      span {
+        color: #ff66b3;
+      }
+    }
+    p {
+      width: 100%;
+      @include area;
+      color: #000000;
+      font-size: 18px;
+      line-height: 27px;
+      margin-bottom: 40px;
+      @include smallDevices {
+        font-size: 16px;
+        line-height: 25px;
+        text-align: center;
+      }
+    }
+  }
+  .btnpckg {
+    width: 100%;
+    @include blockBase;
+    margin-bottom: 15px;
+    background: #42bfdd;
+    color: #070600;
+    font-size: 14px;
+    line-height: 21px;
+    font-weight: 500;
+    border-radius: $roundBase;
+    padding: 12px 0;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    &:hover {
+      box-shadow: $boxShadowSemi;
+    }
+    &--emp {
+      background: #ff66b3;
+      color: #f0f6f6;
+    }
+  }
+  .pckgPnl {
+    width: 100%;
+    @include flexBase;
+    justify-content: center;
+    flex-direction: column;
+    padding: 30px;
+    box-sizing: border-box;
+    border-radius: $roundBase;
+    border: 2px solid #ff66b3;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    &:hover {
+      box-shadow: $boxShadowLarge;
+    }
+    @include smallDevices {
+      margin-bottom: 20px;
+    }
+    &--dark {
+      border-color: #ff66b3;
+    }
+    .icn {
+      margin: 0 0 32px 0;
+    }
+    h2 {
+      color: #070600;
+      font-size: 24px;
+      font-weight: 400;
+      margin: 0 0 25px 0;
+    }
+    p {
+      color: #000000;
+      font-size: 18px;
+      line-height: 27px;
+      text-align: center;
+      padding: 0 2em;
+      margin-bottom: 0;
+      min-height: 372px;
+      @include smallDevices {
+        min-height: auto;
+      }
+    }
+    .freebtn {
+      color: #42bfdd;
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      &--dark {
+        color: #ff66b3;
+      }
+    }
+    .btnCart {
+      background: #42bfdd;
+      width: $fullWidth;
+      border-radius: $roundBase;
+      padding: 12px 0;
+      color: #070600;
+      font-weight: 500;
+      -webkit-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      &:hover {
+        box-shadow: $boxShadowSemi;
+      }
+      &--dark {
+        background: #ff66b3;
+        color: #f0f6f6;
+      }
+    }
+  }
+}
+
+footer {
+  width: $fullWidth;
+  @include blockBase;
+  background: #084b83;
+  padding: 140px 0;
+  @include smallDevices {
+    padding: 40px 0;
+  }
+  .footerblock {
+    width: $fullWidth;
+    @include flexBase;
+    flex-direction: column;
+    @include smallDevices {
+      margin-bottom: 20px;
+    }
+    h2 {
+      width: $fullWidth;
+      @include flexBase;
+      margin: 0 0 35px 0;
+      color: #f0f6f6;
+      font-weight: 500;
+      font-size: 24px;
+      @include smallDevices {
+        text-align: center;
+        width: $fullWidth;
+        justify-content: center;
+        margin: 0 0 25px 0;
+        font-size: 20px;
+      }
+    }
+    .footList {
+      width: $fullWidth;
+      @include listBase;
+      li {
+        margin-bottom: 8px;
+        @include smallDevices {
+          margin-bottom: 5px;
+          text-align: center;
+        }
+        img {
+          margin-right: 15px;
+        }
+        a {
+          color: #f0f6f6;
+          font-size: 18px;
+          line-height: 27px;
+          text-decoration: none;
+          &.last {
+            color: #42bfdd;
+          }
+        }
+      }
+    }
+  }
+}
+
+.navbar-light {
+  .navbar-toggler {
+    border: none;
+    &:focus {
+      text-decoration: none;
+      outline: 0;
+      box-shadow: none;
+    }
+  }
+}
+
+.findJob {
+  @include area;
+  @include smallDevices {
+    margin-bottom: 80px;
+  }
+  .mainHeading {
+    @include blockBase;
+    width: $fullWidth;
+    h2 {
+      color: #084b83;
+      font-size: 52px;
+      line-height: 67px;
+      margin-bottom: 25px;
+      font-weight: 500;
+      font-family: $fontBaseSecondary;
+      @include smallDevices {
+        font-size: 30px;
+        margin-bottom: 20px;
+      }
+    }
+    p {
+      @include blockBase;
+      width: $fullWidth;
+      font-size: 18px;
+      line-height: 27px;
+      margin-bottom: 30px;
+      span {
+        color: #42bfdd;
+      }
+    }
+  }
+
+  .form-control {
+    border: 2px solid #bbe6e4;
+    border-radius: $roundBase;
+    padding: 15px;
+    color: rgba(7, 6, 0, 0.5);
+    margin-bottom: 15px;
+    @include smallDevices {
+      margin-bottom: 15px;
+    }
+    &:focus {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    &--key {
+      background: #fff url(../images/search-icon01.png) no-repeat 6% 45%;
+      padding-left: 45px;
+    }
+    &--loc {
+      background: #fff url(../images/search-icon02.png) no-repeat 6% 45%;
+      padding-left: 45px;
+    }
+    &--selct {
+      background: #fff url(../images/search-icon03.png) no-repeat 6% 45%;
+      padding-left: 45px;
+    }
+    &--exp {
+      background: #fff url(../images/search-icon04.png) no-repeat 6% 45%;
+      padding-left: 45px;
+    }
+  }
+  .btnSearch {
+    @include blockBase;
+    padding: 16px 55px;
+    color: #070600;
+    background: #42bfdd;
+    border-radius: $roundBase;
+    box-sizing: border-box;
+    margin-left: 15px;
+
+    @include smallDevices {
+      width: 100%;
+      margin-left: 0px;
+    }
+  }
+  .filterRow {
+    width: $fullWidth;
+    @include listBase;
+    @include flexBase;
+    margin-top: 10px;
+    margin-bottom: 70px;
+    @include smallDevices {
+      flex-direction: column;
+    }
+    .timeSelect {
+      width: 10%;
+      margin-right: 16px;
+      @include smallDevices {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 10px;
+      }
+      .form-select {
+        border: none;
+        color: #070600;
+        font-size: 18px;
+        font-weight: 500;
+        background: url(../images/selectArrow.png) no-repeat 99% 50%;
+      }
+    }
+    .limitSearchArea {
+      width: 90%;
+      @include flexBase;
+      justify-content: flex-start;
+      @include smallDevices {
+        width: $fullWidth;
+        flex-direction: column;
+      }
+      h2 {
+        color: #070600;
+        font-size: 18px;
+        line-height: 27px;
+        font-weight: 500;
+        margin: 0 15px 0 0;
+        @include smallDevices {
+          width: $fullWidth;
+          margin: 0 0 10px 40px;
+        }
+      }
+      .form-check {
+        margin-right: 14px;
+        width: 12%;
+        @include smallDevices {
+          width: $fullWidth;
+        }
+        .form-check-label {
+          color: #070600;
+          font-size: 18px;
+          line-height: 27px;
+        }
+        input[type="checkbox"] {
+          display: none;
+          & + label {
+            background: url(../images/unchecked.png) no-repeat 0 0;
+            height: 22px;
+            width: 22px;
+            display: inline-block;
+            padding: 0 0 0 35px;
+            white-space: nowrap;
+          }
+        }
+        input[type="checkbox"]:checked {
+          & + label {
+            background: url(../images/checked.png) no-repeat 0 0;
+            height: 22px;
+            width: 22px;
+            display: inline-block;
+            padding: 0 0 0 35px;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+  }
+  .cardArea {
+    width: $fullWidth;
+    @include blockBase;
+    .card {
+      border-radius: $roundBase;
+      margin-bottom: 34px;
+      @include flexBase;
+      padding: 28px;
+      box-sizing: border-box;
+      border: 1px solid #bbe6e4;
+      flex-direction: row;
+      @include smallDevices {
+        flex-direction: column;
+        padding: 20px;
+      }
+
+      .logo {
+        width: 20%;
+        @include flexBase;
+        justify-content: center;
+        align-items: center;
+        @include smallDevices {
+          width: 100%;
+        }
+      }
+      .photo {
+        align-self: baseline;
+        width: 20%;
+        @include flexBase;
+        @include smallDevices {
+          width: 100%;
+          justify-content: center;
+          margin-bottom: 20px;
+        }
+        img {
+          border-radius: $roundBase;
+          width: 173px;
+          height: 173px;
+        }
+      }
+      .content {
+        width: 80%;
+        @include flexBase;
+        flex-direction: column;
+        @include smallDevices {
+          width: 100%;
+        }
+        .topRow {
+          width: $fullWidth;
+          @include flexBase;
+          align-items: baseline;
+          margin: 0 0 8px 0;
+          @include smallDevices {
+            width: $fullWidth;
+            flex-direction: column;
+          }
+          .leftSide {
+            width: 60%;
+            @include flexBase;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-direction: column;
+            &--exptext {
+              h2 {
+                color: #084b83;
+              }
+            }
+            @include smallDevices {
+              width: 100%;
+            }
+            h2 {
+              @include blockBase;
+              width: $fullWidth;
+              color: #084b83;
+              font-size: 24px;
+              font-weight: 500;
+              margin: 0 0 18px 0;
+            }
+            p {
+              @include blockBase;
+              width: $fullWidth;
+              color: #07060080;
+              font-size: 14px;
+              line-height: 20px;
+              img {
+                padding-right: 10px;
+              }
+            }
+            .ageTxt {
+              color: #000000;
+              font-size: 18px;
+              line-height: 27px;
+            }
+          }
+          .rightSide {
+            width: 40%;
+            @include flexBase;
+            justify-content: flex-end;
+            align-items: flex-end;
+            @include smallDevices {
+              width: $fullWidth;
+              justify-content: flex-start;
+              align-items: flex-start;
+            }
+            p {
+              span {
+                color: rgba(7, 6, 0, 0.5);
+                @include blockBase;
+                margin-right: 15px;
+              }
+              strong {
+                color: #ff66b3;
+                font-weight: 500;
+                font-size: 24px;
+              }
+            }
+            .tag {
+              color: #070600;
+              line-height: 21px;
+              padding: 6px 20px;
+              border-radius: $roundBase/2;
+              margin-left: 10px;
+              &--grey {
+                background: #bbe6e4;
+              }
+              &--pink {
+                background: #ff66b3;
+              }
+              &--semiPink {
+                background: #42bfdd;
+              }
+            }
+          }
+        }
+        article {
+          width: $fullWidth;
+
+          color: #070600;
+          margin: 0 0 30px 0;
+        }
+        .sec {
+          width: $fullWidth;
+          @include blockBase;
+          margin: 0 0 20px 0;
+          h4 {
+            width: $fullWidth;
+            @include blockBase;
+            margin: 0 0 18px 0;
+            color: rgba(7, 6, 0, 0.5);
+            font-size: 14px;
+          }
+          h3 {
+            width: $fullWidth;
+            @include blockBase;
+            margin: 0 0 0 0;
+            color: #000;
+            font-size: 18px;
+            line-height: 27px;
+          }
+        }
+        .btmRow {
+          width: $fullWidth;
+          @include flexBase;
+          @include smallDevices {
+            flex-direction: column;
+          }
+          .applybtn {
+            @include blockBase;
+            padding: 12px 65px;
+            border-radius: $roundBase;
+            background: $themeColor;
+            color: #070600;
+            font-weight: 500;
+            @include smallDevices {
+              margin-bottom: 15px;
+            }
+          }
+          .date {
+            color: rgba(7, 6, 0, 0.5);
+            img {
+              padding-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.detailsArea {
+  width: $fullWidth;
+  @include blockBase;
+  margin: 0 0 150px 0;
+  @include smallDevices {
+    margin: 0 0 80px 0;
+  }
+  .jobLogoArea {
+    width: $fullWidth;
+    @include flexBase;
+    background: #f0f6f6;
+    padding: 20px;
+    border-radius: $roundBase;
+    margin: 0 0 25px 0;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    &.bgNone {
+      background: none;
+    }
+    .logo {
+      @include blockBase;
+      margin: 0 0 21px 0;
+    }
+    .photo {
+      width: $fullWidth;
+      position: relative;
+      @include blockBase;
+      margin: 0 0 21px 0;
+      -webkit-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+      .upload {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 5;
+        width: 100%;
+        height: 100%;
+        border-radius: $roundBase;
+        @include flexBase;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.15);
+        cursor: pointer;
+        img {
+          -webkit-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+        }
+        &:hover {
+          box-shadow: $boxShadowLarge;
+          img {
+            margin-top: -15px;
+          }
+        }
+      }
+      img {
+        border-radius: $roundBase;
+      }
+    }
+    p {
+      width: $fullWidth;
+      color: #070600;
+      margin-bottom: 25px;
+      margin-bottom: 7px;
+      a {
+        color: #084b83;
+      }
+      @include smallDevices {
+        text-align: center;
+      }
+    }
+    .btn {
+      width: $fullWidth;
+      @include blockBase;
+      background: #ff66b3;
+      padding: 7px 0;
+      color: #f0f6f6;
+      font-weight: 500;
+      border-radius: $roundBase;
+    }
+  }
+  .detailsPnl {
+    width: $fullWidth;
+    @include blockBase;
+    p {
+      a {
+        color: $headingColor;
+        text-decoration: none;
+      }
+    }
+    h1 {
+      width: $fullWidth;
+      @include blockBase;
+      margin: 0 0 45px 0;
+      color: #084b83;
+      font-size: 55px;
+      font-weight: 500;
+      font-family: $fontBaseSecondary;
+      @include smallDevices {
+        font-size: 30px;
+        margin: 0 0 25px 0;
+        text-align: center;
+      }
+    }
+    h3 {
+      width: $fullWidth;
+      @include blockBase;
+      color: #ff66b3;
+      font-size: 20px;
+      line-height: 30px;
+      font-weight: 500;
+      margin: 0 0 40px 0;
+      @include smallDevices {
+        text-align: center;
+        margin: 0 0 25px 0;
+      }
+    }
+    h4 {
+      color: $headingColor;
+      padding: 0 0 10px 0;
+      margin: 0;
+      font-size: 24px;
+      font-weight: 500;
+    }
+    
+    .addressRow {
+      width: $fullWidth;
+      @include flexBase;
+      @include listBase;
+      padding-bottom: 30px;
+      margin-bottom: 70px;
+      border-bottom: 2px solid #bbe6e4;
+      @include smallDevices {
+        margin-bottom: 30px;
+      }
+      li {
+        color: rgba(7, 6, 0, 0.5);
+        font-size: 18px;
+        @include flexBase;
+        justify-content: flex-start;
+        @include smallDevices {
+          padding: 0 10px;
+          box-sizing: border-box;
+          font-size: 14px;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+        }
+        img {
+          margin-right: 12px;
+          @include smallDevices {
+            margin-right: 0;
+            margin-bottom: 12px;
+          }
+        }
+      }
+    }
+    .jobPara {
+      width: $fullWidth;
+      @include blockBase;
+      margin: 0 0 50px 0;
+      @include smallDevices {
+        margin: 0 0 25px 0;
+      }
+
+      h2 {
+        width: $fullWidth;
+        @include blockBase;
+        margin: 0 0 45px 0;
+        color: #084b83;
+        font-weight: 500;
+        font-family: $fontBaseSecondary;
+        font-size: 24px;
+        @include smallDevices {
+          text-align: center;
+          margin: 0 0 25px 0;
+        }
+      }
+
+      h3 {
+        width: $fullWidth;
+        @include blockBase;
+        margin: 0 0 45px 0;
+        color: $headingColor;
+        font-weight: 500;
+        font-family: $fontBase;
+        font-size: 20px;
+        @include smallDevices {
+          text-align: center;
+        }
+      }
+      p {
+        width: $fullWidth;
+        @include blockBase;
+        color: #070600;
+        a {
+          color: $headingColor;
+          text-decoration: none;
+        }
+        &.semi-lg {
+          font: $fontStyleSemiBase;
+        }
+        img {
+          margin-right: 14px;
+        }
+        .lBlock {
+          width: 30%;
+          @include blockBase;
+          @include smallDevices {
+            width: 50%;
+          }
+        }
+        .rBlock {
+          width: 30%;
+          @include blockBase;
+          color: $colorBase;
+          font-weight: 500;
+          @include smallDevices {
+            width: 50%;
+          }
+        }
+        @include smallDevices {
+          text-align: center;
+        }
+      }
+    }
+    .btnRow {
+      width: $fullWidth;
+      @include flexBase;
+      justify-content: flex-start;
+      @include smallDevices {
+        flex-direction: column;
+      }
+    }
+    .btn {
+      @include blockBase;
+      background: #42bfdd;
+      border-radius: $roundBase;
+      color: #070600;
+      font-weight: 500;
+      padding: 14px 60px;
+      @include smallDevices {
+        margin: 0 0 20px 0 !important;
+        width: $fullWidth;
+      }
+      &.outline-btn {
+        border: 2px solid #e5e5e5;
+        background: none;
+        color: #070600;
+        font-size: 16px;
+        line-height: 24px;
+        padding: 14px 60px;
+        -webkit-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+        @include smallDevices {
+          width: $fullWidth;
+        }
+        img {
+          padding-right: 10px;
+          -webkit-transition: all 0.5s ease-in-out;
+          transition: all 0.5s ease-in-out;
+        }
+        &:hover {
+          background: #e5e5e5;
+          img {
+            padding-right: 15px;
+          }
+        }
+      }
+      @include smallDevices {
+        display: table;
+        margin: 0 auto;
+        float: none;
+      }
+    }
+    .accountsFormArea {
+      width: $fullWidth;
+      padding: 2em 0 4em;
+      
+    }
+  }
+}
+
+.contentArea {
+  width: $fullWidth;
+  @include blockBase;
+  margin: 0 0 150px 0;
+  @include smallDevices {
+    margin: 0 0 60px 0;
+  }
+  .leftPoster {
+    width: $fullWidth;
+    @include blockBase;
+    margin: 0 0 25px 0;
+    img {
+      width: $fullWidth;
+    }
+  }
+  .rightBlock {
+    width: $fullWidth;
+    @include blockBase;
+    margin: 0 0 0 0;
+    h2 {
+      width: $fullWidth;
+      @include blockBase;
+      margin: 0 0 40px 0;
+      color: $headingColor;
+      font: 500 40px $fontBaseSecondary;
+      @include smallDevices {
+        margin: 0 0 30px 0;
+        font-size: 35px;
+      }
+    }
+    h4 {
+      width: $fullWidth;
+      @include blockBase;
+      margin: 0 0 30px 0;
+      color: $colorBase;
+      font: $fontStyleSemiBase;
+      @include smallDevices {
+        margin: 0 0 20px 0;
+      }
+    }
+    .listPoint {
+      width: $fullWidth;
+      @include blockBase;
+      @include listBase;
+      margin-bottom: 14px;
+      li {
+        width: $fullWidth;
+        @include blockBase;
+        margin: 0 0 24px 0;
+        color: $colorBase;
+        font: $fontStyleBase;
+        span {
+          padding: 8px 15px;
+          background: #f0f6f6;
+        }
+      }
+    }
+    .btn {
+      @include buttonLarge;
+      margin-top: 1.5em;
+    }
+  }
+}
+
+.blogArea {
+  .blogSlide {
+    width: $fullWidth;
+    @include blockBase;
+    position: relative;
+    @include smallDevices {
+      margin-bottom: 4em;
+    }
+    .poster {
+      width: $fullWidth;
+      @include blockBase;
+      img {
+        width: $fullWidth;
+        border-radius: $roundBase;
+      }
+    }
+    .bottomCard {
+      position: absolute;
+      bottom: -38px;
+      left: 2.5%;
+      z-index: 5;
+      width: 95%;
+      border-radius: $roundBase;
+      padding: 25px 20px;
+      box-sizing: border-box;
+      background: #f0f6f6;
+      -webkit-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      &:hover {
+        box-shadow: $boxShadowSemi;
+      }
+      .headBlock {
+        width: $fullWidth;
+        @include flexBase;
+        margin: 0 0 10px 0;
+
+        h3 {
+          color: #ff66b3;
+          @include smallDevices {
+            fint-size: 14px;
+          }
+        }
+        .dates {
+          color: rgba(7, 6, 0, 0.5);
+          @include smallDevices {
+            fint-size: 14px;
+          }
+        }
+      }
+      h2 {
+        width: $fullWidth;
+        margin: 0;
+        padding: 0;
+        color: #070600;
+        font-size: 24px;
+        font-weight: 500;
+        @include smallDevices {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+  .popularArea {
+    width: $fullWidth;
+    @include blockBase;
+    .popBtn {
+      border-radius: $roundBase;
+      margin: 0 0 20px 0;
+      background: #bbe6e4;
+      font-size: 16px;
+      font-weight: 600;
+      padding: 12px 70px;
+      @include smallDevices {
+        margin: 0 auto 20px;
+        display: table;
+      }
+    }
+    .popCard {
+      width: $fullWidth;
+      @include flexBase;
+      padding: 17px 15px;
+      border-bottom: 2px solid rgba(187, 230, 228, 0.4);
+      -webkit-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      border-radius: $roundBase;
+      &:hover {
+        box-shadow: $boxShadowSemi;
+      }
+      &:last-child {
+        border-bottom: none;
+      }
+      .photo {
+        width: 40%;
+        margin-right: 15px;
+        img {
+          width: $fullWidth;
+          border-radius: $fontBase;
+        }
+      }
+      .cntnt {
+        width: 60%;
+        h3 {
+          width: $fullWidth;
+          margin-bottom: 16px;
+          color: #ff66b3;
+          font-size: 14px;
+          margin: 0 0 8px 0;
+        }
+        h2 {
+          color: #070600;
+          margin: 0;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+  .thumbAreaBlog {
+    width: $fullWidth;
+    @include blockBase;
+    margin-bottom: 30px;
+    .blogthumbItem {
+      width: $fullWidth;
+      @include blockBase;
+      padding: 20px;
+      border-radius: $roundBase;
+      box-sizing: border-box;
+      margin: 6em 0 0 0;
+      -webkit-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      &:hover {
+        box-shadow: $boxShadowSemi;
+      }
+      @include smallDevices {
+        margin-top: 2em;
+      }
+      .photo {
+        width: $fullWidth;
+        @include blockBase;
+        margin-bottom: 20px;
+        img {
+          border-radius: $roundBase;
+          width: $fullWidth;
+        }
+      }
+      .heading {
+        width: $fullWidth;
+        margin-bottom: 20px;
+        @include flexBase;
+        h3 {
+          color: #ff66b3;
+          margin: 0 0 0 0;
+          font-size: 14px;
+          line-height: 21px;
+        }
+        h4 {
+          color: rgba(7, 6, 0, 0.5);
+          margin: 0 0 0 0;
+          font-size: 14px;
+          line-height: 21px;
+        }
+      }
+      h2 {
+        width: $fullWidth;
+        margin: 0 0 45px 0;
+        color: #070600;
+        font-weight: 500;
+        font-size: 26px;
+        @include smallDevices {
+          margin: 0 0 15px 0;
+          font-size: 20px;
+        }
+      }
+      p {
+        width: $fullWidth;
+        color: rgba(7, 6, 0, 0.5);
+      }
+    }
+  }
+}
+
+.findResumeArea {
+  width: $fullWidth;
+  @include blockBase;
+  margin: 0 0 120px 0;
+  @include smallDevices {
+    margin: 0 0 80px 0;
+  }
+  .pgHdng {
+    width: $fullWidth;
+    @include blockBase;
+    margin: 0 0 50px 0;
+    @include smallDevices {
+      margin: 0 0 30px 0;
+    }
+    h2 {
+      width: $fullWidth;
+      @include blockBase;
+      color: $headingColor;
+      font-weight: 500;
+      font-size: 34px;
+      margin: 0;
+      font-family: $fontBaseSecondary;
+      @include smallDevices {
+        font-size: 30px;
+        text-align: center;
+      }
+    }
+  }
+  .infoCard {
+    width: 100%;
+    @include flexBase;
+    justify-content: flex-start;
+    padding: 25px 15px;
+    border-radius: $roundBase;
+    margin: 0 0 140px 0;
+    border: 1px solid #d12c2c;
+    background: rgba(209, 44, 44, 0.1);
+    @include smallDevices {
+      margin: 0 0 50px 0;
+    }
+    .icon {
+      margin-right: 20px;
+    }
+    .contnt {
+      width: 80%;
+      margin: 0 0 0 0;
+      h2 {
+        width: 100%;
+        color: #d12c2c;
+        font: $fontStyleSemiBase;
+        font-weight: 500;
+        margin-bottom: 5px;
+      }
+      h3 {
+        width: 100%;
+        color: #d12c2c;
+        font: 400 16px/25px "Poppins", sans-serif;
+      }
+    }
+  }
+  .accessBlock {
+    width: $fullWidth;
+    @include blockBase;
+    margin: 0 0 0 0;
+    h2 {
+      width: $fullWidth;
+      @include blockBase;
+      margin: 0 0 60px 0;
+      color: #084b83;
+      font-size: 24px;
+      font-weight: 500;
+      @include smallDevices {
+        margin: 0 0 30px 0;
+      }
+    }
+    .table-responsive {
+      float: left;
+      width: $fullWidth;
+      .accessTable {
+        width: $fullWidth;
+        tr {
+          -webkit-transition: all 0.5s ease-in-out;
+          transition: all 0.5s ease-in-out;
+          &:hover {
+            background: rgba(187, 230, 228, 0.4);
+          }
+        }
+        th {
+          color: $colorBase;
+          font-size: 20px;
+          line-height: 30px;
+          font: weight 500px;
+          border-bottom: 2px solid rgba(187, 230, 228, 0.4);
+        }
+        td {
+          color: $colorBase;
+          font: $fontStyleSemiBase;
+          padding: 22px 15px;
+          span {
+            width: $fullWidth;
+            color: #8b8b88;
+            border-bottom: 2px solid rgba(187, 230, 228, 0.4);
+          }
+          .btn {
+            @include buttonLarge;
+            padding: 15px 45px;
+            -webkit-transition: all 0.2s ease-in-out;
+            transition: all 0.2s ease-in-out;
+            &:hover {
+              color: $buttonHoverColor;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.loginArea {
+  width: $fullWidth;
+  @include blockBase;
+  margin: 80px 0 150px 0;
+  @include smallDevices {
+    margin: 30px 0 40px 0;
+  }
+  .pgHdng {
+    width: $fullWidth;
+    @include blockBase;
+    margin: 0 0 40px 0;
+    @include smallDevices {
+      margin: 0 0 20px 0;
+    }
+    h2 {
+      width: $fullWidth;
+      @include blockBase;
+      margin: 0 0 0 0;
+      font-size: 54px;
+      color: #ff66b3;
+      font-weight: 500;
+      font-family: $fontBaseSecondary;
+      text-align: center;
+      @include smallDevices {
+        font-size: 34px;
+      }
+    }
+  }
+  .LoginTabArea {
+    width: $fullWidth;
+    .loginTab {
+      @include flexBase;
+      justify-content: center;
+      border-bottom: none;
+      @include smallDevices {
+        flex-direction: row;
+      }
+
+      .nav-item {
+        @include smallDevices {
+          width: 48%;
+        }
+        .nav-link {
+          padding: 28px 110px;
+          box-sizing: border-box;
+          @include flexBase;
+          flex-direction: column;
+          justify-content: center;
+          border-radius: $roundBase;
+          border: none;
+          -webkit-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+          @include smallDevices {
+            padding: 20px 50px;
+          }
+          &.active,
+          &:hover {
+            background: #f0f6f6;
+            border: none;
+            h5 {
+              color: #084b83;
+            }
+          }
+          &:focus {
+            box-shadow: $boxShadowSemi;
+          }
+          img {
+            width: auto;
+            @include smallDevices {
+              width: 50%;
+            }
+          }
+          h5 {
+            color: $colorBase;
+            font-size: 24px;
+            margin: 28px 0 0 0;
+            @include smallDevices {
+              font-size: 20px;
+            }
+          }
+        }
+      }
+    }
+    .tab-content {
+      width: 62%;
+      padding: 70px;
+      box-sizing: border-box;
+      margin: 0 auto;
+      display: table;
+      @include smallDevices {
+        padding: 30px;
+        width: 100%;
+      }
+      .form-label {
+        color: #070600;
+        font-size: 24px;
+        @include smallDevices {
+          font-size: 18px;
+        }
+      }
+      .field {
+        width: $fullWidth;
+        border: 2px solid #bbe6e4;
+        border-radius: $roundBase;
+        padding: 12px 18px;
+        box-sizing: border-box;
+        background: #fff;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        .form-control {
+          border: none;
+          padding: 0;
+          margin-left: 25px;
+          &::-webkit-input-placeholder {
+            color: rgba(7, 6, 0, 0.5);
+          }
+          &::-ms-input-placeholder {
+            color: rgba(7, 6, 0, 0.5);
+          }
+          &:-ms-input-placeholder {
+            color: rgba(7, 6, 0, 0.5);
+          }
+          &::-moz-placeholder {
+            color: rgba(7, 6, 0, 0.5);
+          }
+          &:-moz-placeholder {
+            color: rgba(7, 6, 0, 0.5);
+          }
+          &:focus {
+            box-shadow: none;
+          }
+        }
+      }
+      .btn {
+        @include buttonLarge;
+        background: #ff66b3;
+        font-size: 18px;
+        margin: 40px auto 30px;
+        display: table;
+        color: #f0f6f6;
+        padding: 16px 90px;
+        -webkit-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+        @include smallDevices {
+          margin: 30px auto 10px;
+          width: 100%;
+        }
+        &:hover {
+          box-shadow: $boxShadowSemi;
+        }
+      }
+      .link {
+        margin: 0 auto;
+        display: table;
+        color: #ff66b3;
+        font-size: 24px;
+        font-weight: 500;
+        text-decoration: none;
+        padding: 12px 25px;
+        border-radius: $roundBase;
+        -webkit-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+        @include smallDevices {
+          width: $fullWidth;
+          text-align: center;
+        }
+        &:hover {
+          box-shadow: $boxShadowSemi;
+        }
+      }
+      .linkText {
+        margin: 0 auto;
+        display: table;
+        color: $colorBase;
+        a {
+          color: #ff66b3;
+          text-decoration: none;
+        }
+      }
+    }
+    .infoData {
+      width: 60%;
+      margin: 0 auto;
+      display: table;
+      float: none;
+      p {
+        width: $fullWidth;
+        text-align: center;
+        font-size: 24px;
+        line-height: 36px;
+        color: $colorBase;
+        margin-bottom: 30px;
+      }
+      .btn {
+        @include buttonLarge;
+        background: #ff66b3;
+        font-size: 18px;
+        margin: 40px auto 30px;
+        display: table;
+        color: #f0f6f6;
+        padding: 18px 80px;
+        -webkit-transition: all 0.5s ease-in-out;
+        transition: all 0.5s ease-in-out;
+        @include smallDevices {
+          margin: 30px auto 10px;
+          width: 100%;
+        }
+        &:hover {
+          box-shadow: $boxShadowSemi;
+        }
+      }
+    }
+  }
+}
+
+.infoCard {
+  width: 100%;
+  @include flexBase;
+  justify-content: flex-start;
+  padding: 25px 15px;
+  border-radius: $roundBase;
+  margin: 0;
+  border: 1px solid #d12c2c;
+  background: rgba(209, 44, 44, 0.1);
+  @include smallDevices {
+    margin: 0 0 50px 0;
+  }
+  .icon {
+    margin-right: 20px;
+  }
+  .contnt {
+    width: 80%;
+    margin: 0 0 0 0;
+    h2 {
+      width: 100%;
+      color: #d12c2c;
+      font: $fontStyleSemiBase;
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
+    h3 {
+      width: 100%;
+      color: #d12c2c;
+      font: 400 16px/25px "Poppins", sans-serif;
+    }
+  }
+}
+
+.pgHdng {
+  width: $fullWidth;
+  @include blockBase;
+  margin: 0 0 45px 0;
+  h2 {
+    margin: 0 0 0 0;
+    color: $headingColor;
+    font-family: $fontBaseSecondary;
+  }
+}
+
+.formRow {
+  width: $fullWidth;
+  margin: 0 0 20px 0;
+  .frmNm {
+    width: $fullWidth;
+    color: $colorBase;
+    font: $fontBaseSecondary;
+    margin: 5px 0 0 0;
+  }
+  .bottomText {
+    width: $fullWidth;
+    color: rgba(7, 6, 0, 0.5);
+    @include smallDevices {
+      font-size: 14px;
+      margin-bottom: 10px;
+      float: left;
+    }
+  }
+  .form-control {
+    width: $fullWidth;
+    padding: 15px 20px;
+    border: 2px solid #bbe6e4;
+    background: #fff;
+    border-radius: 10px;
+    @include placeholder {
+      color: rgba(7, 6, 0, 0.5);
+      font-size: 14px;
+    }
+  }
+  .form-check {
+    width: $fullWidth;
+    margin-bottom: 7px;
+    color: #000000;
+    font: $fontStyleSemiBase;
+  }
+}
+
+.file-input__input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.file-input__label {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  border-radius: $roundBase;
+  font-size: 14px;
+  font-weight: 500;
+  color: $colorBase;
+  font-size: 14px;
+  padding: 15px 40px;
+  background-color: #42bfdd;
+  margin-right: 25px;
+  white-space: nowrap;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+}
+
+.planSrvcBlock {
+  width: $fullWidth;
+  padding: 0 55px;
+  margin: 0 0 100px 0;
+  @include flexBase;
+  justify-content: center;
+  @include smallDevices {
+    flex-direction: column;
+    margin: 0 0 40px 0;
+  }
+  .item {
+    width: 33.33%;
+    padding: 30px;
+    box-sizing: border-box;
+    @include flexBase;
+    justify-content: center;
+    flex-direction: column;
+    @include smallDevices {
+      padding: 20px;
+      width: 100%;
+    }
+    .photo {
+      margin-bottom: 20px;
+      height: 184px;
+      @include smallDevices {
+        height: auto;
+        margin-bottom: 10px;
+      }
+    }
+    h4 {
+      color: $colorBase;
+      font: $fontStyleSemiBase;
+      @include smallDevices {
+        text-align: center;
+      }
+    }
+  }
+}
+
+.accessPlanArea {
+  width: $fullWidth;
+  padding: 0;
+  margin: 0 0;
+  @include blockBase;
+
+  h2 {
+    width: $fullWidth;
+    margin: 0 0 50px 0;
+    padding: 0;
+    color: $headingColor;
+    font-family: $fontBaseSecondary;
+    font-size: 32px;
+    @include smallDevices {
+      text-align: center;
+      font-size: 30px;
+      margin: 0 0 40px 0;
+    }
+  }
+  .item {
+    width: $fullWidth;
+    @include flexBase;
+    justify-content: center;
+    flex-direction: column;
+    padding: 55px 35px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #42bfdd;
+    border-radius: $roundBase;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    @include smallDevices {
+      margin: 0 0 20px 0;
+    }
+    &:hover {
+      box-shadow: $boxShadowLarge;
+    }
+    h3 {
+      color: $activeColorBase;
+      font-size: 50px;
+      font-weight: 500;
+      margin: 0 0 25px 0;
+    }
+    p {
+      font-size: 20px;
+      line-height: 30px;
+      font-weight: 500;
+      text-align: center;
+      margin: 0 0 50px 0;
+    }
+    .btn {
+      background: $activeColorBase;
+      width: $fullWidth;
+      padding: 18px 0;
+      border-radius: $roundBase;
+      color: #f0f6f6;
+      font-weight: 500;
+      -webkit-transition: all 0.5s ease-in-out;
+      transition: all 0.5s ease-in-out;
+      &:hover {
+        box-shadow: $boxShadowSemi;
+      }
+    }
+  }
+}
+
+.formPanel {
+  width: $fullWidth;
+  @include blockBase;
+  .frmRow {
+    width: $fullWidth;
+    @include flexBase;
+    justify-content: flex-start;
+    align-items: baseline;
+    margin: 0 0 20px 0;
+    @include smallDevices {
+      flex-direction: column;
+    }
+    .tittleSide {
+      flex-basis: 40%;
+      display: flex;
+      flex-direction: column;
+      margin: 0 0 0 0;
+      @include smallDevices {
+        flex-basis: 100%;
+        width: $fullWidth;
+        margin: 0 0 20px 0;
+        
+      }
+       
+      label {
+        width: $fullWidth;
+        @include blockBase;
+        color: $colorBase;
+        font: $fontBaseSecondary;
+        @include smallDevices{
+          font-size: 16px;
+        }
+      }
+     
+    }
+    .fieldBox {
+      flex-basis: 60%;
+      margin: 0 0 0 0;
+      @include smallDevices {
+        flex-basis: 100%;
+        width: $fullWidth;
+      }
+      &.small {
+        flex-basis: 20%;
+        align-self: flex-start;
+        @include smallDevices {
+          flex-basis: 50%;
+        }
+      }
+      .form-control {
+        width: $fullWidth;
+        border-radius: $roundBase;
+        border: 1px solid #ccc;
+        padding: 15px 20px;
+      }
+    }
+  }
+  .formBtn{
+    @include buttonLarge;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    &:hover{
+      box-shadow: $boxShadowSemi;
+    }
+  }
+}
+
+.mainContentArea {
+  width: $fullWidth;
+  @include blockBase;
+  min-height: 50vh;
+  margin: 0 0 150px 0;
+  @include smallDevices {
+    margin: 0 0 60px 0;
+  }
+  .pgHeading {
+    width: $fullWidth;
+    @include blockBase;
+    margin: 0 0 30px 0;
+    h2 {
+      width: $fullWidth;
+      @include blockBase;
+      margin: 0 0 0 0;
+      font: size 4px;
+      font-weight: 500;
+      font-family: $fontBaseSecondary;
+      color: $headingColor;
+      @include smallDevices {
+        text-align: center;
+      }
+    }
+  }
+  p {
+    width: $fullWidth;
+    @include blockBase;
+    margin: 0 0 30px 0;
+    font: $fontStyleSemiBase;
+    color: $colorBase;
+    @include smallDevices {
+      text-align: center;
+      font-size: 14px;
+    }
+  }
+  .shopBtn {
+    @include buttonLarge;
+    margin: 15px 0 30px 0;
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    @include smallDevices {
+      margin: 15px auto 30px auto;
+      display: table;
+      float: none;
+    }
+    &:hover {
+      box-shadow: $boxShadowSemi;
+    }
+  }
+  .editBillText {
+    width: $fullWidth;
+    @include flexBase;
+    justify-content: flex-start;
+    align-items: baseline;
+    margin: 0 0 20px 0;
+    @include smallDevices {
+      margin: 0 auto 0 auto;
+      display: table;
+      width: auto;
+    }
+    p {
+      color: $colorBase;
+      padding-right: 15px;
+      font-size: 20px;
+      width: auto;
+    }
+  }
+  .dashboardTabArea {
+    width: $fullWidth;
+    @include blockBase;
+    .nav-tabs {
+      border-bottom: none;
+      margin-bottom: 50px;
+      @include smallDevices {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .nav-item {
+        .nav-link {
+          color: rgba(7, 6, 0, 0.5);
+          font-size: 20px;
+          line-height: 30px;
+          font-weight: 500;
+          padding: 15px 50px 15px 0;
+          border: none;
+          @include smallDevices {
+            padding-right: 0;
+            font-size: 14px;
+            line-height: 20px;
+          }
+          &:hover,
+          &:focus {
+            border: none;
+          }
+          &.active {
+            color: #ff66b3;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+  .table {
+    width: $fullWidth;
+    th {
+      @include tableHead;
+      white-space: nowrap;
+      @include smallDevices {
+        font-size: 14px;
+      }
+    }
+    td {
+      @include tableDiv;
+      white-space: nowrap;
+      padding: 15px;
+      @include smallDevices {
+        font-size: 14px;
+      }
+      &.jobFirst {
+        width: 26%;
+      }
+      &.byclr {
+        color: #42bfdd;
+        p {
+          color: #42bfdd;
+        }
+        ul {
+          @include listBase;
+          @include flexBase;
+          justify-content: flex-start;
+          li {
+            margin-right: 15px;
+            a {
+              color: #084b83;
+              font: $fontStyleBase;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+      .btn {
+        @include buttonLarge;
+        padding: 10px 80px;
+        vertical-align: baseline;
+      }
+    }
+  }
+}
+
+.frmRow {
+  width: 100%;
+  @include flexBase;
+  justify-content: flex-start;
+  align-items: baseline;
+  margin: 0 0 20px 0;
+  .tittleSide {
+    flex-basis: 40%;
+    margin: 0 0 0 0;
+    display: flex;
+    flex-direction:column;
+    @include smallDevices{
+      margin: 0 0 20px 0;
+    }
+    span{
+      width: $fullWidth;
+      color: rgba(7, 6, 0, 0.5);
+    } 
+    label {
+      color: $colorBase;
+      font: $fontStyleSemiBase;
+    }
+  }
+  .fieldBox {
+    flex-basis: 60%;
+    margin: 0 0 0 0;
+    .form-control {
+      width: 100%;
+      border-radius: $roundBase;
+      border: 1px solid #ccc;
+      padding: 15px 20px;
+      color: $colorBase;
+    }
+    .addLink{
+      color: $activeColorBase;
+      font: $fontStyleSemiBase;
+      text-decoration: none;
+      font-weight: 500;
+      @include smallDevices{
+        font-size: 14px;
+      }
+    }
+  }
+}
+.progressBlock{
+  width: $fullWidth;
+  @include blockBase;
+  position: relative;
+  margin: 0 0 6em 0;
+  .progressNum{
+    position: absolute;
+    top:-30px;
+    right: 0;
+    color: rgba(7, 6, 0, 0.5);
+  }
+  .bg-info{
+    background-color: #FF66B3 !important;
+  }
+}
+
+.formHeading{
+  color: $headingColor;
+  padding: 0 0 10px 0;
+  margin: 0;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+
+
+.navigateBar .navbar-collapse{
+  height: 42vh !important;
+}
+
+
+// @media only screen and (max-width: 991px) and (min-width: 769px){
+//   .navigateBar .navbar-collapse {
+//     height: 42vh !important;
+//   }
+
+// }

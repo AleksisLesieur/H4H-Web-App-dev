@@ -1,0 +1,16 @@
+@media only screen and (max-width: 800px) and (min-width: 560px){
+    .blogArea .popularArea .popCard{
+        flex-direction: column;
+    }
+    .blogArea .popularArea .popCard .photo,
+    .blogArea .popularArea .popCard .cntnt{
+        width: 100%;
+    }
+    .blogArea .popularArea .popCard .cntnt{
+        margin: 0 !important;
+        padding-top: 5px;
+    }
+    .blogArea .popularArea .popCard{
+        flex-direction: column !important;
+    }
+}

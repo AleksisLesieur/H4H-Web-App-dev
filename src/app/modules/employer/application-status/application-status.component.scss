@@ -1,0 +1,11 @@
+.mainContentArea .table td .btn:hover{
+    background: #548ea2 !important;
+    color: #fff !important;
+    border: none !important;
+}
+
+@media screen and (max-width: 575px) {
+    .nav-tabs .nav-link{
+        width: 100% !important;
+    }
+  }

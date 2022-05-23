@@ -1,0 +1,1560 @@
+<section class="mainContentArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="pgHeading" data-aos="fade-up">
+        <h2>Post Resume</h2>
+      </div>
+
+      <div class="detailsPnl">
+        <ul class="stepList">
+          <li
+            (click)="gotoStep(1)"
+            [ngClass]="contactInformation.valid ? 'active ' : 'inactive'"
+          >
+            1. Contact Details
+          </li>
+          <li
+            (click)="gotoStep(2)"
+            [ngClass]="personalInformation.valid ? 'active ' : 'inactive'"
+          >
+            2. Personal Information
+          </li>
+          <li
+            (click)="gotoStep(3)"
+            [ngClass]="educationalInformation.valid ? 'active ' : 'inactive'"
+          >
+            3. Education
+          </li>
+          <li
+            (click)="gotoStep(4)"
+            [ngClass]="workInformation.valid ? 'active ' : 'inactive'"
+          >
+            4. Work Experience
+          </li>
+          <li
+            (click)="gotoStep(5)"
+            [ngClass]="skillsInformation.valid ? 'active ' : 'inactive'"
+          >
+            5. Skills and Abilities
+          </li>
+        </ul>
+        <!-- Contact details Content Start-->
+        <form [formGroup]="contactInformation" id="msform">
+          <fieldset *ngIf="step == 1">
+            <div class="contentArea">
+              <h2>Contact Details</h2>
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Your name*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    formControlName="user_name"
+                    [ngClass]="
+                      contactInformationStep &&
+                      contactInformation.controls.user_name.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    type="text"
+                    placeholder="Alex Tushynski"
+                  />
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Your email*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    formControlName="user_email"
+                    [ngClass]="
+                      contactInformationStep &&
+                      contactInformation.controls.user_email.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    type="email"
+                    placeholder="aaaaaa.bbb@gmail.com"
+                  />
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Phone number*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    formControlName="phone_number"
+                    [ngClass]="
+                      contactInformationStep &&
+                      contactInformation.controls.phone_number.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    type="text"
+                    appPhoneNumber
+                    placeholder="Enter your phone number"
+                    maxlength="14"
+                  />
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Location (city, state)*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <!-- <input
+                    formControlName="location"
+                    [ngClass]="
+                      contactInformationStep &&
+                      contactInformation.controls.location.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    type="text"
+                    placeholder="“London, UK”, “New York”, “Houston, TX”"
+                  /> -->
+                  <input
+                    ngx-google-places-autocomplete
+                    id="placeAutocomplete"
+                    formControlName="location"
+                    [ngClass]="
+                      contactInformationStep &&
+                      (contactInformation.controls.location.errors ||
+                        contactInformation.controls.lat.errors ||
+                        contactInformation.controls.lng.errors)
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    placeholder="“London, UK”, “New York”, “Houston, TX”"
+                    (onAddressChange)="handleAddressChange($event)"
+                  />
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  contactInformationStep &&
+                  (contactInformation.controls.user_name.errors ||
+                    contactInformation.controls.user_email.errors ||
+                    contactInformation.controls.location.errors ||
+                    contactInformation.controls.lat.errors ||
+                    contactInformation.controls.lng.errors ||
+                    contactInformation.controls.phone_number.errors)
+                "
+                class="row mt-2 justify-content-md-start"
+              >
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="infoCard mb-3">
+                    <div class="icon">
+                      <img src="assets/images/erorr.png" alt="" />
+                    </div>
+                    <div class="contnt">
+                      <h2>Required fields.</h2>
+                      <h3>You need to fill in the fields highlighted in red</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-md-end">
+                <div class="col-md-9">
+                  <div class="row rowarea">
+                    <div class="col-sm-6 col-md-4 secondorder">
+                      <a
+                        href="javascript:void(0)"
+                        class="prvBtn btn ripple"
+                        [routerLink]="['/candidate/resume']"
+                        data-waves=""
+                        >Back</a
+                      >
+                    </div>
+                    <div class="col-sm-6 col-md-4 semisecondorder">
+                      <input
+                        (click)="next()"
+                        type="button"
+                        value="Save and Continue"
+                        class="next action-button ripple"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+        <!-- Contact details Content End-->
+        <!-- Personal information Start-->
+        <form [formGroup]="personalInformation" id="msform">
+          <fieldset *ngIf="step == 2">
+            <div class="contentArea">
+              <h2>Personal Information</h2>
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Personal intro statement*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <textarea
+                    formControlName="personal_statement"
+                    [ngClass]="
+                      personalInformationStep &&
+                      personalInformation.controls.personal_statement.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    rows="5"
+                    placeholder="Tell us why an employer should hire you. What sets you apart? What are your strengths? 
+Don’t be afraid to brag!"
+                  ></textarea>
+                </div>
+              </div>
+
+              <!-- <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Professional Title*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    formControlName="professional_title"
+                    placeholder="“Hair Stylist”"
+                    [ngClass]="
+                      personalInformationStep &&
+                      personalInformation.controls.professional_title.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                  />
+                </div>
+              </div> -->
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Resume category*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <angular2-multiselect
+                    [data]="category_list"
+                    [(ngModel)]="selectedItems"
+                    [settings]="dropdownSettings"
+                    (onSelect)="onItemSelect($event)"
+                    (onDeSelect)="OnItemDeSelect($event)"
+                    (onDeSelectAll)="onDeSelectAll($event)"
+                    formControlName="resume_category"
+                    [ngClass]="
+                      personalInformationStep &&
+                      personalInformation.controls.resume_category.errors
+                        ? 'form-control input-error'
+                        : 'form-control'
+                    "
+                  >
+                    <c-badge>
+                      <ng-template let-item="item">
+                        <img
+                          [src]="item.category_image"
+                          style="width: 16px; margin-right: 10px"
+                        />
+                        <label style="margin: 0px">{{
+                          item.category_name
+                        }}</label>
+                      </ng-template>
+                    </c-badge>
+                    <c-item>
+                      <ng-template let-item="item">
+                        <img
+                          [src]="item.category_image"
+                          style="
+                            width: 30px;
+                            border: 1px solid #efefef;
+                            margin-right: 20px;
+                          "
+                        />
+                        <label>{{ item.category_name }}</label>
+                      </ng-template>
+                    </c-item>
+                  </angular2-multiselect>
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Photo</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <div class="photorow">
+                    <div class="portphotos">
+                      <span
+                        class="photoclose"
+                        (click)="removeProfileImage()"
+                        *ngIf="
+                          reasumeData.user_photo.length != 0 ||
+                          base64textString.length != 0
+                        "
+                        >X</span
+                      >
+                      <img
+                        *ngIf="base64textString.length != 0"
+                        alt="Image placeholder"
+                        [src]="transform()"
+                        onerror="this.src='assets/images/loader.gif';"
+                        width="194"
+                        height="194"
+                      />
+                      <img
+                        *ngIf="
+                          reasumeData.user_photo.length != 0 &&
+                          base64textString.length == 0
+                        "
+                        alt="Image placeholder"
+                        [src]="reasumeData.user_photo"
+                        onerror="this.src='assets/images/user.png';"
+                        width="194"
+                        height="194"
+                      />
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <div class="file-input">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          (change)="handleFileSelect($event)"
+                          name="file-input"
+                          id="file-input"
+                          class="file-input__input"
+                          (click)="$event.target.value = null"
+                          [ngClass]="
+                            personalInformationStep &&
+                            personalInformation.controls.user_photo.errors
+                              ? 'file-error'
+                              : 'file-input__input'
+                          "
+                        />
+                        <label
+                          [ngClass]="
+                            personalInformationStep &&
+                            personalInformation.controls.user_photo.errors
+                              ? 'file-error'
+                              : 'file-input__label'
+                          "
+                          for="file-input"
+                        >
+                          <span>Choose file</span></label
+                        >
+                      </div>
+                      <p>Maximum file size: 10 MB</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Portfolio photos</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <div class="photorow">
+                    <div
+                      class="portphotoholder"
+                      *ngFor="let cl of portfolioFiles; let i = index"
+                    >
+                      <div class="portphotos">
+                        <span
+                          class="photoclose"
+                          *ngIf="cl.length != 0"
+                          (click)="removePortPholioImage(i)"
+                          >X</span
+                        >
+                        <img
+                          *ngIf="cl.length != 0"
+                          alt="Image placeholder"
+                          [src]="transformUrl(cl)"
+                          onerror="this.src='assets/images/loader.gif';"
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        class="file-input"
+                        style="background: none; border: none"
+                      >
+                        <input
+                          type="file"
+                          accept="image/*"
+                          (change)="handlePortpolioSelect($event, i)"
+                          name="file-input"
+                          id="file-input-{{ i }}"
+                          class="file-input__input"
+                          (click)="$event.target.value = null"
+                        />
+                        <label
+                          class="file-input__label"
+                          for="file-input-{{ i }}"
+                        >
+                          <span>Choose file</span></label
+                        >
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Video</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    formControlName="user_video"
+                    placeholder="A link to a video about yourself"
+                    [ngClass]="
+                      personalInformationStep &&
+                      personalInformation.controls.user_video.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                  />
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Instagram URL</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    formControlName="instagram"
+                    placeholder="Enter a valid URL address (i.e. https:/www.mywebsite.com/)"
+                    [ngClass]="
+                      personalInformationStep &&
+                      personalInformation.controls.instagram.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                  />
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Facebook page URL</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    formControlName="facebook"
+                    placeholder="Enter a valid URL address (i.e. https:/www.mywebsite.com/)"
+                    [ngClass]="
+                      personalInformationStep &&
+                      personalInformation.controls.facebook.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                  />
+                </div>
+              </div>
+              <div formArrayName="urls">
+                <div
+                  *ngFor="let url of urls().controls; let i = index"
+                  [formGroupName]="[i]"
+                  class="row formRow"
+                >
+                  <div class="col-sm-3 pL0">
+                    <label class="frmNm">URL({{ i + 1 }})</label>
+                  </div>
+                  <div class="col-sm-9 pR0 d-flex">
+                    <input
+                      type="text"
+                      formControlName="url"
+                      class="form-control"
+                      placeholder="Enter a valid URL address (i.e. https:/www.mywebsite.com/)"
+                    />
+                    <button
+                      style="background-color: #e34f4f"
+                      (click)="removeUrl(i)"
+                      class="btn btn-danger ml-2"
+                    >
+                      X
+                    </button>
+                  </div>
+                  <!-- <div class="fieldBox d-flex">
+                
+                </div> -->
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">URL(s)</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <a href="javascript:void(0)" (click)="addUrl()" class="addUrl"
+                    >+ Add URL</a
+                  >
+                  <p
+                    style="
+                      color: rgba(0, 0, 0, 0.3);
+                      font-size: 14px;
+                      margin-top: -15px;
+                      text-align: left;
+                    "
+                  >
+                    Optionally provide links to any your websites or social
+                    network profiles
+                  </p>
+                </div>
+              </div>
+
+              <div
+                *ngIf="
+                  personalInformationStep &&
+                  (personalInformation.controls.personal_statement.errors ||
+                    personalInformation.controls.professional_title.errors ||
+                    personalInformation.controls.resume_category.errors ||
+                    personalInformation.controls.user_photo.errors)
+                "
+                class="row mt-2 justify-content-md-start"
+              >
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="infoCard mb-3">
+                    <div class="icon">
+                      <img src="assets/images/erorr.png" alt="" />
+                    </div>
+                    <div class="contnt">
+                      <h2>Required fields.</h2>
+                      <h3>You need to fill in the fields highlighted in red</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row justify-content-md-end">
+                <div class="col-sm-9 ml-auto">
+                  <div class="row rowarea">
+                    <div class="col-sm-6 col-md-4 secondorder">
+                      <a
+                        style="width: 100%"
+                        href="javascript:void(0)"
+                        class="prvBtn btn ripple"
+                        (click)="previous()"
+                        data-waves=""
+                        >Previous</a
+                      >
+                    </div>
+                    <div class="col-sm-6 col-md-4 semisecondorder">
+                      <input
+                        (click)="next()"
+                        type="button"
+                        value="Save and Continue"
+                        class="next action-button ripple"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+        <!-- Education Start-->
+        <form [formGroup]="educationalInformation" id="msform">
+          <fieldset *ngIf="step == 3">
+            <div class="contentArea mainArea">
+              <h2>Education</h2>
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm"
+                    >How did you complete your training requirements?*</label
+                  >
+                </div>
+
+                <div class="col-sm-9 pR0">
+                  <select
+                    [ngClass]="
+                      educationalInformationStep &&
+                      educationalInformation.controls.apprentice_program_flag
+                        .errors
+                        ? 'input-error select-control'
+                        : 'form-control select-control'
+                    "
+                    (change)="onChangeTraining()"
+                    formControlName="apprentice_program_flag"
+                    class="form-control select-control"
+                  >
+                    <option disabled value="">Select</option>
+                    <option value="1">Apprentice Program</option>
+                    <option value="0">Beauty / Barber School, etc.</option>
+                  </select>
+                  <textarea
+                    *ngIf="
+                      educationalInformation.controls.apprentice_program_flag
+                        .value == 1
+                    "
+                    formControlName="apprentice_program"
+                    [ngClass]="
+                      educationalInformationStep &&
+                      educationalInformation.controls.apprentice_program.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    placeholder="Where?"
+                    rows="3"
+                  ></textarea>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  educationalInformation.controls.apprentice_program_flag
+                    .value === '0'
+                "
+                class="row formRow"
+              >
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">State / Territory*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <select
+                    style="padding: 0px 15px !important ; height: 48px"
+                    (change)="
+                      loadSchoolList(
+                        educationalInformation.controls.states_territories.value
+                      )
+                    "
+                    [ngClass]="
+                      educationalInformationStep &&
+                      educationalInformation.controls.states_territories.errors
+                        ? 'input-error select-control'
+                        : 'form-control select-control'
+                    "
+                    formControlName="states_territories"
+                  >
+                    <option disabled value="">Select State / Territory</option>
+                    <option
+                      *ngFor="let cl of state_list"
+                      [value]="cl.idstates_territories"
+                    >
+                      {{ cl.states_territories_name }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div
+                *ngIf="
+                  educationalInformation.controls.apprentice_program_flag
+                    .value === '0'
+                "
+                class="row formRow"
+              >
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Trade / Beauty school*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <select
+                    style="padding: 0px 15px !important ; height: 48px"
+                    (change)="
+                      setSchool(educationalInformation.controls.school_id.value)
+                    "
+                    [ngClass]="
+                      educationalInformationStep &&
+                      educationalInformation.controls.school_id.errors
+                        ? 'input-error select-control'
+                        : 'form-control select-control'
+                    "
+                    formControlName="school_id"
+                  >
+                    <option disabled value="">Select School</option>
+                    <option
+                      *ngFor="let cl of school_list"
+                      [value]="cl.idschool"
+                    >
+                      {{ cl.school_name }}
+                    </option>
+                    <option value="61">Other</option>
+                  </select>
+
+                  <input
+                    *ngIf="
+                      educationalInformation.controls.school_id.value == 61
+                    "
+                    type="text"
+                    formControlName="other_school"
+                    [ngClass]="
+                      educationalInformationStep &&
+                      educationalInformation.controls.other_school.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    placeholder="Enter your school name"
+                  />
+                </div>
+              </div>
+
+              <div
+                *ngIf="
+                  educationalInformationStep &&
+                  (educationalInformation.controls.states_territories.errors ||
+                    educationalInformation.controls.apprentice_program.errors ||
+                    educationalInformation.controls.other_school.errors ||
+                    educationalInformation.controls.apprentice_program_flag
+                      .errors ||
+                    educationalInformation.controls.school_id.errors)
+                "
+                class="row mt-2 justify-content-md-start"
+              >
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="infoCard mb-3">
+                    <div class="icon">
+                      <img src="assets/images/erorr.png" alt="" />
+                    </div>
+                    <div class="contnt">
+                      <h2>Required fields.</h2>
+                      <h3>You need to fill in the fields highlighted in red</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mt-5 justify-content-md-space-between">
+                <div class="col-sm-9 ml-auto">
+                  <div class="row rowarea">
+                    <div class="col-sm-6 col-md-4 switchBtm">
+                      <a
+                        style="width: 100%"
+                        href="javascript:void(0)"
+                        class="prvBtn btn ripple"
+                        (click)="previous()"
+                        data-waves=""
+                        >Previous</a
+                      >
+                    </div>
+                    <div class="col-sm-6 col-md-4 semisecondorder">
+                      <input
+                        (click)="next()"
+                        type="button"
+                        value="Save and Continue"
+                        class="next action-button ripple"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+        <!-- Education End-->
+        <!-- Work experience Start-->
+        <form [formGroup]="workInformation" id="msform">
+          <fieldset *ngIf="step == 4">
+            <div class="contentArea">
+              <h2>Work Experience</h2>
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm"
+                    >Are you currently licensed in a related field?*</label
+                  >
+                </div>
+                <div class="col-sm-7 pR0">
+                  <select
+                    [ngClass]="
+                      workInformationStep &&
+                      workInformation.controls.certificate_license_flag.errors
+                        ? 'input-error select-control'
+                        : 'form-control select-control'
+                    "
+                    formControlName="certificate_license_flag"
+                  >
+                    <option disabled value="">Select</option>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Number of years licensed*</label>
+                </div>
+                <div class="col-sm-7 pR0">
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <select
+                        [ngClass]="
+                          workInformationStep &&
+                          workInformation.controls.license_year.errors
+                            ? 'input-error select-control'
+                            : 'form-control select-control'
+                        "
+                        formControlName="license_year"
+                      >
+                        <option disabled value="">
+                          Select the number of years
+                        </option>
+                        <option *ngFor="let cl of exp_year" [value]="cl.key">
+                          {{ cl.value }}
+                        </option>
+                      </select>
+                    </div>
+                    <!-- <div class="col-sm-6">
+                      <select
+                        [ngClass]="
+                          workInformationStep &&
+                          workInformation.controls.license_month.errors
+                            ? 'input-error select-control'
+                            : 'form-control select-control'
+                        "
+                        formControlName="license_month"
+                      >
+                        <option disabled value="">Select Month</option>
+                        <option *ngFor="let cl of exp_month" [value]="cl.key">
+                          {{ cl.value }}
+                        </option>
+                      </select>
+                    </div> -->
+                  </div>
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Certificates / Licenses</label>
+                </div>
+                <div class="col-sm-7 pR0">
+                  
+                    <textarea
+                      class="form-control"
+                      formControlName="certificate_license"
+                      rows="3"
+                      placeholder="Certificates / licenses"
+                      style="margin-top: 1em"
+                    ></textarea>
+                  
+                </div>
+              </div>
+              <h2>Previous Job</h2>
+              <div formArrayName="job_exp">
+                <div
+                  *ngFor="let wh of workHistorys().controls; let i = index"
+                  [formGroupName]="[i]"
+                >
+                  <div class="col-sm-11 pR0 d-flex" *ngIf="i != 0">
+                    <h2>Job ({{ i + 1 }})</h2>
+                    <button
+                      style="background-color: #e34f4f"
+                      (click)="removeWorkHistory(i)"
+                      class="btn btn-danger ml-2"
+                    >
+                      X
+                    </button>
+                  </div>
+                  <div class="row formRow">
+                    <div class="col-sm-3 pL0">
+                      <label class="frmNm">Company name</label>
+                    </div>
+                    <div class="col-sm-7 pR0">
+                      <div class="iconTextBox">
+                        <input
+                          type="text"
+                          name=""
+                          id=""
+                          placeholder="Company Name"
+                          formControlName="company_name"
+                        />
+                        <img src="assets/images/company.png" alt="" />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row formRow">
+                    <div class="col-sm-3 pL0">
+                      <label class="frmNm">Position held</label>
+                    </div>
+                    <div class="col-sm-7 pR0">
+                      <div class="iconTextBox">
+                        <input
+                          type="text"
+                          name=""
+                          id=""
+                          placeholder="Position held"
+                          formControlName="position_held"
+                        />
+                        <img src="assets/images/knife.png" alt="" />
+                      </div>
+
+                      <div
+                        *ngIf="i == 0"
+                        class="form-check"
+                        style="margin-top: 1em; padding-left: 0"
+                      >
+                        <input
+                          (change)="removeEndDate()"
+                          type="checkbox"
+                          name="a"
+                          formControlName="is_current"
+                        />
+                        <label
+                          class="form-check-label"
+                          for=""
+                          style="margin-left: 20px"
+                        >
+                          I am currently working here.</label
+                        >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row formRow">
+                    <div class="col-sm-3 pL0">
+                      <label class="frmNm">Start date</label>
+                    </div>
+                    <div class="col-sm-7 pR0">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select
+                            formControlName="start_year"
+                            class="form-control select-control"
+                          >
+                            <option disabled value="">Year</option>
+                            <option *ngFor="let cl of years" [value]="cl.key">
+                              {{ cl.value }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <select
+                            formControlName="start_month"
+                            class="form-control select-control"
+                          >
+                            <option disabled value="">Month</option>
+                            <option *ngFor="let cl of months" [value]="cl.key">
+                              {{ cl.value }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    *ngIf="i == 0 && isCurrentlyWorking ? false : true"
+                    class="row formRow"
+                  >
+                    <div class="col-sm-3 pL0">
+                      <label class="frmNm">End date</label>
+                    </div>
+                    <div class="col-sm-7 pR0">
+                      <div class="row">
+                        <div class="col-sm-6">
+                          <select
+                            formControlName="end_year"
+                            class="form-control select-control"
+                          >
+                            <option disabled value="">Year</option>
+                            <option *ngFor="let cl of years" [value]="cl.key">
+                              {{ cl.value }}
+                            </option>
+                          </select>
+                        </div>
+                        <div class="col-sm-6">
+                          <select
+                            formControlName="end_month"
+                            class="form-control select-control"
+                          >
+                            <option disabled value="">Month</option>
+                            <option *ngFor="let cl of months" [value]="cl.key">
+                              {{ cl.value }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 offset-sm-3">
+                  <input
+                    type="button"
+                    (click)="addWorkHistory()"
+                    value="Add job"
+                    class="addBtn btn"
+                  />
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  workInformationStep &&
+                  (workInformation.controls.certificate_license_flag.errors ||
+                    workInformation.controls.license_year.errors ||
+                    workInformation.controls.license_month.errors)
+                "
+                class="row mt-2 justify-content-md-start"
+              >
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="infoCard mb-3">
+                    <div class="icon">
+                      <img src="assets/images/erorr.png" alt="" />
+                    </div>
+                    <div class="contnt">
+                      <h2>Required fields.</h2>
+                      <h3>You need to fill in the fields highlighted in red</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-5 justify-content-md-space-between">
+                <div class="col-sm-9 ml-auto">
+                  <div class="row rowarea">
+                    <div class="col-sm-6 col-md-4 switchBtm">
+                      <a
+                        style="width: 100%"
+                        href="javascript:void(0)"
+                        class="prvBtn btn ripple"
+                        (click)="previous()"
+                        data-waves=""
+                        >Previous</a
+                      >
+                    </div>
+                    <div class="col-sm-6 col-md-4 semisecondorder">
+                      <input
+                        (click)="next()"
+                        type="button"
+                        value="Save and Continue"
+                        class="next action-button ripple"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+        <!-- Work experience End-->
+        <!-- Skills and abilities Start-->
+        <form [formGroup]="skillsInformation" id="msform">
+          <fieldset *ngIf="step == 5">
+            <div class="contentArea">
+              <h2>Skills and Abilities</h2>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Skills*</label>
+                </div>
+                <div class="col-sm-7 pR0">
+                  <textarea
+                    formControlName="skills"
+                    [ngClass]="
+                      skillsInformationStep &&
+                      skillsInformation.controls.skills.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    placeholder="Separate each skill with a comma"
+                  ></textarea>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <small *ngIf="skillsInformation.value.skills.length != 0"
+                        >{{ 255 - skillsInformation.value.skills.length }}
+                        characters left.
+                      </small>
+                      <small *ngIf="skillsInformation.value.skills.length == 0"
+                        >Maximum 255 characters limit.
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pL0">
+                  <label class="frmNm">Desired job type </label>
+                </div>
+                <div class="col-sm-7 pR0">
+                  <div
+                    class="form-check"
+                    style="margin-top: 1em; padding-left: 0"
+                  >
+                    <input
+                      formControlName="is_full_time"
+                      type="checkbox"
+                      name="a"
+                    />
+                    <label
+                      class="form-check-label"
+                      for=""
+                      style="margin-left: 20px"
+                    >
+                      Full Time</label
+                    >
+                  </div>
+                  <div
+                    class="form-check"
+                    style="margin-top: 1em; padding-left: 0"
+                  >
+                    <input
+                      formControlName="is_part_time"
+                      type="checkbox"
+                      name="a"
+                    />
+                    <label
+                      class="form-check-label"
+                      for=""
+                      style="margin-left: 20px"
+                    >
+                      Part Time</label
+                    >
+                  </div>
+                  <div
+                    class="form-check"
+                    style="margin-top: 1em; padding-left: 0"
+                  >
+                    <input
+                      formControlName="is_temporary"
+                      type="checkbox"
+                      name="a"
+                    />
+                    <label
+                      class="form-check-label"
+                      for=""
+                      style="margin-left: 20px"
+                      >Temporary</label
+                    >
+                  </div>
+                  <div
+                    class="form-check"
+                    style="margin-top: 1em; padding-left: 0"
+                  >
+                    <input
+                      formControlName="is_booth_rent"
+                      type="checkbox"
+                      name="a"
+                    />
+                    <label
+                      class="form-check-label"
+                      for=""
+                      style="margin-left: 20px"
+                      >Contractor / Booth Rent</label
+                    >
+                  </div>
+                  <div
+                    class="form-check"
+                    style="margin-top: 1em; padding-left: 0"
+                  >
+                    <input
+                      formControlName="is_hourly"
+                      type="checkbox"
+                      name="a"
+                    />
+                    <label
+                      class="form-check-label"
+                      for=""
+                      style="margin-left: 20px"
+                      >Hourly</label
+                    >
+                  </div>
+                  <!-- <div
+                    class="form-check"
+                    style="margin-top: 1em; padding-left: 0"
+                  >
+                    <input
+                      formControlName="is_contractor"
+                      type="checkbox"
+                      name="a"
+                    />
+                    <label
+                      class="form-check-label"
+                      for=""
+                      style="margin-left: 20px"
+                      >Contractor</label
+                    >
+                  </div> -->
+                  <div class="boxinfoLine">
+                    <img src="assets/images/info.png" alt="" />
+                    <p style="text-align: left; width: 100%; font-size: 14px">
+                      Employees that are paid based on a percentage are often
+                      considered to be
+                      <span style="font-weight: 500">a contractor</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  skillsInformationStep &&
+                  skillsInformation.controls.skills.errors
+                "
+                class="row mt-2 justify-content-md-start"
+              >
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="infoCard mb-3">
+                    <div class="icon">
+                      <img src="assets/images/erorr.png" alt="" />
+                    </div>
+                    <div class="contnt">
+                      <h2>Required fields.</h2>
+                      <h3>You need to fill in the fields highlighted in red</h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-5 justify-content-md-space-between">
+                <div class="col-sm-9 ml-auto">
+                  <div class="row rowarea">
+                    <div class="col-sm-4 col-md-3 switchBtm">
+                      <a
+                        style="width: 100%"
+                        href="javascript:void(0)"
+                        class="prvBtn btn ripple"
+                        (click)="previous()"
+                        data-waves=""
+                        >Previous</a
+                      >
+                    </div>
+                    <div class="col-sm-4 col-md-3">
+                      <input
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        (click)="onPreview()"
+                        value="Preview"
+                        class="next action-button ripple"
+                      />
+                    </div>
+                    <div class="col-sm-4 col-md-3 semisecondorder">
+                      <input
+                        type="button"
+                        (click)="next()"
+                        value="Update"
+                        class="next action-button ripple"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+        <!-- Skills and abilities End-->
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-body">
+        <section class="detailsArea modalcontnt">
+          <div class="container-fluid">
+            <div class="container">
+              <div class="resume_TopArea">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="resumeUserphto">
+                      <img
+                        *ngIf="base64textString.length != 0"
+                        alt=""
+                        [src]="transform()"
+                        onerror="this.src='assets/images/user.png';"
+                      />
+                      <img
+                        *ngIf="base64textString.length == 0"
+                        [src]="resumeData.user_photo"
+                        onerror="this.src='assets/images/user.png';"
+                        alt=""
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-9">
+                    <div class="resumeTopcntnt">
+                      <div class="hdngArea">
+                        <h2>{{ resumeData.user_name }}</h2>
+                      </div>
+                      <ul class="subpointarea">
+                        <li>
+                          <img src="assets/images/scissors.png" alt="" />
+                          {{ resumeData.category_name }}
+                        </li>
+                        <li>
+                          <img src="assets/images/location.png" alt="" />
+                          {{ resumeData.location }}
+                        </li>
+                        <li *ngIf="resumeData.license_year > 1">
+                          <img src="assets/images/icard.png" alt="" />
+                          Licensed {{ resumeData.license_year }} years
+                        </li>
+                        <li *ngIf="resumeData.license_year < 2">
+                          <img src="assets/images/icard.png" alt="" />
+                          Licensed {{ resumeData.license_year }} year
+                        </li>
+                      </ul>
+                      <div class="tabrow">
+                        <span
+                          class="tab-badge"
+                          *ngIf="resumeData.is_booth_rent"
+                          style="background: #393a10; color: #fff"
+                          >Booth Rent</span
+                        >
+                        <span
+                          class="tab-badge"
+                          *ngIf="resumeData.is_hourly"
+                          style="background: #a2bfca; color: #000"
+                          >Hourly</span
+                        >
+                        <span
+                          class="tab-badge"
+                          *ngIf="resumeData.is_part_time"
+                          style="background: #807680; color: #fff"
+                          >Part Time</span
+                        >
+                        <span
+                          class="tab-badge"
+                          *ngIf="resumeData.is_full_time"
+                          style="background: #a4a89f; color: #fff"
+                          >Full Time</span
+                        >
+                        <span
+                          class="tab-badge"
+                          *ngIf="resumeData.is_temporary"
+                          style="background: #c28650; color: #fff"
+                          >Temporary</span
+                        >
+                        <span
+                          class="tab-badge"
+                          *ngIf="resumeData.is_contractor"
+                          style="background: #eff0f1; color: #000"
+                          >Contractor</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="portfolioArea" *ngIf="portfolioFiles.length != 0">
+                <div class="hdng">
+                  <h2>Portfolio</h2>
+                </div>
+                <div class="portfolioblock">
+                  <div *ngFor="let p of portfolioFiles" class="photo">
+                    <img
+                      style="width: 200px"
+                      [src]="transformUrl(p)"
+                      onerror="this.src='assets/images/default.png';"
+                      alt=""
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="portfolioArea">
+                <div class="hdng">
+                  <h2>Introductory Statement</h2>
+                </div>
+                <article>
+                  <p>
+                    {{ resumeData.personal_statement }}
+                  </p>
+                </article>
+                <div class="hdng"><h2>Skills</h2></div>
+                <article>
+                  <p
+                    [innerHTML]="resumeData.skills.split(',').join(',<br />')"
+                  ></p>
+                  <!-- <p [innerHTML]="resumeData.skills"></p> -->
+                </article>
+              </div>
+              <div class="bottomresume-area">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="item">
+                      <h2 *ngIf="resumeData.apprentice_program_flag == 0">
+                        Beauty School
+                      </h2>
+                      <h2 *ngIf="resumeData.apprentice_program_flag == 1">
+                        Apprentice Program
+                      </h2>
+                      <p
+                        style="word-break: break-all"
+                        *ngIf="
+                          resumeData.apprentice_program_flag == 0 &&
+                          resumeData.other_school_flag == 0
+                        "
+                      >
+                        {{ resumeData.school_name }}
+                      </p>
+                      <p
+                        style="word-break: break-all"
+                        *ngIf="
+                          resumeData.apprentice_program_flag == 0 &&
+                          resumeData.other_school_flag == 1
+                        "
+                      >
+                        {{ resumeData.other_school }}
+                      </p>
+                      <p
+                        style="word-break: break-all"
+                        *ngIf="resumeData.apprentice_program_flag == 1"
+                      >
+                        {{ resumeData.apprentice_program }}
+                      </p>
+                      <!-- <p style="word-break: break-all">
+                <span style="margin-right: 5px">
+                  <img src="assets/images/btmicn.png" alt="" />
+                </span>
+                {{ resumeData.skills }}
+              </p> -->
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="item">
+                      <h2>Work experience</h2>
+                      <div *ngFor="let e of resumeData.job_exp">
+                        <div *ngIf="e.company_name.length != 0">
+                          <p style="word-break: break-all">
+                            <b>{{ e.company_name }}</b>
+                          </p>
+                          <p>
+                            <span
+                              >{{ e.start_month }}/{{ e.start_year }} - </span
+                            ><span *ngIf="!e.is_current">
+                              {{ e.end_month }}/{{ e.end_year }} </span
+                            ><span *ngIf="e.is_current">
+                              Currently Working</span
+                            >
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="item">
+                      <h2>Contact</h2>
+                      <p>
+                        <img
+                          src="assets/images/icon_contact01.png"
+                          alt=""
+                          style="margin-right: 5px"
+                        />
+                        <a href="tel:{{ phone }}">{{ phone }} </a>
+                      </p>
+                      <p>
+                        <img
+                          src="assets/images/icon_contact02.png"
+                          alt=""
+                          style="margin-right: 5px"
+                        />
+                        <a href="mailto:{{ resumeData.user_email }}">
+                          {{ resumeData.user_email }}</a
+                        >
+                      </p>
+                      <p *ngIf="resumeData.instagram.length != 0">
+                        <img
+                          src="assets/images/icon_contact03.png"
+                          alt=""
+                          style="margin-right: 5px"
+                        />
+                        <a
+                          *ngIf="validURL(resumeData.instagram)"
+                          target="_blank"
+                          href="{{ '//' + resumeData.instagram }}"
+                          >{{ resumeData.instagram }}</a
+                        >
+                        <a
+                          *ngIf="!validURL(resumeData.instagram)"
+                          target="_blank"
+                          href="{{ 'https://' + resumeData.instagram }}"
+                          >{{ resumeData.instagram }}</a
+                        >
+                      </p>
+                      <p *ngIf="resumeData.facebook.length != 0">
+                        <img
+                          src="assets/images/facebook.png"
+                          alt=""
+                          style="margin-right: 5px"
+                        />
+                        <a
+                          *ngIf="validURL(resumeData.facebook)"
+                          target="_blank"
+                          href="{{ '//' + resumeData.facebook }}"
+                          >{{ resumeData.facebook }}</a
+                        >
+                        <a
+                          *ngIf="!validURL(resumeData.facebook)"
+                          target="_blank"
+                          href="{{ 'https://' + resumeData.facebook }}"
+                          >{{ resumeData.facebook }}</a
+                        >
+                      </p>
+                      <p *ngIf="resumeData.user_video.length != 0">
+                        <img
+                          src="assets/images/video.png"
+                          alt=""
+                          style="margin-right: 5px"
+                        />
+                        <a
+                          *ngIf="validURL(resumeData.user_video)"
+                          target="_blank"
+                          href="{{ '//' + resumeData.user_video }}"
+                          >{{ resumeData.user_video }}</a
+                        >
+                        <a
+                          *ngIf="!validURL(resumeData.user_video)"
+                          target="_blank"
+                          href="{{ 'https://' + resumeData.user_video }}"
+                          >{{ resumeData.user_video }}</a
+                        >
+                      </p>
+                      <p *ngFor="let u of resumeData.urls">
+                        <img
+                          src="assets/images/url.png"
+                          alt=""
+                          style="margin-right: 5px"
+                        />
+                        <a
+                          *ngIf="validURL(u.url)"
+                          target="_blank"
+                          href="{{ '//' + u.url }}"
+                          >{{ u.url }}</a
+                        >
+                        <a
+                          *ngIf="!validURL(u.url)"
+                          target="_blank"
+                          href="{{ 'https://' + u.url }}"
+                          >{{ u.url }}</a
+                        >
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  
+                  <div class="col-sm-4 col-md-3 mx-auto">
+                    <button
+                      type="button"
+                      class="prvBtn closemodalbtn"
+                      data-waves
+                      data-aos="fade-up"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

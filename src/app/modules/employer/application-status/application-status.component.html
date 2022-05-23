@@ -1,0 +1,338 @@
+<section class="mainContentArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="pgHeading" data-aos="fade-up">
+        <div class="row">
+          <div class="col-sm-9 col-md-9 col-lg-10">
+            <h2>Application status</h2>
+          </div>
+          <div class="col-sm-3 col-md-3 col-lg-2">
+            <a
+              href="javascript:void(0);"
+              (click)="goBack()"
+              class="btn btnSearch"
+              >Back</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <ul class="nav nav-tabs filterTabRow" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link active"
+                id="one-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#one"
+                type="button"
+                role="tab"
+                (click)="loadAllStatusList()"
+                aria-controls="one"
+                aria-selected="true"
+              >
+                All ({{ status_count.all }})
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="two-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#two"
+                type="button"
+                role="tab"
+                (click)="loadAcceptedStatusList()"
+                aria-controls="two"
+                aria-selected="false"
+              >
+                Accepted ({{ status_count.accepted }})
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="three-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#three"
+                type="button"
+                role="tab"
+                (click)="loadDeclinedStatusList()"
+                aria-controls="three"
+                aria-selected="false"
+              >
+                Declined ({{ status_count.declined }})
+              </button>
+            </li>
+            <li class="nav-item" role="presentation">
+              <button
+                class="nav-link"
+                id="four-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#four"
+                type="button"
+                (click)="loadReviewedStatusList()"
+                role="tab"
+                aria-controls="four"
+                aria-selected="false"
+              >
+                Reviewed ({{ status_count.reviewed }})
+              </button>
+            </li>
+          </ul>
+          <div class="tab-content" id="myTabContent">
+            <div
+              class="tab-pane fade show active"
+              id="one"
+              role="tabpanel"
+              aria-labelledby="one-tab"
+            >
+              <div class="table-responsive">
+                <table class="table table-hover applicationTble">
+                  <thead>
+                    <tr *ngIf="status_list.length != 0">
+                      <th>Status</th>
+                      <th>Resume</th>
+                      <th>Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let sl of status_list">
+                      <td scope="row">
+                        <a *ngIf="sl.is_accepted == '1'" class="accept"
+                          >Accepted</a
+                        >
+                        <a *ngIf="sl.is_declined == '1'" class="decline"
+                          >Declined</a
+                        >
+                        <a
+                          *ngIf="
+                            sl.is_reviewed == '1' &&
+                            sl.is_accepted == '0' &&
+                            sl.is_declined == '0'
+                          "
+                          >Reviewed</a
+                        >
+                        <a
+                          *ngIf="
+                            sl.is_reviewed == '0' &&
+                            sl.is_declined == '0' &&
+                            sl.is_accepted == '0'
+                          "
+                          >Pending</a
+                        >
+                      </td>
+                      <td>
+                        <div class="dataBox">
+                          <span>
+                            <img
+                              [src]="sl.user_photo"
+                              onerror="this.src='assets/images/user.png';"
+                            />
+                          </span>
+                          <div class="cnt">
+                            <h4>{{ sl.professional_title }}</h4>
+                            <small>{{ sl.location }}</small>
+                          </div>
+                        </div>
+                        <div class="linkRow">
+                          <a
+                            style="color: #19a863"
+                            href="javascript:void(0)"
+                            (click)="acceptJobApplication(sl)"
+                            >Accept</a
+                          >
+                          <a
+                            href="javascript:void(0)"
+                            (click)="declineJobApplication(sl)"
+                            >Decline</a
+                          >
+                          <a
+                            style="color: blue"
+                            href="javascript:void(0)"
+                            (click)="reviewJobApplication(sl)"
+                            >Reviewed</a
+                          >
+                        </div>
+                      </td>
+                      <td>{{ sl.applied_date | date }}</td>
+                      <td>
+                        <a
+                          type="button"
+                          (click)="onViewResume(sl)"
+                          class="btn msgBtn ripple"
+                          >View Resume</a
+                        >
+                      </td>
+                    </tr>
+                    <tr *ngIf="status_list.length == 0">
+                      No data found.
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="two"
+              role="tabpanel"
+              aria-labelledby="two-tab"
+            >
+              <div class="table-responsive">
+                <table class="table table-hover applicationTble">
+                  <thead>
+                    <tr *ngIf="accepted_status_list.length != 0">
+                      <th>Status</th>
+                      <th>Resume</th>
+                      <th>Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let sl of accepted_status_list">
+                      <td scope="row">
+                        <a href="#" class="accept">Accepted</a>
+                      </td>
+                      <td>
+                        <div class="dataBox">
+                          <span>
+                            <img
+                              [src]="sl.user_photo"
+                              onerror="this.src='assets/images/user.png';"
+                            />
+                          </span>
+                          <div class="cnt">
+                            <h4>{{ sl.professional_title }}</h4>
+                            <small>{{ sl.location }}</small>
+                          </div>
+                        </div>
+                        <div class="linkRow">
+                          <!-- <a href="#">Accept</a>
+                          <a href="#">Decline</a>
+                          <a href="#">Delet</a> -->
+                        </div>
+                      </td>
+                      <td>{{ sl.applied_date | date }}</td>
+                      <td>
+                        <a type="button" class="btn msgBtn ripple"
+                          >Send a message</a
+                        >
+                      </td>
+                    </tr>
+                    <tr *ngIf="accepted_status_list.length == 0">
+                      No data found.
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="three"
+              role="tabpanel"
+              aria-labelledby="three-tab"
+            >
+              <div class="table-responsive">
+                <table class="table table-hover applicationTble">
+                  <thead>
+                    <tr *ngIf="declined_status_list.length != 0">
+                      <th>Status</th>
+                      <th>Resume</th>
+                      <th>Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let sl of declined_status_list">
+                      <td scope="row">
+                        <a href="#" class="decline">Declined</a>
+                      </td>
+                      <td>
+                        <div class="dataBox">
+                          <span>
+                            <img
+                              [src]="sl.user_photo"
+                              onerror="this.src='assets/images/user.png';"
+                            />
+                          </span>
+                          <div class="cnt">
+                            <h4>{{ sl.professional_title }}</h4>
+                            <small>{{ sl.location }}</small>
+                          </div>
+                        </div>
+                        <div class="linkRow">
+                          <!-- <a href="#">Delet</a> -->
+                        </div>
+                      </td>
+                      <td>{{ sl.applied_date | date }}</td>
+                      <td>
+                        <a type="button" class="btn msgBtn ripple"
+                          >Send a message</a
+                        >
+                      </td>
+                    </tr>
+                    <tr *ngIf="declined_status_list.length == 0">
+                      No data found.
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="tab-pane fade"
+              id="four"
+              role="tabpanel"
+              aria-labelledby="four-tab"
+            >
+              <div class="table-responsive">
+                <table class="table table-hover applicationTble">
+                  <thead>
+                    <tr *ngIf="reviewed_status_list.length != 0">
+                      <th>Status</th>
+                      <th>Resume</th>
+                      <th>Date</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let sl of reviewed_status_list">
+                      <td scope="row"><a href="#">Reviewed</a></td>
+                      <td>
+                        <div class="dataBox">
+                          <span>
+                            <img
+                              [src]="sl.user_photo"
+                              onerror="this.src='assets/images/user.png';"
+                            />
+                          </span>
+                          <div class="cnt">
+                            <h4>{{ sl.professional_title }}</h4>
+                            <small>{{ sl.location }}</small>
+                          </div>
+                        </div>
+                        <div class="linkRow">
+                          <!-- <a href="#">Delet</a> -->
+                        </div>
+                      </td>
+                      <td>{{ sl.applied_date | date }}</td>
+                      <td>
+                        <a type="button" class="btn msgBtn ripple"
+                          >Send a message</a
+                        >
+                      </td>
+                    </tr>
+                    <tr *ngIf="reviewed_status_list.length == 0">
+                      No data found.
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

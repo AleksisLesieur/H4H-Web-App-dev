@@ -1,0 +1,380 @@
+<section *ngIf="profileUpdated" class="detailsArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="jobLogoArea bgNone">
+            <div class="photo">
+              <!-- <div class="upload">
+                <img
+                  *ngIf="!profileUpdated"
+                  (click)="fileInput1.click()"
+                  src="assets/images/cameraIcn.png"
+                  alt=""
+                />
+              </div> -->
+              <img
+                *ngIf="base64textString.length != 0"
+                alt="Image placeholder"
+                [src]="transform()"
+                onerror="this.src='assets/images/user.png';"
+                class="w-100"
+              />
+              <img
+                *ngIf="base64textString.length == 0"
+                alt="Image placeholder"
+                [src]="userData.user_image"
+                class="w-100"
+                onerror="this.src='assets/images/user.png';"
+              />
+              <input
+                type="file"
+                style="display: none"
+                accept="image/*"
+                #fileInput1
+                (change)="handleFileSelect($event)"
+                class="form-control form-control-alternative"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="detailsPnl">
+            <a (click)="profileUpdated = false" class="editbtn" title="Edit">
+              <img src="assets/images/edit.png" alt="" />
+            </a>
+            <h1>{{ userData.user_fname }} {{ userData.user_lname }}</h1>
+            <!-- <h3>
+              {{ userData.company_name }} ({{ userData.user_category_type }})
+            </h3> -->
+            <div class="jobPara" data-aos="fade-up">
+              <h2>Introductory Statement</h2>
+
+              <p class="semi-lg">
+                {{ userData.user_bio ? userData.user_bio : "N/A" }}
+              </p>
+            </div>
+
+            <div class="jobPara" data-aos="fade-up">
+              <h2>Company Name</h2>
+
+              <p class="semi-lg">
+                <span class="lBlock">
+                  {{ userData.company_name }}
+                </span>
+              </p>
+            </div>
+
+            <div class="jobPara" data-aos="fade-up">
+              <h2>Company Type</h2>
+              <p class="semi-lg">
+                {{
+                  userData.user_company_type
+                    ? userData.user_company_type
+                    : "N/A"
+                }}
+              </p>
+            </div>
+            <div class="jobPara" data-aos="fade-up">
+              <h2>Contact Details</h2>
+              <p class="semi-lg">
+                <img src="assets/images/contactIcn01_th01.png" alt="" />
+                {{
+                  userData.user_phone_number
+                    ? userData.user_phone_number
+                    : "N/A"
+                }}
+              </p>
+              <p class="semi-lg">
+                <img src="assets/images/contactIcn02_th01.png" alt="" />
+                {{ userData.user_email }}
+              </p>
+              <p class="semi-lg">
+                <img src="assets/images/contactIcn03_th01.png" alt="" />
+                {{ userData.user_instagram ? userData.user_instagram : "N/A" }}
+              </p>
+              <p class="semi-lg">
+                <img src="assets/images/contactIcn04_th01.png" alt="" />
+                {{ userData.user_address ? userData.user_address : "N/A" }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="!profileUpdated" class="detailsArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="jobLogoArea bgNone">
+            <div class="photo">
+              <div class="upload">
+                <img
+                  (click)="fileInput.click()"
+                  src="assets/images/cameraIcn.png"
+                  alt=""
+                />
+              </div>
+              <img
+                *ngIf="base64textString.length != 0"
+                alt="Image placeholder"
+                [src]="transform()"
+                onerror="this.src='assets/images/user.png';"
+                class="w-100"
+              />
+              <img
+                *ngIf="base64textString.length == 0"
+                alt="Image placeholder"
+                [src]="userData.user_image"
+                class="w-100"
+                onerror="this.src='assets/images/user.png';"
+              />
+              <input
+                type="file"
+                style="display: none"
+                accept="image/*"
+                #fileInput
+                (change)="handleFileSelect($event)"
+                class="form-control form-control-alternative"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div class="detailsPnl">
+            <a (click)="profileUpdated = true" class="editbtn" title="Go Back">
+              <img src="assets/images/buttonLeftArrow.png" alt="" />
+            </a>
+            <h1>Account Details</h1>
+            <div class="formPanel" data-aos="fade-up">
+              <form [formGroup]="accountForm">
+                <div class="frmRow">
+                  <div class="tittleSide">
+                    <label for="">First Name*</label>
+                  </div>
+                  <div class="fieldBox">
+                    <input
+                      type="text"
+                      placeholder="First Name"
+                      formControlName="user_fname"
+                      [ngClass]="
+                        hitSubmit && accountForm.controls.user_fname.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="frmRow">
+                  <div class="tittleSide">
+                    <label for="">Last Name*</label>
+                  </div>
+                  <div class="fieldBox">
+                    <input
+                      type="text"
+                      placeholder="Last Name"
+                      formControlName="user_lname"
+                      [ngClass]="
+                        hitSubmit && accountForm.controls.user_lname.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="frmRow">
+                  <div class="tittleSide">
+                    <label for="">Company Name*</label>
+                  </div>
+                  <div class="fieldBox">
+                    <input
+                      type="text"
+                      placeholder="Company name"
+                      formControlName="company_name"
+                      [ngClass]="
+                        hitSubmit && accountForm.controls.company_name.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="frmRow">
+                  <div class="tittleSide">
+                    <label for="">Type of Company</label>
+                  </div>
+                  <div class="fieldBox">
+                    <input
+                      type="text"
+                      placeholder="Type of Company"
+                      formControlName="user_company_type"
+                      [ngClass]="
+                        hitSubmit &&
+                        accountForm.controls.user_company_type.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="frmRow">
+                  <div class="tittleSide">
+                    <label for="">Introductory Statement*</label>
+                  </div>
+                  <div class="fieldBox">
+                    <textarea
+                      [ngClass]="
+                        hitSubmit && accountForm.controls.user_bio.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                      placeholder="Introductory Statement"
+                      formControlName="user_bio"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                </div>
+
+                <div class="row mb-4">
+                  <div class="col-sm-12 mt-4">
+                    <h4>Contact Details</h4>
+                  </div>
+                </div>
+                <div class="frmRow">
+                  <div class="tittleSide">
+                    <label for="">Phone</label>
+                  </div>
+                  <div class="fieldBox">
+                    <input
+                      (keypress)="numericOnly($event)"
+                      type="text"
+                      placeholder="Phone"
+                      formControlName="user_phone_number"
+                      [ngClass]="
+                        hitSubmit &&
+                        accountForm.controls.user_phone_number.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="frmRow">
+                  <div class="tittleSide">
+                    <label for="">Email*</label>
+                  </div>
+                  <div class="fieldBox">
+                    <input
+                      disabled
+                      type="email"
+                      placeholder="Email"
+                      formControlName="user_email"
+                      [ngClass]="
+                        hitSubmit && accountForm.controls.user_email.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="frmRow">
+                  <div class="tittleSide">
+                    <label for=""> Instagram Profile</label>
+                  </div>
+                  <div class="fieldBox">
+                    <input
+                      type="text"
+                      placeholder="Instagram Profile"
+                      formControlName="user_instagram"
+                      [ngClass]="
+                        hitSubmit && accountForm.controls.user_instagram.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                    />
+                  </div>
+                </div>
+                <div class="frmRow">
+                  <div class="tittleSide">
+                    <label for=""> Address </label>
+                  </div>
+                  <div class="fieldBox">
+                    <textarea
+                      [ngClass]="
+                        hitSubmit && accountForm.controls.user_address.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                      placeholder="Address"
+                      formControlName="user_address"
+                      rows="3"
+                    ></textarea>
+                  </div>
+                </div>
+                <!-- <button
+                  type="button"
+                  (click)="profileUpdated = true"
+                  class="btn mt-5 py-3"
+                  data-waves
+                  data-aos="fade-up"
+                >
+                  Cancel
+                </button> -->
+
+                <div
+                  *ngIf="
+                    hitSubmit &&
+                    (accountForm.controls.user_fname.errors ||
+                      accountForm.controls.user_lname.errors ||
+                      accountForm.controls.company_name.errors ||
+                      accountForm.controls.user_phone_number.errors ||
+                      accountForm.controls.user_company_type.errors ||
+                      accountForm.controls.user_bio.errors ||
+                      accountForm.controls.user_address.errors ||
+                      accountForm.controls.user_email.errors ||
+                      accountForm.controls.user_instagram.errors ||
+                      accountForm.controls.user_image.errors)
+                  "
+                  class="row mt-2 justify-content-md-start"
+                >
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-6">
+                    <div class="infoCard mb-3">
+                      <div class="icon">
+                        <img src="assets/images/erorr.png" alt="" />
+                      </div>
+                      <div class="contnt">
+                        <h2>Required fields / Invalid Input.</h2>
+                        <h3>
+                          You need to fill valid input in the fields highlighted
+                          in red
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  (click)="onUpdateAccountInfo()"
+                  class="btn mt-5 py-3"
+                  data-waves
+                  data-aos="fade-up"
+                >
+                  Save Changes
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="fieldBox">
+          <p>Form Status: {{ accountForm.status }}</p>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>

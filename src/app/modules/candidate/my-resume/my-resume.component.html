@@ -1,0 +1,230 @@
+<section class="mainContentArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="pgHeading" data-aos="fade-up">
+        <div class="row">
+          <div class="col-sm-10">
+            <h2>My Resume</h2>
+          </div>
+          <div class="col-sm-2">
+            <a
+              href="javascript:void(0)"
+              [routerLink]="['/candidate/resume/add']"
+              class="prvBtn btn ripple"
+              data-waves=""
+              >Add +</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="tabAreaBlock">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a
+                  class="nav-link active"
+                  id="home-tab"
+                  data-toggle="tab"
+                  href="#home"
+                  (click)="getAllResume()"
+                  role="tab"
+                  aria-controls="home"
+                  aria-selected="true"
+                  >Completed Resume</a
+                >
+              </li>
+              <li class="nav-item">
+                <a
+                  class="nav-link"
+                  id="profile-tab"
+                  data-toggle="tab"
+                  href="#profile"
+                  (click)="getAllInCompletedResume()"
+                  role="tab"
+                  aria-controls="profile"
+                  aria-selected="false"
+                  >Incompleted Resume</a
+                >
+              </li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+              <div
+                class="tab-pane active"
+                id="home"
+                role="tabpanel"
+                aria-labelledby="home-tab"
+              >
+                <table style="margin-top: 2em">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Date Posted</th>
+                      <th scope="col">Last Modified</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let rl of reasumeList">
+                      <td data-label="Name" class="byclr jobFirst">
+                        <span [ngClass]="rl.is_default == '1' ? 'default' : ''">
+                          {{ rl.user_name }}
+                        </span>
+                        <img
+                          *ngIf="rl.is_default == '1'"
+                          src="assets/images/checked.png"
+                          alt="Default Resume"
+                          width="25"
+                          height="25"
+                        />
+                      </td>
+                      <td data-label="Date Post">
+                        {{ homeService.convertDate(rl.entry_date) | date }}
+                      </td>
+                      <td data-label="Last Modified">
+                        {{
+                          homeService.convertModifiedDate(rl.is_modified) | date
+                        }}
+                      </td>
+                      <td data-label="Action" class="byclr jobFirst">
+                        <ul class="listbox">
+                          <li>
+                            <a
+                              href="javascript:void(0);"
+                              (click)="onViewResume(rl)"
+                              >View Details</a
+                            >
+                          </li>
+                          <li>
+                            <a
+                              *ngIf="rl.is_default != '1'"
+                              href="javascript:void(0);"
+                              (click)="onMakeAsDefault(rl)"
+                              >Make as Default</a
+                            >
+                            <a *ngIf="rl.is_default == '1'">Make as Default</a>
+                          </li>
+                          <li>
+                            <a
+                              href="javascript:void(0);"
+                              (click)="onEditResume(rl)"
+                              >Edit</a
+                            >
+                          </li>
+                          <li>
+                            <a
+                              href="javascript:void(0);"
+                              (click)="onCreateDuplicate(rl)"
+                              >Duplicate</a
+                            >
+                          </li>
+                          <li>
+                            <a href="javascript:void(0);" (click)="onDelete(rl)"
+                              >Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr *ngIf="reasumeList.length == 0">
+                      No data Found.
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div
+                class="tab-pane"
+                id="profile"
+                role="tabpanel"
+                aria-labelledby="profile-tab"
+              >
+                <table style="margin-top: 2em">
+                  <thead>
+                    <tr>
+                      <th scope="col">Name</th>
+                      <th scope="col">Date Posted</th>
+                      <th scope="col">Last Modified</th>
+                      <th scope="col">Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let rl of inCompleteReasumeList">
+                      <td data-label="Name" class="byclr jobFirst">
+                        <span>
+                          {{ rl.user_name }}
+                        </span>
+                        <!-- <img
+                          *ngIf="rl.is_default == '1'"
+                          src="assets/images/checked.png"
+                          alt="Default Resume"
+                          width="25"
+                          height="25"
+                        /> -->
+                      </td>
+                      <td data-label="Date Post">
+                        {{ homeService.convertDate(rl.entry_date) | date }}
+                      </td>
+                      <td data-label="Last Modified">
+                        {{
+                          homeService.convertModifiedDate(rl.is_modified) | date
+                        }}
+                      </td>
+                      <td data-label="Action" class="byclr jobFirst">
+                        <ul class="listbox">
+                          <!-- <li>
+                            <a
+                              href="javascript:void(0);"
+                              (click)="onViewResume(rl)"
+                              >View Details</a
+                            >
+                          </li> -->
+                          <!-- <li>
+                            <a
+                              *ngIf="rl.is_default != '1'"
+                              href="javascript:void(0);"
+                              (click)="onMakeAsDefault(rl)"
+                              >Make as Default</a
+                            >
+                            <a *ngIf="rl.is_default == '1'">Make as Default</a>
+                          </li> -->
+                          <li>
+                            <a
+                              href="javascript:void(0);"
+                              (click)="onEditResume(rl)"
+                              >Edit</a
+                            >
+                          </li>
+                          <!-- <li>
+                            <a
+                              href="javascript:void(0);"
+                              (click)="onCreateDuplicate(rl)"
+                              >Duplicate</a
+                            >
+                          </li> -->
+                          <li>
+                            <a href="javascript:void(0);" (click)="onDelete(rl)"
+                              >Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </td>
+                    </tr>
+
+                    <tr *ngIf="inCompleteReasumeList.length == 0">
+                      No data Found.
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

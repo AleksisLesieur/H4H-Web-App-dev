@@ -1,0 +1,83 @@
+<section class="mainContentArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="pgHeading" data-aos="fade-up">
+        <div class="row">
+          <div class="col-sm-12 col-md-10">
+            <h2>My Jobs</h2>
+          </div>
+          <div class="col-sm-12 col-md-2">
+            <a
+              href="javascript:void(0)"
+              (click)="onAddJob()"
+              class="prvBtn btn ripple"
+              data-waves=""
+              >Add +</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <div class="table-responsive">
+            <table class="table table-hover" data-aos="fade-up">
+              <thead>
+                <tr *ngIf="jobList.length != 0">
+                  <th>Title</th>
+                  <th>Date posted</th>
+                  <th>Last Modified</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let rl of jobList">
+                  <td scope="row" class="byclr jobFirst">
+                    <p>{{ rl.job_title }}</p>
+                  </td>
+                  <td>{{ homeService.convertDate(rl.entry_date) | date }}</td>
+                  <td>
+                    {{
+                      homeService.convertModifiedDate(rl.job_post_is_modified)
+                        | date
+                    }}
+                  </td>
+                  <td class="byclr jobFirst">
+                    <ul>
+                      <li>
+                        <a
+                          href="javascript:void(0);"
+                          (click)="onViewApplicationStatus(rl)"
+                          >Application Status</a
+                        >
+                      </li>
+                      <li>
+                        <a href="javascript:void(0);" (click)="onViewJob(rl)"
+                          >View Details</a
+                        >
+                      </li>
+                      <li>
+                        <a href="javascript:void(0);" (click)="onEditJob(rl)"
+                          >Edit</a
+                        >
+                      </li>
+                      <!-- <li><a href="javascript:void(0);">Duplicate</a></li> -->
+                      <li>
+                        <a href="javascript:void(0);" (click)="onDelete(rl)"
+                          >Delete</a
+                        >
+                      </li>
+                    </ul>
+                  </td>
+                </tr>
+                <tr *ngIf="jobList.length == 0">
+                  No data found.
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

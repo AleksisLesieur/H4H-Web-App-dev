@@ -1,0 +1,110 @@
+<section class="findJob blogArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="mainHeading">
+            <h2>Blog</h2>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-8">
+          <div
+            class="blogSlide"
+            style="cursor: pointer"
+            (click)="onBlogDetails(popular_list[0])"
+          >
+            <div class="poster">
+              <img
+                [src]="popular_list[0].blog_image"
+                onerror="this.src='assets/images/placeholder.png';"
+              />
+            </div>
+            <div class="bottomCard">
+              <div class="headBlock">
+                <h3>{{ popular_list[0].blog_author }}</h3>
+                <span class="dates">{{
+                  popular_list[0].blog_created | date
+                }}</span>
+              </div>
+              <h2>{{ popular_list[0].blog_title }}</h2>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="popularArea">
+            <span class="popBtn"> Popular </span>
+            <div *ngFor="let blog of popular_list; let i = index">
+              <div
+                style="cursor: pointer"
+                *ngIf="i != 0"
+                class="popCard"
+                (click)="onBlogDetails(blog)"
+              >
+                <div class="photo">
+                  <img
+                    height="80"
+                    [src]="blog.blog_image"
+                    onerror="this.src='assets/images/placeholder.png';"
+                  />
+                </div>
+                <div class="cntnt">
+                  <h3>{{ blog.blog_author }}</h3>
+                  <h2>{{ blog.blog_title }}</h2>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="thumbAreaBlog">
+        <div class="row">
+          <div
+            *ngFor="let blog of blog_list"
+            class="col-sm-4"
+            style="cursor: pointer"
+            (click)="onBlogDetails(blog)"
+          >
+            <div class="blogthumbItem">
+              <div class="photo">
+                <img
+                  height="200"
+                  [src]="blog.blog_image"
+                  onerror="this.src='assets/images/placeholder.png';"
+                />
+              </div>
+              <div class="heading">
+                <h3>{{ blog.blog_author }}</h3>
+                <h4>{{ blog.blog_created | date }}</h4>
+              </div>
+              <h2>{{ blog.blog_title }}</h2>
+
+              <p
+                [innerHtml]="
+                  blog.blog_post.length > 99
+                    ? (blog.blog_post | slice: 0:99) + '...'
+                    : blog.blog_post
+                "
+              ></p>
+            </div>
+          </div>
+        </div>
+        <div
+          *ngIf="blog_list.length != 0 && blog_list.length % 10 == 0"
+          style="width: 100%; text-align: center"
+          class="popularArea"
+        >
+          <button
+            (click)="onLoadMore()"
+            type="button"
+            data-waves
+            class="btn popBtn"
+          >
+            Load More
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

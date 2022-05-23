@@ -1,0 +1,51 @@
+<section class="detailsArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-4 col-md-2">
+          <div class="jobLogoArea">
+            <div class="logo">
+              <img
+                width="150"
+                [src]="blogData.blog_image"
+                onerror="this.src='assets/images/placeholder.png';"
+              />
+            </div>
+            <p>Written By {{ blogData.blog_author }}</p>
+          </div>
+        </div>
+        <div class="col-sm-8 col-md-10">
+          <div class="detailsPnl">
+            <h1>{{ blogData.blog_title }}</h1>
+            <!-- <ul class="addressRow" data-aos="fade-up">
+              <li><img src="images/home-small.png" alt="" /> UWM Barbershop</li>
+              <li>
+                <img src="images/location-small.png" alt="" /> Salt Lake City,
+                Utah,United States
+              </li>
+              <li>
+                <img src="images/calender-small.png" alt="" /> Posted 2 weeks
+                ago
+              </li>
+            </ul> -->
+            <div
+              [innerHtml]="blogData.blog_post"
+              class="jobPara"
+              data-aos="fade-up"
+            ></div>
+            <button
+              (click)="goBack()"
+              type="button"
+              class="btn"
+              style="cursor: pointer !important"
+              data-waves
+              data-aos="fade-up"
+            >
+              Go Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

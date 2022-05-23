@@ -1,0 +1,16 @@
+.form-control.ng-invalid.ng-touched {
+  border-color: red !important;
+}
+.input-error {
+  width: 100%;
+  padding: 22px 20px !important;
+  background: #fff;
+  border-radius: 10px !important;
+  border: 2px solid red !important;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  display: block;
+  height: calc(1.5em + 0.75rem + 2px);
+}

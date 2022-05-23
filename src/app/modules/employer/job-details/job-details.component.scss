@@ -1,0 +1,37 @@
+.detailsArea .detailsPnl .jobtags .btn {
+  padding: 5px 15px !important;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.detailsArea .detailsPnl .jobtags .btn:last-child {
+  margin-right: 0px;
+}
+.rightSide {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.jobtags {
+  width: 50%;
+  display: block;
+  float: left;
+}
+.jobheading {
+  width: 50%;
+}
+
+@media only screen and (max-width: 600px) {
+  .rightSide {
+    flex-direction: column;
+  }
+  .jobheading,
+  .jobtags {
+    width: 100%;
+  }
+  .detailsArea .detailsPnl .jobtags .btn {
+    padding: 5px 10px !important;
+    margin-right: 5px !important;
+    font-size: 12px;
+  }
+}

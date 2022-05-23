@@ -1,0 +1,72 @@
+
+
+
+
+
+
+
+$medDesk: 1199px;
+@mixin medDeskDevices {
+    @media screen and (max-width: #{$medDesk}) {
+        @content;
+      }
+}
+
+$maxRange: 1199px;
+$lowRange: 1025px;
+@mixin maxDevices {
+  @media screen and (max-width: #{$maxRange}) and (min-width: #{$lowRange}) {
+      @content;
+    }
+}
+
+$large: 1024px;
+@mixin largeDevices {
+  @media screen and (max-width: #{$large}) {
+      @content;
+    }
+}
+
+$midHigh: 994px;
+$midlow: 769px;
+@mixin midHighDevices {
+  @media screen and (max-width: #{$midHigh}) and (min-width: #{$midlow}) {
+      @content;
+    }
+}
+
+$midRangeHigh: 991px;
+$midRangeLow: 769px;
+@mixin midDevices {
+  @media screen and (max-width: #{$midRangeHigh}) and (min-width: #{$midRangeLow}) {
+      @content;
+    }
+}
+
+$smallTop: 768px;
+$smallBottom: 576px;
+@mixin smallSemiDevices {
+  @media screen and (max-width: #{$smallTop}) and (min-width: #{$smallBottom}) {
+      @content;
+    }
+}
+$small: 768px;
+@mixin smallDevices {
+    @media screen and (max-width: #{$small}) {
+        @content;
+      }
+}
+
+$mobile: 575px;
+@mixin mobileDevices {
+    @media screen and (max-width: #{$mobile}) {
+        @content;
+      }
+}
+$mobileMin: 330px;
+@mixin mobileMinDevices {
+    @media screen and (max-width: #{$mobileMin}) {
+        @content;
+      }
+}
+

@@ -1,0 +1,158 @@
+<section class="detailsArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-3 col-md-2">
+          <div class="jobLogoArea">
+            <h2>{{ package_details.package_name }}</h2>
+
+            <h2>${{ package_details.package_price }}.00</h2>
+            <!-- <p>
+              Do you have a discount code? <br />
+              <a href="#">Click here to enter your discount code</a>
+            </p> -->
+          </div>
+        </div>
+        <div class="col-sm-9 col-md-10">
+          <div class="detailsPnl">
+            <h1>Checkout</h1>
+
+            <div class="formPanel">
+              <form [formGroup]="checkOutInformation">
+                <div
+                  class="row mb-4 align-items-baseline justify-content-start"
+                  data-aos="fade-up"
+                >
+                  <div class="col-sm-12 mt-4">
+                    <h4>Payment information</h4>
+                  </div>
+                </div>
+                <div class="frmRow" data-aos="zoom-in">
+                  <div class="tittleSide">
+                    <label for="">Card number</label>
+                  </div>
+                  <div class="fieldBox">
+                    <input
+                      type="text"
+                      formControlName="cardnumber"
+                      (keypress)="numericOnly($event)"
+                      [ngClass]="
+                        checkOutInformation_submit &&
+                        checkOutInformation.controls.cardnumber.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                      placeholder="1234 1234 1234 1234"
+                    />
+                  </div>
+                </div>
+                <div class="frmRow" data-aos="zoom-in">
+                  <div class="tittleSide">
+                    <label for="">Expiration date</label>
+                  </div>
+                  <div class="fieldBox small">
+                    <input
+                      type="number"
+                      formControlName="expmonth"
+                      (keypress)="numericOnly($event)"
+                      [ngClass]="
+                        checkOutInformation_submit &&
+                        checkOutInformation.controls.expmonth.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                      placeholder="MM"
+                    />
+                  </div>
+                  <div class="fieldBox small leftspce">
+                    <input
+                      type="text"
+                      formControlName="expyear"
+                      (keypress)="numericOnly($event)"
+                      [ngClass]="
+                        checkOutInformation_submit &&
+                        checkOutInformation.controls.expyear.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                      placeholder="YYYY"
+                    />
+                  </div>
+                </div>
+                <div class="frmRow" data-aos="zoom-in">
+                  <div class="tittleSide">
+                    <label for="">CVC</label>
+                  </div>
+                  <div class="fieldBox small">
+                    <input
+                      type="text"
+                      formControlName="card_cvv"
+                      (keypress)="numericOnly($event)"
+                      [ngClass]="
+                        checkOutInformation_submit &&
+                        checkOutInformation.controls.card_cvv.errors
+                          ? 'input-error'
+                          : 'form-control'
+                      "
+                      placeholder="CVC"
+                    />
+                  </div>
+                </div>
+                <div class="row chkrow" >
+                  
+                  <div class="col-sm-7">
+                    <div class="cheackbox">
+                      <input
+                      type="checkbox"
+                      class="form-check-input"
+                      formControlName="auto_renew"
+                      value="checkedValue"
+                    />
+                    <label class="form-check-label" for="">Auto Renew</label>
+                    </div>
+                  </div>
+                </div>
+                
+                <div
+                  *ngIf="
+                    checkOutInformation_submit &&
+                    (checkOutInformation.controls.cardnumber.errors ||
+                      checkOutInformation.controls.expyear.errors ||
+                      checkOutInformation.controls.expmonth.errors ||
+                      checkOutInformation.controls.card_cvv.errors)
+                  "
+                  class="row mt-2 justify-content-md-start"
+                >
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-6">
+                    <div class="infoCard mb-3">
+                      <div class="icon">
+                        <img src="assets/images/erorr.png" alt="" />
+                      </div>
+                      <div class="contnt">
+                        <h2>Required fields / Invaild input</h2>
+                        <h3>
+                          You need to fill with valid input in the fields
+                          highlighted in red.
+                        </h3>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="btn mt-5 py-3"
+                  (click)="onSubmit()"
+                  data-waves
+                  data-aos="fade-up"
+                >
+                  Submit and check out
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

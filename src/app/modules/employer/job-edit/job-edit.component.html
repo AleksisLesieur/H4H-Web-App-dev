@@ -1,0 +1,982 @@
+<section class="detailsArea">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-md-offset-3" *ngIf="jobData">
+          <!-- progressbar -->
+          <ul id="progressbar">
+            <li [ngClass]="step >= 1 ? 'active' : 'inactive'">
+              1. Company description
+            </li>
+            <li [ngClass]="step >= 2 ? 'active ' : 'inactive'">
+              2. Job information
+            </li>
+            <li [ngClass]="step >= 3 ? 'active' : 'inactive'">
+              3. Job description
+            </li>
+            <li [ngClass]="step == 4 ? 'active' : 'inactive'">
+              4. Social media
+            </li>
+          </ul>
+          <!-- fieldsets -->
+          <form [formGroup]="companyDescription" id="msform">
+            <fieldset *ngIf="step == 1">
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Company name*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    [ngClass]="
+                      companyDescription_step &&
+                      companyDescription.controls.company_name.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    formControlName="company_name"
+                    placeholder="Company Name"
+                  />
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Company website</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    formControlName="company_website"
+                    class="form-control"
+                    placeholder="Enter a valid URL address (i.e. https:/www.mywebsite.com/)"
+                  />
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Company logo*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <div class="row">
+                    <div
+                      class="col-sm-12 d-flex justify-content-start align-items-center"
+                    >
+                      <div class="file-input">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          (change)="handleFileSelect($event)"
+                          name="file-input"
+                          id="file-input"
+                          class="file-input__input"
+                          (click)="$event.target.value = null"
+                        />
+                        <label
+                          [ngClass]="
+                            companyDescription_step &&
+                            companyDescription.controls.company_image.errors
+                              ? 'file-error'
+                              : 'file-input__label'
+                          "
+                          for="file-input"
+                        >
+                          <span>Choose file</span></label
+                        >
+                      </div>
+                      <p>Maximum file size: 10 MB</p>
+                      <div class="upldphoto">
+                        <div class="portphotos">
+                          <img
+                            *ngIf="base64textString.length != 0"
+                            alt="Image placeholder"
+                            [src]="transform()"
+                            onerror="this.src='assets/images/user.png';"
+                            width="94"
+                            height="94"
+                          />
+
+                          <img
+                            *ngIf="
+                              base64textString.length == 0 &&
+                              jobData.company_image.length != 0
+                            "
+                            alt="Image placeholder"
+                            [src]="jobData.company_image"
+                            onerror="this.src='assets/images/user.png';"
+                            width="94"
+                            height="94"
+                          />
+                          <span
+                            *ngIf="
+                              base64textString.length != 0 ||
+                              jobData.company_image.length != 0
+                            "
+                            class="photoclose"
+                            (click)="removeImage()"
+                            >X</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-12">
+                      <!-- <small
+                        style="
+                          text-align: left;
+                          width: 100%;
+                          display: block;
+                          margin: 10px 0 0 0;
+                          font-size: 12px;
+                          color: #9d9b9b;
+                        "
+                      >
+                        Add on image to attract more interest to your job post.
+                        Close up image work best with high resolution. Image
+                        will be displayed as part of your job post profile.
+                        Choose image that reflect an activity or the culture of
+                        your company.
+                      </small> -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Company summary</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <textarea
+                    formControlName="company_summary"
+                    cols="10"
+                    rows="4"
+                    ngClass="form-control"
+                    placeholder="Company Summary"
+                  ></textarea>
+                  <small
+                    style="
+                      text-align: left;
+                      width: 100%;
+                      display: block;
+                      margin: 10px 0 0 0;
+                      font-size: 12px;
+                      color: #9d9b9b;
+                    "
+                  >
+                  Attract the right candidate by describing your company here. What makes your business unique, better, or different?</small
+                  >
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  companyDescription_step &&
+                  (companyDescription.controls.company_name.errors ||
+                    companyDescription.controls.company_website.errors ||
+                    companyDescription.controls.company_image.errors)
+                "
+                class="row mt-2 justify-content-md-start"
+              >
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="infoCard mb-3">
+                    <div class="icon">
+                      <img src="images/erorr.png" alt="" />
+                    </div>
+                    <div class="contnt">
+                      <h2>Required fields / Invalid Input.</h2>
+                      <h3>
+                        You need to fill valid input in the fields highlighted
+                        in red
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-5 justify-content-md-space-between">
+                <div class="col-sm-9 ml-auto">
+                  <div class="row rowarea">
+                    <div class="col-sm-4 col-md-3 switchBtm">
+                      <a
+                        href="javascript:void(0)"
+                        [routerLink]="['/employer/job']"
+                        class="prvBtn btn ripple"
+                        data-waves=""
+                        >Back</a
+                      >
+                    </div>
+                    <div class="col-sm-4 col-md-3 semisecondorder">
+                      <input
+                        (click)="next()"
+                        type="button"
+                        name="next"
+                        class="next action-button ripple"
+                        value="Next"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <form [formGroup]="jobInformation" id="msform">
+            <fieldset *ngIf="step == 2">
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Job title*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    [ngClass]="
+                      jobInformation_step &&
+                      jobInformation.controls.job_title.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    formControlName="job_title"
+                    placeholder="Job Title"
+                  />
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Phone number</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    [ngClass]="
+                      jobInformation_step &&
+                      jobInformation.controls.job_phone.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    formControlName="job_phone"
+                    appPhoneMask
+                    maxlength="14"
+                    placeholder="Enter your phone number"
+                  />
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Job location (city, state)*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <!-- <input
+                    type="text"
+                    formControlName="job_location"
+                    [ngClass]="
+                      jobInformation_step &&
+                      jobInformation.controls.job_location.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    placeholder="London"
+                  /> -->
+                  <input
+                    ngx-google-places-autocomplete
+                    id="placeAutocomplete"
+                    formControlName="job_location"
+                    [ngClass]="
+                      jobInformation_step &&
+                      (jobInformation.controls.job_location.errors ||
+                        jobInformation.controls.lat.errors ||
+                        jobInformation.controls.lng.errors)
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    placeholder="London"
+                    (onAddressChange)="handleAddressChange($event)"
+                  />
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Email*</label>
+                  <!-- <span class="bottomText"
+                    >(notifications will be sent to this email)</span
+                  > -->
+                </div>
+
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    formControlName="job_email"
+                    [ngClass]="
+                      jobInformation_step &&
+                      jobInformation.controls.job_email.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                    placeholder="Enter a valid URL address (i.e. https:/www.mywebsite.com/)"
+                  />
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Job type </label>
+                </div>
+                <div class="fieldBox">
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      formControlName="is_full_time"
+                      value="checkedValue"
+                    />
+                    <label class="form-check-label" for=""> Full time </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      formControlName="is_part_time"
+                      value="checkedValue"
+                    />
+                    <label class="form-check-label" for=""> Part time </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      formControlName="is_temporary"
+                      value="checkedValue"
+                    />
+                    <label class="form-check-label" for="">Temporary</label>
+                  </div>
+                  <!-- <div class="form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      formControlName="is_contractor"
+                      value="checkedValue"
+                    />
+                    <label class="form-check-label" for=""> Contractor </label>
+                  </div> -->
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      formControlName="is_booth_rent"
+                      value="checkedValue"
+                    />
+                    <label class="form-check-label" for=""
+                      >Contractor / Booth Rent
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      class="form-check-input"
+                      formControlName="is_hourly"
+                      value="checkedValue"
+                    />
+                    <label class="form-check-label" for=""> Hourly </label>
+                  </div>
+
+                  <!-- <input
+                      type="text"
+                      name=""
+                      id=""
+                      class="form-control mt-3"
+                      placeholder="Desired job type"
+                    /> -->
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">How many openings do you have?</label>
+                  <!-- <span class="bottomText"
+                    >(notifications will be sent to this email)</span
+                  > -->
+                </div>
+
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    formControlName="no_of_opening"
+                    ngClass="form-control"
+                    placeholder="Enter the number of openings here"
+                  />
+                </div>
+              </div>
+
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Job Category*</label>
+                </div>
+
+                <div class="col-sm-9 pR0">
+                  <angular2-multiselect
+                    [data]="category_list"
+                    [(ngModel)]="selectedItems"
+                    [settings]="dropdownSettings"
+                    (onSelect)="onItemSelect($event)"
+                    (onDeSelect)="OnItemDeSelect($event)"
+                    (onDeSelectAll)="onDeSelectAll($event)"
+                    formControlName="job_tag"
+                    [ngClass]="
+                      jobInformation_step &&
+                      jobInformation.controls.job_tag.errors
+                        ? 'input-error'
+                        : 'form-control'
+                    "
+                  >
+                    <c-badge>
+                      <ng-template let-item="item">
+                        <img
+                          [src]="item.category_image"
+                          style="width: 16px; margin-right: 10px"
+                        />
+                        <label style="margin: 0px">{{
+                          item.category_name
+                        }}</label>
+                      </ng-template>
+                    </c-badge>
+                    <c-item>
+                      <ng-template let-item="item">
+                        <img
+                          [src]="item.category_image"
+                          style="
+                            width: 30px;
+                            border: 1px solid #efefef;
+                            margin-right: 20px;
+                          "
+                        />
+                        <label>{{ item.category_name }}</label>
+                      </ng-template>
+                    </c-item>
+                  </angular2-multiselect>
+                </div>
+              </div>
+              <!-- {{ this.jobInformation.value.job_tag | json }} -->
+              <div
+                *ngIf="
+                  jobInformation_step &&
+                  (jobInformation.controls.job_phone.errors ||
+                    jobInformation.controls.job_location.errors ||
+                    jobInformation.controls.lat.errors ||
+                    jobInformation.controls.lng.errors ||
+                    jobInformation.controls.job_tag.errors ||
+                    jobInformation.controls.job_title.errors ||
+                    jobInformation.controls.job_email.errors)
+                "
+                class="row mt-2 justify-content-md-start"
+              >
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="infoCard mb-3">
+                    <div class="icon">
+                      <img src="assets/images/erorr.png" alt="" />
+                    </div>
+                    <div class="contnt">
+                      <h2>Required fields / Invalid Input.</h2>
+                      <h3>
+                        You need to fill valid input in the fields highlighted
+                        in red
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- button area -->
+              <div class="row mt-5 justify-content-md-space-between">
+                <div class="col-sm-9 ml-auto">
+                  <div class="row rowarea">
+                    <div class="col-sm-4 col-md-3 switchBtm">
+                      <input
+                        (click)="previous()"
+                        type="button"
+                        name="previous"
+                        class="previous action-button-previous ripple"
+                        value="Previous"
+                      />
+                    </div>
+                    <div class="col-sm-4 col-md-3 semisecondorder">
+                      <input
+                        (click)="next()"
+                        type="button"
+                        name="next"
+                        class="next action-button ripple"
+                        value="Next"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <input
+                type="text"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid': personal_step && personal.name.errors
+                }"
+                placeholder="Full Name"
+              />
+
+              <input
+                type="text"
+                formControlName="email"
+                name="email"
+                placeholder="Email"
+              />
+              <div
+                *ngIf="personal_step && personalDetails.controls.email.errors"
+              >
+                <div *ngIf="personal.email.errors?.required">
+                  Email is required
+                </div>
+              </div>
+              <input
+                type="text"
+                formControlName="phone"
+                name="phone"
+                placeholder="Phone"
+              />
+              <div
+                *ngIf="personal_step && personalDetails.controls.phone.errors"
+              >
+                <div *ngIf="personal.phone.errors?.required">
+                  Phone is required
+                </div>
+              </div> -->
+            </fieldset>
+          </form>
+
+          <form [formGroup]="jobDescription" id="msform">
+            <fieldset *ngIf="step == 3">
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Job summary*</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <textarea
+                    formControlName="job_summary"
+                    cols="10"
+                    rows="4"
+                    [ngClass]="
+                      jobDescription_step &&
+                      jobDescription.controls.job_summary.errors
+                        ? 'textarea-error'
+                        : 'form-control'
+                    "
+                    placeholder="Enter your job summary"
+                  ></textarea>
+                  <small
+                    style="
+                      text-align: left;
+                      width: 100%;
+                      display: block;
+                      margin: 10px 0 0 0;
+                      font-size: 12px;
+                      color: #9d9b9b;
+                    "
+                  >
+                    Provide information that will attract more talent. What is
+                    the experience like to work there? What makes the job great?
+                    Provide on overview of the position and benefits</small
+                  >
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Job duties/responsibilities</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <textarea
+                    formControlName="job_duties"
+                    cols="10"
+                    rows="4"
+                    class="form-control"
+                    placeholder="Enter your Job duties/responsibilities"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Job qualifications</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <textarea
+                    formControlName="job_skills"
+                    cols="10"
+                    rows="4"
+                    class="form-control"
+                    placeholder="Enter your Job skills and qualifications"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div
+                *ngIf="
+                  jobDescription_step &&
+                  (jobDescription.controls.job_summary.errors ||
+                    jobDescription.controls.job_duties.errors ||
+                    jobDescription.controls.job_skills.errors)
+                "
+                class="row mt-2 justify-content-md-start"
+              >
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="infoCard mb-3">
+                    <div class="icon">
+                      <img src="images/erorr.png" alt="" />
+                    </div>
+                    <div class="contnt">
+                      <h2>Required fields / Invalid Input.</h2>
+                      <h3>
+                        You need to fill valid input in the fields highlighted
+                        in red
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-5 justify-content-md-space-between">
+                <div class="col-sm-9 ml-auto">
+                  <div class="row rowarea">
+                    <div class="col-sm-4 col-md-3 switchBtm">
+                      <input
+                        (click)="previous()"
+                        type="button"
+                        name="previous"
+                        class="previous action-button-previous ripple"
+                        value="Previous"
+                      />
+                    </div>
+                    <div class="col-sm-4 col-md-3 semisecondorder">
+                      <input
+                        (click)="next()"
+                        type="button"
+                        name="next"
+                        class="next action-button ripple"
+                        value="Next"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+
+          <form [formGroup]="socialInformation" id="msform">
+            <fieldset *ngIf="step == 4">
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Facebook URL</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    formControlName="facebook"
+                    class="form-control"
+                    placeholder="Enter a valid URL address (i.e. https:/www.mywebsite.com/)"
+                  />
+                </div>
+              </div>
+              <div class="row formRow">
+                <div class="col-sm-3 pR0">
+                  <label class="frmNm">Instagram URL</label>
+                </div>
+                <div class="col-sm-9 pR0">
+                  <input
+                    type="text"
+                    formControlName="instagram"
+                    class="form-control"
+                    placeholder="Enter a valid URL address (i.e. https:/www.mywebsite.com/)"
+                  />
+                </div>
+              </div>
+
+              <div
+                *ngIf="
+                  socialInformation_step &&
+                  (socialInformation.controls.facebook.errors ||
+                    socialInformation.controls.instagram.errors)
+                "
+                class="row mt-2 justify-content-md-start"
+              >
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                  <div class="infoCard mb-3">
+                    <div class="icon">
+                      <img src="images/erorr.png" alt="" />
+                    </div>
+                    <div class="contnt">
+                      <h2>Required fields / Invalid Input.</h2>
+                      <h3>
+                        You need to fill valid input in the fields highlighted
+                        in red
+                      </h3>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-5 justify-content-md-space-between">
+                <div class="col-sm-9 ml-auto">
+                  <div class="row rowarea">
+                    <div class="col-sm-4 col-md-3 switchBtm">
+                      <input
+                        (click)="previous()"
+                        type="button"
+                        name="previous"
+                        class="previous action-button-previous ripple"
+                        value="Previous"
+                      />
+                    </div>
+                    <div class="col-sm-4 col-md-3 semisecondorder">
+                      <input
+                        type="button"
+                        (click)="onPreview()"
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal"
+                        name="preview"
+                        class="submit action-button ripple"
+                        value="Preview"
+                      />
+                    </div>
+                    <div class="col-sm-4 col-md-3 semisecondorder">
+                      <input
+                        (click)="next()"
+                        type="button"
+                        name="submit"
+                        class="submit action-button ripple"
+                        value="Submit"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-body">
+        <section class="detailsArea modalcontnt">
+          <div class="container-fluid">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4 col-md-3">
+                  <div class="jobLogoArea">
+                    <div class="logo">
+                      <!-- <img src="assets/images/searchListLogo01.png" alt="" /> -->
+
+                      <img
+                        alt="Image placeholder"
+                        [src]="jobData.company_image"
+                        class="w-100"
+                        onerror="this.src='assets/images/recruiter_th01.png';"
+                      />
+                    </div>
+                    <!-- <p>{{ jobData.company_name }}</p> -->
+                    <!-- <button type="button" class="btn" data-waves>Login</button> -->
+                  </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                  <div class="detailsPnl">
+                    <div class="rightSide">
+                      <h1 class="jobheading">
+                        {{ jobData.job_title }}
+                        <span
+                          style="
+                            width: 100%;
+                            display: block;
+                            margin-top: 10px;
+                            font-size: 16px;
+                            color: black;
+                            font-weight: normal;
+                          "
+                          >{{ jobData.category_name }}</span
+                        >
+                      </h1>
+
+                      <div class="jobtags">
+                        <button
+                          style="white-space: nowrap; background-color: #a4a89f"
+                          *ngIf="jobData.is_full_time"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Full Time
+                        </button>
+                        <button
+                          style="white-space: nowrap; background-color: #807680"
+                          *ngIf="jobData.is_part_time"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Part Time
+                        </button>
+                        <button
+                          style="white-space: nowrap; background-color: #a2bfca"
+                          *ngIf="jobData.is_hourly"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Hourly
+                        </button>
+                        <button
+                          style="white-space: nowrap; background-color: #393a10"
+                          *ngIf="jobData.is_booth_rent"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Booth Rent
+                        </button>
+                        <button
+                          style="
+                            white-space: nowrap;
+                            color: #000;
+                            background-color: #eff0f1;
+                          "
+                          *ngIf="jobData.is_contractor"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Contractor
+                        </button>
+                        <button
+                          style="white-space: nowrap; background-color: #242324"
+                          *ngIf="jobData.is_temporary"
+                          type="button"
+                          class="btn tag tag--semiPink"
+                        >
+                          Temporary
+                        </button>
+                      </div>
+                    </div>
+                    <ul class="addressRow" data-aos="fade-up">
+                      <li>
+                        <img src="assets/images/home-small.png" alt="" />
+                        <a
+                          *ngIf="
+                            validURL(jobData.company_website) &&
+                            jobData.company_website
+                          "
+                          target="_blank"
+                          href="{{ '//' + jobData.company_website }}"
+                        >
+                          {{ jobData.company_name }}</a
+                        >
+                        <a
+                          *ngIf="
+                            !validURL(jobData.company_website) &&
+                            jobData.company_website
+                          "
+                          target="_blank"
+                          href="{{ 'https://' + jobData.company_website }}"
+                          >{{ jobData.company_name }}</a
+                        >
+                        <div *ngIf="!jobData.company_website">
+                          {{ jobData.company_name }}
+                        </div>
+                      </li>
+                      <li>
+                        <img src="assets/images/location-small.png" alt="" />
+                        {{ jobData.job_location }}
+                      </li>
+                      <li>
+                        <img src="assets/images/calender-small.png" alt="" />
+                        {{ jobData.job_post_is_created | date }}
+                      </li>
+                    </ul>
+                    <div class="jobPara" data-aos="fade-up">
+                      <h2>Job Details</h2>
+                      <p>
+                        {{ jobData.job_summary }}
+                      </p>
+                    </div>
+                    <div
+                      *ngIf="jobData.job_duties?.length != 0"
+                      class="jobPara"
+                      data-aos="fade-up"
+                    >
+                      <h2>JOB DUTIES / RESPONSIBILITIES</h2>
+                      <p>
+                        {{ jobData.job_duties }}
+                      </p>
+                    </div>
+                    <div
+                      *ngIf="jobData.job_skills.length != 0"
+                      class="jobPara"
+                      data-aos="fade-up"
+                    >
+                      <h2>JOB QUALIFICATIONS</h2>
+                      <p>
+                        {{ jobData.job_skills }}
+                      </p>
+                    </div>
+                    <div class="jobPara" data-aos="fade-up">
+                      <h2>CONTACT INFORMATION</h2>
+                      <p *ngIf="jobData.job_phone.length != 0" class="semi-lg">
+                        <img src="assets/images/contactIcn01_th01.png" alt="" />
+                        <a href="tel:{{ jobData.job_phone }}" target="_blank"
+                          >{{ jobData.job_phone }}
+                        </a>
+                      </p>
+                      <p *ngIf="jobData.job_email.length != 0" class="semi-lg">
+                        <img src="assets/images/contactIcn02_th01.png" alt="" />
+                        <a
+                          href="mailto:{{ jobData.job_email }}"
+                          target="_blank"
+                        >
+                          {{ jobData.job_email }}</a
+                        >
+                      </p>
+                      <p *ngIf="jobData.instagram.length != 0" class="semi-lg">
+                        <img src="assets/images/contactIcn03_th01.png" alt="" />
+                        <a
+                          target="_blank"
+                          href="{{ '//' + jobData.instagram }}"
+                          >{{ jobData.instagram }}</a
+                        >
+                      </p>
+                      <p *ngIf="jobData.facebook.length != 0" class="semi-lg">
+                        <img src="assets/images/contactIcn04_th01.png" alt="" />
+                        <a
+                          target="_blank"
+                          href="{{ '//' + jobData.facebook }}"
+                          >{{ jobData.facebook }}</a
+                        >
+                      </p>
+                    </div>
+                    <button
+                      style="width: 200px"
+                      type="button"
+                      class="prvBtn closemodalbtn"
+                      data-waves
+                      data-aos="fade-up"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

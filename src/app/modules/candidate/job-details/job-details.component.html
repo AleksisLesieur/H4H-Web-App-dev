@@ -1,0 +1,214 @@
+<section class="detailsArea">
+  <div class="container-fluid">
+    <div class="container" *ngIf="jobData.job_title">
+      <div class="row">
+        <div class="col-sm-2">
+          <div class="jobLogoArea">
+            <div class="logo">
+              <!-- <img src="assets/images/searchListLogo01.png" alt="" /> -->
+
+              <img
+                alt="Image placeholder"
+                [src]="jobData.company_image"
+                class="w-100"
+                onerror="this.src='assets/images/recruiter_th01.png';"
+              />
+            </div>
+            <!-- <p>{{ jobData.company_name }}</p> -->
+            <!-- <button type="button" class="btn" data-waves>Login</button> -->
+          </div>
+        </div>
+        <div class="col-sm-10">
+          <div class="detailsPnl">
+            <div class="rightSide">
+              <h1 class="jobheading">
+                {{ jobData.job_title }}
+                <span
+                  style="
+                    width: 100%;
+                    display: block;
+                    margin-top: 10px;
+                    font-size: 16px;
+                    color: black;
+                    font-weight: normal;
+                  "
+                  >{{ jobData.category_name }}</span
+                >
+              </h1>
+
+              <div class="jobtags">
+                <button
+                  style="white-space: nowrap; background-color: #a4a89f"
+                  *ngIf="jobData.is_full_time == 'True'"
+                  type="button"
+                  class="btn tag tag--semiPink"
+                >
+                  Full Time
+                </button>
+                <button
+                  style="white-space: nowrap; background-color: #807680"
+                  *ngIf="jobData.is_part_time == 'True'"
+                  type="button"
+                  class="btn tag tag--semiPink"
+                >
+                  Part Time
+                </button>
+                <button
+                  style="white-space: nowrap; background-color: #a2bfca"
+                  *ngIf="jobData.is_hourly == 'True'"
+                  type="button"
+                  class="btn tag tag--semiPink"
+                >
+                  Hourly
+                </button>
+                <button
+                  style="white-space: nowrap; background-color: #393a10"
+                  *ngIf="jobData.is_booth_rent == 'True'"
+                  type="button"
+                  class="btn tag tag--semiPink"
+                >
+                  Booth Rent
+                </button>
+                <button
+                  style="
+                    white-space: nowrap;
+                    color: #000;
+                    background-color: #eff0f1;
+                  "
+                  *ngIf="jobData.is_contractor == 'True'"
+                  type="button"
+                  class="btn tag tag--semiPink"
+                >
+                  Contractor
+                </button>
+                <button
+                  style="white-space: nowrap; background-color: #242324"
+                  *ngIf="jobData.is_temporary == 'True'"
+                  type="button"
+                  class="btn tag tag--semiPink"
+                >
+                  Temporary
+                </button>
+              </div>
+            </div>
+            <ul class="addressRow" data-aos="fade-up">
+              <li>
+                <img src="assets/images/home-small.png" alt="" />
+                <a
+                  *ngIf="
+                    validURL(jobData.company_website) && jobData.company_website
+                  "
+                  target="_blank"
+                  href="{{ jobData.company_website }}"
+                >
+                  {{ jobData.company_name }}</a
+                >
+                <a
+                  *ngIf="
+                    !validURL(jobData.company_website) &&
+                    jobData.company_website
+                  "
+                  target="_blank"
+                  href="{{ 'https://' + jobData.company_website }}"
+                  >{{ jobData.company_name }}</a
+                >
+                <div *ngIf="!jobData.company_website">
+                  {{ jobData.company_name }}
+                </div>
+              </li>
+              <li>
+                <img src="assets/images/location-small.png" alt="" />
+                {{ jobData.job_location }}
+              </li>
+              <li>
+                <img src="assets/images/calender-small.png" alt="" />
+                {{ homeService.convertDate(jobData.entry_date) | date }}
+              </li>
+            </ul>
+            <div class="jobPara" data-aos="fade-up">
+              <h2>Job Details</h2>
+              <p>
+                {{ jobData.job_summary }}
+              </p>
+            </div>
+            <div
+              *ngIf="jobData.job_duties.length != 0"
+              class="jobPara"
+              data-aos="fade-up"
+            >
+              <h2>JOB DUTIES / RESPONSIBILITIES</h2>
+              <p>
+                {{ jobData.job_duties }}
+              </p>
+            </div>
+            <div
+              *ngIf="jobData.job_skills.length != 0"
+              class="jobPara"
+              data-aos="fade-up"
+            >
+              <h2>JOB QUALIFICATIONS</h2>
+              <p>
+                {{ jobData.job_skills }}
+              </p>
+            </div>
+            <div class="jobPara" data-aos="fade-up">
+              <h2>CONTACT INFORMATION</h2>
+              <p *ngIf="jobData.job_phone.length != 0" class="semi-lg">
+                <img src="assets/images/contactIcn01_th01.png" alt="" />
+                <a href="tel:{{ phone }}" target="_blank">{{ phone }} </a>
+              </p>
+              <p *ngIf="jobData.job_email.length != 0" class="semi-lg">
+                <img src="assets/images/contactIcn02_th01.png" alt="" />
+                <a href="mailto:{{ jobData.job_email }}" target="_blank">
+                  {{ jobData.job_email }}</a
+                >
+              </p>
+              <p *ngIf="jobData.instagram.length != 0" class="semi-lg">
+                <img src="assets/images/contactIcn03_th01.png" alt="" />
+                <a
+                  *ngIf="validURL(jobData.instagram)"
+                  target="_blank"
+                  href="{{ jobData.instagram }}"
+                  >{{ jobData.instagram }}</a
+                >
+                <a
+                  *ngIf="!validURL(jobData.instagram)"
+                  target="_blank"
+                  href="{{ 'https://' + jobData.instagram }}"
+                  >{{ jobData.instagram }}</a
+                >
+              </p>
+              <p *ngIf="jobData.facebook.length != 0" class="semi-lg">
+                <img src="assets/images/contactIcn04_th01.png" alt="" />
+                <a
+                  *ngIf="validURL(jobData.facebook)"
+                  target="_blank"
+                  href="{{ jobData.facebook }}"
+                  >{{ jobData.facebook }}</a
+                >
+                <a
+                  *ngIf="!validURL(jobData.facebook)"
+                  target="_blank"
+                  href="{{ 'https://' + jobData.facebook }}"
+                  >{{ jobData.facebook }}</a
+                >
+              </p>
+            </div>
+            <!-- <button type="button" class="btn" data-waves data-aos="fade-up">
+              Edit Listing
+            </button> -->
+            <button
+              type="button"
+              (click)="goBack()"
+              class="btn"
+              data-waves
+              data-aos="fade-up"
+            >
+              Go Back
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

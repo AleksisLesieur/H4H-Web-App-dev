@@ -1,0 +1,776 @@
+.detailsArea .detailsPnl .jobtags .btn {
+  padding: 5px 15px !important;
+  margin-right: 5px;
+  margin-bottom: 5px;
+}
+.detailsArea .detailsPnl .jobtags .btn:last-child {
+  margin-right: 0px;
+}
+.rightSide {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.jobtags {
+  width: 50%;
+  display: block;
+  float: left;
+}
+.jobheading {
+  width: 50%;
+}
+
+.portphotos {
+  position: relative;
+  .photoclose {
+    position: absolute;
+    background: red;
+    color: #fff;
+    top: 0;
+    right: 0;
+    padding: 5px 10px;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 8px;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .rightSide {
+    flex-direction: column;
+  }
+  .jobheading,
+  .jobtags {
+    width: 100%;
+  }
+  .detailsArea .detailsPnl .jobtags .btn {
+    padding: 5px 10px !important;
+    margin-right: 5px !important;
+    font-size: 12px;
+  }
+}
+
+// add job section
+#msform {
+  text-align: center;
+  position: relative;
+  margin-top: 30px;
+}
+.formRow .form-check {
+  padding-left: 35px;
+}
+#msform fieldset {
+  background: white;
+  border: 0 none;
+  border-radius: 0px;
+  padding: 20px 0;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  /*stacking fieldsets above each other*/
+  position: relative;
+}
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+  display: none;
+}
+/*inputs*/
+// #msform input,
+// #msform textarea {
+//   padding: 15px;
+//   border: 1px solid #ccc;
+//   border-radius: 0px;
+//   margin-bottom: 10px;
+//   width: 100%;
+//   box-sizing: border-box;
+//   font-family: montserrat;
+//   color: #2c3e50;
+//   font-size: 16px;
+//   font-weight: 500;
+// }
+#msform input:focus,
+#msform textarea:focus {
+  -moz-box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border: 1px solid #ee0979;
+  outline-width: 0;
+  transition: All 0.5s ease-in;
+  -webkit-transition: All 0.5s ease-in;
+  -moz-transition: All 0.5s ease-in;
+  -o-transition: All 0.5s ease-in;
+}
+/*buttons*/
+#msform .action-button {
+  width: 100%;
+  background: #548ea2;
+  font-weight: 500;
+  color: #fff;
+  border: 0 none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 15px 5px;
+  margin: 0 0 20px;
+}
+
+#msform .action-button:hover,
+#msform .action-button:focus {
+  background-color: #548ea2 !important;
+  color: #fff;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+}
+#msform .action-button-previous {
+  width: 100%;
+  background: #548ea2;
+  font-weight: 500;
+  color: #fff;
+  border: 0 none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 15px 5px;
+  margin: 0 0 20px;
+}
+#msform .action-button-previous:hover,
+#msform .action-button-previous:focus {
+  background-color: #548ea2 !important;
+  color: #fff;
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+}
+/*headings*/
+.fs-title {
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+.fs-subtitle {
+  font-weight: normal;
+  font-size: 13px;
+  color: #666;
+  margin-bottom: 20px;
+}
+/*progressbar*/
+#progressbar {
+  margin-bottom: 30px;
+  overflow: hidden;
+  /*CSS counters to number the steps*/
+  counter-reset: step;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+}
+#progressbar li {
+  list-style-type: none;
+  color: #000;
+  text-transform: uppercase;
+  font-size: 9px;
+  float: left;
+  border-radius: 5px;
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  background-color: #efefef;
+  box-sizing: border-box;
+  padding: 25px 25px;
+  margin-right: 15px;
+  font: 500 18px "Poppins", sans-serif;
+  white-space: nowrap;
+}
+#progressbar li.active {
+  background: #548ea2;
+  color: white;
+}
+#progressbar li:before {
+  content: counter(step);
+  counter-increment: unset;
+  width: 100%;
+  height: 50px;
+  line-height: 26px;
+  display: flex;
+  font-size: 12px;
+
+  border-radius: 5px;
+  margin: 0 auto 10px auto;
+  display: none;
+}
+/*progressbar connectors*/
+#progressbar li:after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  background: red;
+  position: absolute;
+  left: -50%;
+  top: 9px;
+  z-index: -1; /*put it behind the numbers*/
+  display: none;
+}
+#progressbar li:first-child:after {
+  /*connector not needed before the first step*/
+  content: none;
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+// #progressbar li.active:before,
+// #progressbar li.active:after {
+//   background: #548EA2;
+//   color: white;
+// }
+
+#progressbar li.inactive:before {
+  background: burlywood;
+  color: #000;
+  display: none;
+}
+fieldset {
+  /* for chrome and safari*/
+  -webkit-animation-duration: 0.25ms;
+  -webkit-animation-name: slidein;
+  /*for firefox*/
+  -moz-animation-duration: 1s;
+  -moz-animation-name: slidein;
+  /* for opera*/
+  -o-animation-duration: 1s;
+  -o-animation-name: slidein;
+  /* Standard syntax*/
+  animation-duration: 1s;
+  animation-name: slidein;
+}
+@-webkit-keyframes slidein {
+  from {
+    margin-right: 100%;
+    width: 300%;
+  }
+  to {
+    margin-right: 0%;
+    width: 100%;
+  }
+}
+@-moz-keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+@-o-keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+@keyframes slidein {
+  from {
+    margin-left: 100%;
+    width: 300%;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+  }
+}
+
+.formRow {
+  width: 100%;
+  margin: 0 0 20px 0;
+
+  .frmNm {
+    width: 100%;
+    color: #070600;
+    font: 18px/27px Poppins !important;
+    margin: 5px 0 0 0;
+    text-align: left;
+  }
+  .form-control {
+    width: 100%;
+    padding: 22px 20px !important;
+    background: #fff;
+    border-radius: 10px !important;
+    border: 2px solid #807680 !important;
+  }
+  .input-error {
+    width: 100%;
+    padding: 22px 20px !important;
+    background: #fff;
+    border-radius: 10px !important;
+    border: 2px solid red !important;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    display: block;
+    height: calc(1.5em + 0.75rem + 2px);
+  }
+  .red {
+    border-color: red !important;
+  }
+  .textarea-error {
+    width: 100%;
+    padding: 22px 20px !important;
+    background: #fff;
+    border-radius: 10px !important;
+    border: 2px solid red !important;
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+  }
+  .bottomText {
+    width: 100%;
+    color: #07060080;
+    text-align: left;
+    font-size: 14px;
+  }
+  .form-check {
+    display: flex;
+    .form-check-label {
+      padding-left: 15px;
+    }
+  }
+  // .form-check {
+  //   display: flex;
+  //   position: relative;
+  //   padding-left: 35px;
+  //   margin-bottom: 12px;
+  //   cursor: pointer;
+  //   padding-top: 9px;
+  //   font-size: 18px;
+  //   margin-right: 25px;
+  //   color: #000;
+  //   margin-top: 5px;
+  //   -webkit-user-select: none;
+  //   -moz-user-select: none;
+  //   -ms-user-select: none;
+  //   user-select: none;
+  //   input {
+  //     position: absolute;
+  //     opacity: 0;
+  //     cursor: pointer;
+  //     height: 0;
+  //     width: 0;
+  //     &:checked {
+  //       ~ {
+  //         .checkmark {
+  //           background: url(./../../../../assets/images/checked.png) no-repeat 0 0;
+  //           &:after {
+  //             display: block;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+}
+input[type="checkbox"] {
+  display: inline-block !important;
+  border: 1px solid #234d57 !important;
+}
+.infoCard {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 25px 15px;
+  border-radius: 10px;
+  margin: 0;
+  border: 1px solid #d12c2c;
+  background: #d12c2c1a;
+  .contnt {
+    width: 80%;
+    margin: 0 0 0 0;
+    text-align: left;
+  }
+}
+
+// .prvBtn {
+//   width: 100%;
+//   border: 2px solid #548ea2;
+//   font-weight: 500;
+//   color: #000;
+//   border: 0 none;
+//   border-radius: 10px;
+//   cursor: pointer;
+//   padding: 13px 5px;
+//   margin: 10px 25px;
+//   -webkit-transition: all 0.5s ease-in-out;
+//   transition: all 0.5s ease-in-out;
+//   margin: 0 0 20px;
+//   &:hover {
+//     background-color: #ff66b3;
+//     color: #fff;
+//     box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+//   }
+// }
+.prvBtn {
+  width: 100%;
+  background: #548ea2;
+  font-weight: 500;
+  color: #fff;
+  border: 0 none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 15px 5px;
+  margin: 0 0 20px;
+}
+
+.file-input__input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.file-input__label {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #eff0f1;
+  font-size: 14px;
+  padding: 15px 40px;
+  background-color: #548ea2;
+  margin-right: 25px;
+  white-space: nowrap;
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+}
+
+.file-error {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #eff0f1;
+  font-size: 14px;
+  padding: 15px 40px;
+  background-color: red;
+  margin-right: 25px;
+  white-space: nowrap;
+  box-shadow: 0px 0px 2px rgb(0 0 0 / 25%);
+}
+
+.formselectBox {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2px solid #807680;
+  border-radius: 10px;
+  padding: 5px 15px;
+  height: 52px;
+  margin-bottom: 15px;
+  background: #fff;
+
+  &:focus {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .dropdown-toggle {
+    white-space: nowrap;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .catList {
+    width: 100%;
+    float: left;
+    height: fit-content;
+
+    -webkit-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    top: 9px !important;
+    // &:hover {
+    //   overflow-y: scroll;
+    // }
+    li {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 6px 12px;
+      box-sizing: border-box;
+      cursor: pointer;
+      &:hover {
+        background: #dedede;
+      }
+      img {
+        width: 20px;
+        height: 20px;
+        background-color: #fff;
+        border: #ddd;
+        border-radius: 5px;
+        margin-right: 4px;
+      }
+      .dropdown-item {
+        font-size: 14px;
+        color: #07060080;
+        font-weight: 400;
+        background: transparent;
+      }
+    }
+  }
+}
+.formSelectField {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.formtabBox {
+  width: 100%;
+  display: block;
+  span {
+    text-align: left;
+  }
+}
+
+.formtabBox img {
+  margin-right: 15px;
+}
+.formselectarea {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border: 2px solid #807680 !important;
+  border-radius: 10px;
+  padding: 5px 15px;
+  height: 52px;
+  margin-bottom: 15px;
+  background: #fff;
+}
+.formselectarea:focus {
+  box-shadow: 0 0.5rem 1rem rgb(0 0 0 / 15%) !important;
+  color: #495057 !important;
+  background-color: #fff !important;
+  border: 2px solid #80bdff !important;
+  outline: 0 !important;
+}
+.formtabBox span {
+  width: 100%;
+  color: #07060080;
+  font-weight: 500;
+}
+.formtabBox .dropdown-toggle::after {
+  display: none;
+}
+.formtabBox .catList {
+  width: 100%;
+  height: 100px;
+  overflow-y: hidden;
+}
+.formtabBox .catList:hover {
+  overflow-y: scroll;
+}
+.formtabBox .catList li {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 6px 12px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.formtabBox .catList li img {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: #ddd;
+  border-radius: 5px;
+  margin-right: 4px;
+}
+.formtabBox .catList li .dropdown-item {
+  font-size: 14px;
+  color: #07060080;
+  font-weight: 400;
+  background: transparent;
+}
+.formtabBox .catList li:hover {
+  background: #dedede;
+}
+.modalcontnt {
+  margin-top: 2em;
+}
+.detailsArea.modalcontnt .detailsPnl .jobtags .btn {
+  margin-right: 10px !important;
+}
+.detailsArea.modalcontnt .detailsPnl .addressRow,
+.detailsArea.modalcontnt .detailsPnl .jobPara {
+  margin-bottom: 20px;
+}
+.detailsArea.modalcontnt .detailsPnl .jobPara h2 {
+  margin-bottom: 10px !important;
+}
+.detailsArea.modalcontnt .closemodalbtn {
+  align-self: flex-start;
+}
+
+@media only screen and (max-width: 1024px) {
+  #progressbar li {
+    padding: 20px 11px;
+  }
+  .modal-dialog {
+    max-width: 90vw !important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .formselectBox {
+    margin-bottom: 15px;
+  }
+  #progressbar {
+    flex-direction: column;
+    li {
+      width: 100%;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+  }
+  .prvBtn {
+    width: 100%;
+  }
+  .formRow {
+    margin-bottom: 10px;
+    .frmNm {
+      margin-bottom: 6px;
+    }
+  }
+  .pR0 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .modal-dialog {
+    max-width: 99vw !important;
+  }
+  .detailsArea.modalcontnt .detailsPnl .jobtags .btn {
+    padding: 10px 15px !important;
+  }
+  .detailsArea.modalcontnt .detailsPnl h1 {
+    margin-bottom: 15px;
+  }
+  .detailsArea.modalcontnt .detailsPnl .jobPara p {
+    text-align: left;
+  }
+  .detailsArea.modalcontnt {
+    margin-bottom: 1em;
+  }
+}
+
+.form-control.ng-invalid.ng-touched {
+  border-color: red !important;
+}
+
+@media only screen and (max-width: 1199px) and (min-width: 1025px) {
+  #progressbar li {
+    padding: 20px 11px;
+  }
+}
+@media only screen and (max-width: 1024px) {
+  #progressbar li {
+    padding: 20px 11px;
+  }
+}
+@media only screen and (max-width: 994px) and (min-width: 769px) {
+  #progressbar {
+    flex-direction: column;
+  }
+  #progressbar li {
+    width: 100%;
+    margin-bottom: 15px;
+    font-size: 14px;
+    padding: 20px 20px;
+  }
+  .prvBtn {
+    white-space: nowrap;
+  }
+}
+@media only screen and (max-width: 991px) and (min-width: 556px) {
+  .formRow .frmNm{
+    padding-right: 10px;
+    word-break: break-word;
+  }
+}
+@media only screen and (max-width: 767px) {
+  #msform .action-button {
+    width: 100%;
+  }
+  #progressbar li {
+    padding: 20px 20px;
+  }
+  .prvBtn {
+    white-space: nowrap;
+  }
+  #progressbar {
+    margin-bottom: 0;
+  }
+  #msform {
+    margin-top: 0;
+  }
+  #progressbar li {
+    margin-right: 0;
+  }
+}
+
+button {
+  border: none;
+  background: none;
+  &:focus {
+    outline: 0;
+    border: none;
+  }
+}
+
+#msform input:focus,
+#msform textarea:focus {
+  box-shadow: 0 0 0 0.2rem rgb(0 123 255 / 25%) !important;
+  border: 2px solid #807680;
+}
+.file-input input:focus .file-input__label {
+  box-shadow: 20px 20px 15px rgb(0 0 0 / 15%) !important;
+}
+button {
+  border: none !important;
+  &:focus {
+    outline: 0 !important;
+  }
+}
+.rowarea {
+  display: flex;
+  justify-content: space-between;
+}
+
+.formRow .form-control.multiselect {
+  padding-top: 3px !important;
+  padding-bottom: 46px !important;
+}
+.upldphoto {
+  width: 94px;
+  height: 94px;
+  margin-left: 10px;
+}
+.upldphoto img {
+  width: 94px;
+  height: 94px;
+  object-fit: contain;
+}

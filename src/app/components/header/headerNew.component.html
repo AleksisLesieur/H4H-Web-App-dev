@@ -1,0 +1,430 @@
+<header>
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <nav class="navbar navbar-expand-lg navbar-light navigateBar">
+            <div class="container-fluid">
+              <a class="navbar-brand" href=""
+                ><img src="assets/images/Logo.png" alt=""
+              /></a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <span><img src="assets/images/menu.png" alt="" /></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul
+                  class="navbar-nav navigateMenu mx-auto me-auto mb-2 mb-lg-0"
+                >
+                  <li class="nav-item">
+                    <a
+                      class="nav-link"
+                      aria-current="page"
+                      routerLink="/explore-job"
+                      >Explore Jobs</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLink="/post-job">Post a Job</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLink="/explore-resume"
+                      >Explore Resumes</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLink="/post-resume"
+                      >Post a Resume</a
+                    >
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLink="/all-access">Packages</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" routerLink="/blog">Blog</a>
+                  </li>
+                  <li class="nav-item">
+                    <a
+                      *ngIf="user_type == '0'"
+                      class="nav-link"
+                      routerLink="/auth"
+                      >Login</a
+                    >
+                  </li>
+                  <li *ngIf="user_type == '0'">
+                    <button
+                      routerLink="/auth/sign-up"
+                      class="btn hdr-login-btn"
+                      data-waves
+                      type="button"
+                    >
+                      Sign Up
+                    </button>
+                  </li>
+                  <li>
+                    <a
+                      *ngIf="user_type == '0'"
+                      class="nav-link"
+                      routerLink="/auth"
+                      >Login</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      *ngIf="user_type == '0'"
+                      class="nav-link"
+                      routerLink="/auth"
+                      ><img
+                        class="hand dropdown-toggle"
+                        id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                        src="assets/images/userIcn.png"
+                        alt=""
+                    /></a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDarkDropdownMenuLink"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Dropdown
+                    </a>
+                    <ul
+                      class="dropdown-menu dropdown-menu-dark"
+                      aria-labelledby="navbarDarkDropdownMenuLink"
+                    >
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li>
+                        <a class="dropdown-item" href="#">Another action</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" href="#"
+                          >Something else here</a
+                        >
+                      </li>
+                    </ul>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)"
+                      ><div
+                        class="dropdown-toggle notifybtn"
+                        id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <img
+                          (click)="onClickNoti()"
+                          class="hand"
+                          src="assets/images/notify.png"
+                          alt=""
+                        />
+                        <span *ngIf="hasNewNoti" class="noty"></span></div
+                    ></a>
+                  </li>
+                </ul>
+                <form class="d-flex"></form>
+                <form *ngIf="user_type == '1'" class="d-flex">
+                  <ul class="hdrNotifyBlock">
+                    <li class="dropdown">
+                      <div
+                        class="dropdown-toggle notifybtn"
+                        id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <img
+                          (click)="onClickNoti()"
+                          class="hand"
+                          src="assets/images/notify.png"
+                          alt=""
+                        />
+                        <span *ngIf="hasNewNoti" class="noty"></span>
+                      </div>
+                      <ul
+                        class="dropdown-menu noti-dropMenu"
+                        aria-labelledby="dropdownMenuButton1"
+                      >
+                        <li
+                          (click)="gotoRAS(n.id_job_post)"
+                          class="item-list hand"
+                          style="background-color: '#cccccc'; padding-top: 5px"
+                          *ngFor="let n of rNewNoti"
+                        >
+                          <img
+                            [src]="n.user_image"
+                            onerror="this.src='assets/images/notify.png';"
+                          />
+                          <div class="contnt">
+                            <h2>{{ n.user_fname }} {{ n.user_lname }}</h2>
+                            <p>
+                              Applied to "<b>{{ n.job_title }}</b
+                              >".
+                            </p>
+                          </div>
+                        </li>
+                        <li
+                          (click)="gotoRAS(n.id_job_post)"
+                          class="item-list hand"
+                          style="padding-top: 5px"
+                          *ngFor="let n of rOldNoti"
+                        >
+                          <img
+                            [src]="n.user_image"
+                            onerror="this.src='assets/images/notify.png';"
+                          />
+                          <div class="contnt">
+                            <h2>{{ n.user_fname }} {{ n.user_lname }}</h2>
+                            <p>
+                              Applied to "<b>{{ n.job_title }}</b
+                              >.
+                            </p>
+                          </div>
+                        </li>
+                        <li
+                          *ngIf="rNewNoti.length == 0 && rOldNoti.length == 0"
+                        >
+                          No notifications yet.
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="btn-group dropdown">
+                        <div
+                          class="dropdown-menu hdrDropMenu"
+                          aria-labelledby="dropdownMenuButton1"
+                        >
+                          <a
+                            class="dropdown-item"
+                            routerLink="/employer/dashboard"
+                            >Dashboard</a
+                          >
+
+                          <a class="dropdown-item" routerLink="/employer/job"
+                            >My Job</a
+                          >
+
+                          <a
+                            class="dropdown-item"
+                            routerLink="/employer/profile"
+                            >My Profile</a
+                          >
+                          <a
+                            class="dropdown-item"
+                            (click)="onSwitchAsApplicant()"
+                            >Switch to Applicant</a
+                          >
+
+                          <a
+                            class="dropdown-item"
+                            routerLink="/employer/change-password"
+                            >Change Password</a
+                          >
+
+                          <div class="dropdown-divider"></div>
+                          <a
+                            class="dropdown-item logoutItem"
+                            (click)="onLogOut()"
+                            >Log Out</a
+                          >
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </form>
+                <form *ngIf="user_type == '2'" class="d-flex">
+                  <ul class="hdrNotifyBlock">
+                    <li class="dropdown">
+                      <ul
+                        class="dropdown-menu noti-dropMenu"
+                        aria-labelledby="dropdownMenuButton1"
+                      >
+                        <li
+                          (click)="gotoCAS(n)"
+                          class="item-list hand"
+                          style="background-color: '#cccccc'; padding-top: 5px"
+                          *ngFor="let n of cNewNoti"
+                        >
+                          <img
+                            *ngIf="n.company_image"
+                            [src]="n.company_image"
+                            onerror="this.src='assets/images/notify.png';"
+                          />
+                          <img
+                            *ngIf="n.user_image"
+                            [src]="n.user_image"
+                            onerror="this.src='assets/images/notify.png';"
+                          />
+                          <div *ngIf="n.company_name" class="contnt">
+                            <h2>{{ n.company_name }}</h2>
+                            <p *ngIf="n.is_accepted">
+                              <b style="color: green !important">Accepted </b
+                              >Your applications for "<b>{{ n.job_title }}</b
+                              >".
+                            </p>
+                            <p *ngIf="n.is_declined">
+                              <b style="color: red !important">Declined </b>Your
+                              applications for "<b>{{ n.job_title }}</b
+                              >".
+                            </p>
+                            <p *ngIf="n.is_reviewed">
+                              <b style="color: blue !important">Reviewed </b
+                              >Your applications for "<b>{{ n.job_title }}</b
+                              >".
+                            </p>
+                            <p *ngIf="n.is_posted">
+                              Posted a new job: <b>{{ n.job_title }}</b
+                              >.
+                            </p>
+                          </div>
+                          <div *ngIf="n.user_fname" class="contnt">
+                            <h2>{{ n.user_fname }} {{ n.user_lname }}</h2>
+                            <p *ngIf="n.is_invited">
+                              Invited you to apply for a job!.
+                            </p>
+                          </div>
+                        </li>
+                        <li
+                          (click)="gotoCAS(n)"
+                          class="item-list hand"
+                          style="padding-top: 5px"
+                          *ngFor="let n of cOldNoti"
+                        >
+                          <img
+                            *ngIf="n.company_image"
+                            [src]="n.company_image"
+                            onerror="this.src='assets/images/notify.png';"
+                          />
+                          <img
+                            *ngIf="n.user_image"
+                            [src]="n.user_image"
+                            onerror="this.src='assets/images/notify.png';"
+                          />
+                          <div *ngIf="n.company_name" class="contnt">
+                            <h2>{{ n.company_name }}</h2>
+                            <p *ngIf="n.is_accepted">
+                              <b style="color: green !important">Accepted </b
+                              >Your applications for "<b>{{ n.job_title }}</b
+                              >".
+                            </p>
+                            <p *ngIf="n.is_declined">
+                              <b style="color: red !important">Declined </b>Your
+                              applications for "<b>{{ n.job_title }}</b
+                              >".
+                            </p>
+                            <p *ngIf="n.is_reviewed">
+                              <b style="color: blue !important">Reviewed </b
+                              >Your applications for "<b>{{ n.job_title }}</b
+                              >".
+                            </p>
+                            <p *ngIf="n.is_posted">
+                              Posted a new job: <b>{{ n.job_title }}</b
+                              >.
+                            </p>
+                          </div>
+                          <div *ngIf="n.user_fname" class="contnt">
+                            <h2>{{ n.user_fname }} {{ n.user_lname }}</h2>
+                            <p *ngIf="n.is_invited">
+                              Invited you to apply for a job!.
+                            </p>
+                          </div>
+                        </li>
+                        <li
+                          *ngIf="cNewNoti.length == 0 && cOldNoti.length == 0"
+                        >
+                          No notifications yet.
+                        </li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="btn-group dropdown">
+                        <img
+                          class="hand dropdown-toggle"
+                          id="dropdownMenuButton2"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                          src="assets/images/userIcn.png"
+                          alt=""
+                        />
+
+                        <div
+                          class="dropdown-menu hdrDropMenu"
+                          aria-labelledby="dropdownMenuButton2"
+                        >
+                          <a
+                            class="dropdown-item"
+                            routerLink="/candidate/profile"
+                            >My Profile</a
+                          >
+                          <a
+                            class="dropdown-item"
+                            routerLink="/candidate/resume"
+                            >My Resume</a
+                          >
+                          <!-- <a
+                              class="dropdown-item"
+                              routerLink="/candidate/resume/add"
+                              >Add Resume</a
+                            > -->
+                          <a
+                            class="dropdown-item"
+                            routerLink="/candidate/application-status"
+                            >Application Status</a
+                          >
+                          <a
+                            class="dropdown-item"
+                            (click)="onSwitchAsRecruter()"
+                            >Switch to Recruiter</a
+                          >
+                          <a
+                            class="dropdown-item"
+                            routerLink="/candidate/change-password"
+                            >Change Password</a
+                          >
+
+                          <div class="dropdown-divider"></div>
+                          <a
+                            class="dropdown-item logoutItem"
+                            (click)="onLogOut()"
+                            >Log Out</a
+                          >
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </form>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  $(document).ready(function () {
+    $(".dropdown-item").click(function (event) {
+      $(".navbar-collapse").collapse("hide");
+    });
+  });
+</script>
+<script>
+  $(document).ready(function () {
+    $("header .navigateBar .navigateMenu .nav-link").click(function (event) {
+      $(".navbar-collapse").collapse("hide");
+    });
+  });
+</script>
