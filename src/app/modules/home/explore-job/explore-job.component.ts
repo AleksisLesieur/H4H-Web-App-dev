@@ -108,6 +108,8 @@ export class ExploreJobComponent implements OnInit {
     this.loadJobList();
   }
 
+ 
+
   OnItemDeSelect(item: any) {
     this.selectedCategory = {
       category_image: "",
@@ -195,6 +197,10 @@ export class ExploreJobComponent implements OnInit {
     this.is_temporary = false;
     this.is_booth_rent = false;
     this.is_hourly = false;
+    this.loadJobList();
+  }
+  onResetRadius() {
+    this.selectedRadius = '';
     this.loadJobList();
   }
 

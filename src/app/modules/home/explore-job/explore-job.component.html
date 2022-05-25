@@ -94,7 +94,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-8 col-md-9">
+        <div class="col-sm-8 col-md-7">
           <ul class="filterRow">
             <li class="timeSelect">
               <select
@@ -169,17 +169,21 @@
             </li>
           </ul>
         </div>
-        <div class="col-sm-4 col-md-3">
+        <div class="col-sm-4 col-md-5">
           <div class="searchBtnBlock">
+            <button style="white-space: nowrap;" (click)="onResetRadius()" class="btn btnSearch" type="button">
+              Reset Location
+            </button>
             <a
               href="javascript:void(0);"
               (click)="onReset()"
               class="btn btnSearch"
-              >Reset</a
+              >Reset All</a
             >
             <button (click)="onSearch()" class="btn btnSearch" type="button">
               Search
             </button>
+            
           </div>
         </div>
       </div>

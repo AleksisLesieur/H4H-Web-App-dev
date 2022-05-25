@@ -273,16 +273,16 @@ export class JobAddComponent implements OnInit {
 
   handleFileSelect(event) {
     const file = event.target.files[0];
-    if (file.size > 10000000) {
-      Swal.fire({
-        title: 'File size is too long.',
-        text: 'Please select a valid image within 10MB size.',
-        imageUrl: 'assets/images/smile.png',
-        imageHeight: 150,
-        imageAlt: 'A tall image',
-      })
-      return;
-    }
+    // if (file.size > 10000000) {
+    //   Swal.fire({
+    //     title: 'File size is too long.',
+    //     text: 'Please select a valid image within 10MB size.',
+    //     imageUrl: 'assets/images/smile.png',
+    //     imageHeight: 150,
+    //     imageAlt: 'A tall image',
+    //   })
+    //   return;
+    // }
     const fileType = file['type'];
     const validImageTypes = ['image/gif', 'image/jpeg', 'image/png'];
     if (validImageTypes.includes(fileType)) {
