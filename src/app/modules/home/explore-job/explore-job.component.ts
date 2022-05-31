@@ -50,13 +50,15 @@ export class ExploreJobComponent implements OnInit {
   public radius: any = [
     { key: 5, value: '5 miles' },
     { key: 10, value: '10 miles' },
+    { key: 15, value: '15 miles' },
     { key: 25, value: '25 miles' },
     { key: 50, value: '50 miles' },
     { key: 100, value: '100 miles' },
-    { key: 1000, value: 'Anywhere' },
+    { key: 3950, value: 'Anywhere' },
   ];
 
   public selectedRadius: any = '';
+  // public selectedRadius: any = 15;
   selectedItems = [];
   dropdownSettings = {};
 
@@ -108,6 +110,8 @@ export class ExploreJobComponent implements OnInit {
     this.loadJobList();
   }
 
+ 
+
   OnItemDeSelect(item: any) {
     this.selectedCategory = {
       category_image: "",
@@ -126,6 +130,7 @@ export class ExploreJobComponent implements OnInit {
     };
     this.loadJobList();
   }
+  
 
 
 
@@ -195,6 +200,10 @@ export class ExploreJobComponent implements OnInit {
     this.is_temporary = false;
     this.is_booth_rent = false;
     this.is_hourly = false;
+    this.loadJobList();
+  }
+  onResetRadius() {
+    this.selectedRadius = '';
     this.loadJobList();
   }
 
@@ -406,7 +415,10 @@ export class ExploreJobComponent implements OnInit {
     return !!pattern.test(str);
   }
 
-
+  onScroll() {
+    // console.log('it works')
+    this.onLoadMore();
+  }
 
 
 }

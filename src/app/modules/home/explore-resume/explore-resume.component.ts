@@ -36,7 +36,7 @@ export class ExploreResumeComponent implements OnInit {
     { key: 25, value: '25 miles' },
     { key: 50, value: '50 miles' },
     { key: 100, value: '100 miles' },
-    { key: 1000, value: 'Anywhere' },
+    { key: 3950, value: 'Anywhere' },
   ];
   public sortDataList: any = [
     { key: 'one_day', value: 'One Day' },
@@ -507,6 +507,10 @@ export class ExploreResumeComponent implements OnInit {
       '(\\?[;&a-z\\d%_.~+=-]*)?' + // query string
       '(\\#[-a-z\\d_]*)?$', 'i'); // fragment locator
     return !!pattern.test(str);
+  }
+
+  onScroll(){
+    this.onLoadMore()
   }
 
 }

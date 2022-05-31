@@ -18,6 +18,7 @@ import { AboutHireComponent } from './about-hire/about-hire.component';
 import { ResumeDetailsComponent } from './resume-details/resume-details.component';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
 import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { GooglePlaceModule } from 'ngx-google-places-autocomplete';
     FormsModule,
     HomeRoutingModule,
     AngularMultiSelectModule,
-    GooglePlaceModule
+    GooglePlaceModule,
+    InfiniteScrollModule
   ]
 })
 export class HomeModule { }
