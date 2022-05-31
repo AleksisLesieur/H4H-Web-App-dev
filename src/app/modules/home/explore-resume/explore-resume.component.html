@@ -149,142 +149,149 @@
 
       <div class="cardArea">
         <div
-          *ngFor="let resume of resume_list"
-          class="card explr"
-          data-aos="fade-up"
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="onScroll()"
         >
-          <div class="photo resumeimg">
-            <!-- <img src="assets/images/resumePhoto01.png" alt="" /> -->
-            <img
-              alt="Image placeholder"
-              [src]="resume.user_photo"
-              onerror="this.src='assets/images/user.png';"
-            />
-          </div>
-          <div class="content">
-            <div class="topRow">
-              <div class="leftSide --exptext">
-                <h2>{{ resume.user_name }}</h2>
-                <!-- <p class="ageTxt">
-                  {{ resume.professional_title }} ({{ resume.category_name }})
+          <div
+            *ngFor="let resume of resume_list"
+            class="card explr"
+            data-aos="fade-up"
+          >
+            <div class="photo resumeimg">
+              <!-- <img src="assets/images/resumePhoto01.png" alt="" /> -->
+              <img
+                alt="Image placeholder"
+                [src]="resume.user_photo"
+                onerror="this.src='assets/images/user.png';"
+              />
+            </div>
+            <div class="content">
+              <div class="topRow">
+                <div class="leftSide --exptext">
+                  <h2>{{ resume.user_name }}</h2>
+                  <!-- <p class="ageTxt">
+                    {{ resume.professional_title }} ({{ resume.category_name }})
+                  </p> -->
+                </div>
+                <!-- <div class="rightSide">
+                  <p>
+                    <strong *ngIf="resume.user_expected_salary">${{ resume.user_expected_salary }} per year</strong>
+                    <br />
+                    <span>Updated {{ resume.is_modified | date: "longDate" }}</span>
+                  </p>
+                </div> -->
+              </div>
+              <div class="pointrow">
+                <img src="assets/images/scissors.png" alt="" />
+                <p>{{ resume.category_name }}</p>
+              </div>
+              <div class="pointrow">
+                <img src="assets/images/icard.png" alt="" />
+                <!-- <p
+                  *ngIf="
+                    resume.license_year == '0' && resume.license_month == '0'
+                  "
+                >
+                  Student
+                </p> -->
+                <!-- <p
+                  *ngIf="
+                    resume.license_year == '0' && resume.license_month != '0'
+                  "
+                >
+                  {{ resume.license_month }} months
+                </p> -->
+                <p *ngIf="resume.license_year > 1">
+                  Licensed {{ resume.license_year }} years
+                </p>
+                <p *ngIf="resume.license_year < 2">
+                  Licensed {{ resume.license_year }} year
+                </p>
+                <!-- <p
+                  *ngIf="
+                    resume.license_year != '0' && resume.license_month != '0'
+                  "
+                >
+                  {{ resume.license_year }} years
+                  {{ resume.license_month }} months
                 </p> -->
               </div>
-              <!-- <div class="rightSide">
-                <p>
-                  <strong *ngIf="resume.user_expected_salary">${{ resume.user_expected_salary }} per year</strong>
-                  <br />
-                  <span>Updated {{ resume.is_modified | date: "longDate" }}</span>
-                </p>
-              </div> -->
-            </div>
-            <div class="pointrow">
-              <img src="assets/images/scissors.png" alt="" />
-              <p>{{ resume.category_name }}</p>
-            </div>
-            <div class="pointrow">
-              <img src="assets/images/icard.png" alt="" />
-              <!-- <p
-                *ngIf="
-                  resume.license_year == '0' && resume.license_month == '0'
-                "
-              >
-                Student
-              </p> -->
-              <!-- <p
-                *ngIf="
-                  resume.license_year == '0' && resume.license_month != '0'
-                "
-              >
-                {{ resume.license_month }} months
-              </p> -->
-              <p *ngIf="resume.license_year > 1">
-                Licensed {{ resume.license_year }} years
-              </p>
-              <p *ngIf="resume.license_year < 2">
-                Licensed {{ resume.license_year }} year
-              </p>
-              <!-- <p
-                *ngIf="
-                  resume.license_year != '0' && resume.license_month != '0'
-                "
-              >
-                {{ resume.license_year }} years
-                {{ resume.license_month }} months
-              </p> -->
-            </div>
-            <div class="pointrow">
-              <img src="assets/images/location.png" alt="" />
-              <p>{{ resume.location }}</p>
-            </div>
-
-            <div class="sec">
-              <!-- <h4>Work experience</h4> -->
-              <!-- <div style="
-                  display: flex;
-                  width: 100%;
-                  justify-content: flex-start;
-                  align-items: center;
-                ">
-                <h3 style="width: auto; padding-right: 1em; white-space: nowrap"
-                  *ngIf="resume.license_year != 0 && resume.license_year == 1">
-                  {{ resume.license_year }} year
-                </h3>
-                <h3 style="width: auto; padding-right: 1em; white-space: nowrap"
-                  *ngIf="resume.license_year != 0 && resume.license_year > 1">
-                  {{ resume.license_year }} years
-                </h3>
-                <h3 style="width: auto; padding-right: 1em; white-space: nowrap"
-                  *ngIf="resume.license_month != 0 && resume.license_month == 1">
-                  {{ resume.license_month }} month
-                </h3>
-                <h3 style="width: auto; padding-right: 1em; white-space: nowrap"
-                  *ngIf="resume.license_month != 0 && resume.license_month > 1">
-                  {{ resume.license_month }} months
-                </h3>
-              </div> -->
-            </div>
-            <!-- <div class="sec">
-              <h4>Last place of work</h4>
-              <h3>{{ resume.job_exp }}</h3>
-            </div> -->
-            <div class="btmRow">
-              <div>
-                <button
-                  *ngIf="!resume.is_invited"
-                  (click)="onInvite(resume)"
-                  type="button"
-                  class="btn applybtn"
-                >
-                  Invite
-                </button>
-                <button
-                  *ngIf="resume.is_invited"
-                  type="button"
-                  class="btn appliedbtn"
-                >
-                  Invitation Sent
-                </button>
-                <button
-                  id="viewResume"
-                  style="display: none"
-                  type="button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
-                >
-                  View Resume
-                </button>
-                <button
-                  type="button"
-                  (click)="onViewResume(resume)"
-                  class="btn applybtn resumebtn"
-                >
-                  View Resume
-                </button>
+              <div class="pointrow">
+                <img src="assets/images/location.png" alt="" />
+                <p>{{ resume.location }}</p>
               </div>
 
-              <!-- <span class="date">
-                <img src="assets/images/loc.png" alt="" />
-                {{ resume.location }}</span> -->
+              <div class="sec">
+                <!-- <h4>Work experience</h4> -->
+                <!-- <div style="
+                    display: flex;
+                    width: 100%;
+                    justify-content: flex-start;
+                    align-items: center;
+                  ">
+                  <h3 style="width: auto; padding-right: 1em; white-space: nowrap"
+                    *ngIf="resume.license_year != 0 && resume.license_year == 1">
+                    {{ resume.license_year }} year
+                  </h3>
+                  <h3 style="width: auto; padding-right: 1em; white-space: nowrap"
+                    *ngIf="resume.license_year != 0 && resume.license_year > 1">
+                    {{ resume.license_year }} years
+                  </h3>
+                  <h3 style="width: auto; padding-right: 1em; white-space: nowrap"
+                    *ngIf="resume.license_month != 0 && resume.license_month == 1">
+                    {{ resume.license_month }} month
+                  </h3>
+                  <h3 style="width: auto; padding-right: 1em; white-space: nowrap"
+                    *ngIf="resume.license_month != 0 && resume.license_month > 1">
+                    {{ resume.license_month }} months
+                  </h3>
+                </div> -->
+              </div>
+              <!-- <div class="sec">
+                <h4>Last place of work</h4>
+                <h3>{{ resume.job_exp }}</h3>
+              </div> -->
+              <div class="btmRow">
+                <div>
+                  <button
+                    *ngIf="!resume.is_invited"
+                    (click)="onInvite(resume)"
+                    type="button"
+                    class="btn applybtn"
+                  >
+                    Invite
+                  </button>
+                  <button
+                    *ngIf="resume.is_invited"
+                    type="button"
+                    class="btn appliedbtn"
+                  >
+                    Invitation Sent
+                  </button>
+                  <button
+                    id="viewResume"
+                    style="display: none"
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#exampleModal"
+                  >
+                    View Resume
+                  </button>
+                  <button
+                    type="button"
+                    (click)="onViewResume(resume)"
+                    class="btn applybtn resumebtn"
+                  >
+                    View Resume
+                  </button>
+                </div>
+
+                <!-- <span class="date">
+                  <img src="assets/images/loc.png" alt="" />
+                  {{ resume.location }}</span> -->
+              </div>
             </div>
           </div>
         </div>
@@ -295,7 +302,7 @@
         >
           No resume found using your criteria.
         </div>
-        <div class="content">
+        <!-- <div class="content">
           <a
             *ngIf="loadmore"
             href="javascript:void(0);"
@@ -303,7 +310,7 @@
             class="btn loadBtn"
             >Load more
           </a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

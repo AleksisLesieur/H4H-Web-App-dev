@@ -48,7 +48,7 @@
                     class="form-select form-control--exp"
                   >
                     <option value="">Radius</option>
-                    <option *ngFor="let exp of radius" [value]="exp.key">
+                    <option *ngFor="let exp of radius" [value]="exp.key"> 
                       {{ exp.value }}
                     </option>
                   </select>
@@ -172,7 +172,7 @@
         <div class="col-sm-4 col-md-5">
           <div class="searchBtnBlock">
             <button style="white-space: nowrap;" (click)="onResetRadius()" class="btn btnSearch" type="button">
-              Reset Location
+              Reset Radius
             </button>
             <a
               href="javascript:void(0);"
@@ -189,128 +189,135 @@
       </div>
 
       <div class="cardArea">
-        <div *ngFor="let job of job_list" class="card explr" data-aos="fade-up">
-          <div class="photo jobimg">
-            <img
-              alt="Image placeholder"
-              [src]="job.company_image"
-              onerror="this.src='assets/images/user.png';"
-            />
-          </div>
-          <div class="content">
-            <div class="topRow">
-              <div class="leftSide --exptext">
-                <h2 *ngIf="!can_apply">{{ job.job_title }}</h2>
-                <h2
-                  style="cursor: pointer"
-                  *ngIf="can_apply"
-                  (click)="onViewJobDetails(job)"
-                >
-                  {{ job.job_title }}
-                </h2>
-                <p class="ageTxt">{{ job.category_name }}</p>
-                <p>
-                  <img src="assets/images/loc.png" alt="" />
-                  {{ job.job_location }}
-                </p>
-              </div>
-              <div class="rightSide">
-                <span
-                  style="white-space: nowrap; background-color: #a4a89f"
-                  *ngIf="job.is_full_time == 'True'"
-                  class="tag tag--semiPink"
-                >
-                  Full Time
-                </span>
-                <span
-                  style="white-space: nowrap; background-color: #807680"
-                  *ngIf="job.is_part_time == 'True'"
-                  class="tag tag--semiPink"
-                >
-                  Part Time
-                </span>
-                <span
-                  style="white-space: nowrap; background-color: #a2bfca"
-                  *ngIf="job.is_hourly == 'True'"
-                  class="tag tag--semiPink"
-                >
-                  Hourly
-                </span>
-                <span
-                  style="white-space: nowrap; background-color: #393a10"
-                  *ngIf="job.is_booth_rent == 'True'"
-                  class="tag tag--semiPink"
-                >
-                  Booth Rent
-                </span>
-                <span
-                  style="
-                    white-space: nowrap;
-                    color: #000;
-                    background-color: #eff0f1;
-                  "
-                  *ngIf="job.is_contractor == 'True'"
-                  class="tag tag--semiPink"
-                >
-                  Contractor
-                </span>
-                <span
-                  style="white-space: nowrap; background-color: #242324"
-                  *ngIf="job.is_temporary == 'True'"
-                  type=""
-                  class="tag tag--semiPink"
-                >
-                  Temporary
-                </span>
-              </div>
+        <div
+        infiniteScroll
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="50"
+        (scrolled)="onScroll()"
+        >
+          <div *ngFor="let job of job_list" class="card explr" data-aos="fade-up">
+            <div class="photo jobimg">
+              <img
+                alt="Image placeholder"
+                [src]="job.company_image"
+                onerror="this.src='assets/images/user.png';"
+              />
             </div>
-            <article>
-              {{ job.job_summary }}
-            </article>
-            <div class="btmRow">
-              <button
-                *ngIf="!job.is_applied"
-                type="button"
-                (click)="onJobApply(job)"
-                class="btn applybtn"
-              >
-                Apply
-              </button>
-              <button
-                *ngIf="job.is_applied"
-                type="button"
-                class="btn appliedbtn"
-              >
-                Application Sent
-              </button>
-              <button
-                id="viewJob"
-                style="display: none"
-                type="button"
-                data-bs-toggle="modal"
-                data-bs-target="#exampleModal"
-              >
-                View job
-              </button>
+            <div class="content">
+              <div class="topRow">
+                <div class="leftSide --exptext">
+                  <h2 *ngIf="!can_apply">{{ job.job_title }}</h2>
+                  <h2
+                    style="cursor: pointer"
+                    *ngIf="can_apply"
+                    (click)="onViewJobDetails(job)"
+                  >
+                    {{ job.job_title }}
+                  </h2>
+                  <p class="ageTxt">{{ job.category_name }}</p>
+                  <p>
+                    <img src="assets/images/loc.png" alt="" />
+                    {{ job.job_location }}
+                  </p>
+                </div>
+                <div class="rightSide">
+                  <span
+                    style="white-space: nowrap; background-color: #a4a89f"
+                    *ngIf="job.is_full_time == 'True'"
+                    class="tag tag--semiPink"
+                  >
+                    Full Time
+                  </span>
+                  <span
+                    style="white-space: nowrap; background-color: #807680"
+                    *ngIf="job.is_part_time == 'True'"
+                    class="tag tag--semiPink"
+                  >
+                    Part Time
+                  </span>
+                  <span
+                    style="white-space: nowrap; background-color: #a2bfca"
+                    *ngIf="job.is_hourly == 'True'"
+                    class="tag tag--semiPink"
+                  >
+                    Hourly
+                  </span>
+                  <span
+                    style="white-space: nowrap; background-color: #393a10"
+                    *ngIf="job.is_booth_rent == 'True'"
+                    class="tag tag--semiPink"
+                  >
+                    Booth Rent
+                  </span>
+                  <span
+                    style="
+                      white-space: nowrap;
+                      color: #000;
+                      background-color: #eff0f1;
+                    "
+                    *ngIf="job.is_contractor == 'True'"
+                    class="tag tag--semiPink"
+                  >
+                    Contractor
+                  </span>
+                  <span
+                    style="white-space: nowrap; background-color: #242324"
+                    *ngIf="job.is_temporary == 'True'"
+                    type=""
+                    class="tag tag--semiPink"
+                  >
+                    Temporary
+                  </span>
+                </div>
+              </div>
+              <article>
+                {{ job.job_summary }}
+              </article>
+              <div class="btmRow">
+                <button
+                  *ngIf="!job.is_applied"
+                  type="button"
+                  (click)="onJobApply(job)"
+                  class="btn applybtn"
+                >
+                  Apply
+                </button>
+                <button
+                  *ngIf="job.is_applied"
+                  type="button"
+                  class="btn appliedbtn"
+                >
+                  Application Sent
+                </button>
+                <button
+                  id="viewJob"
+                  style="display: none"
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  View job
+                </button>
 
-              <button
-                (click)="onViewJobDetails(job)"
-                type="button"
-                class="btn applybtn"
-              >
-                View Details
-              </button>
+                <button
+                  (click)="onViewJobDetails(job)"
+                  type="button"
+                  class="btn applybtn"
+                >
+                  View Details
+                </button>
 
-              <span class="date"
-                >{{ homeService.convertDate(job.entry_date) | date }}
-              </span>
+                <span class="date"
+                  >{{ homeService.convertDate(job.entry_date) | date }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
         <div *ngIf="job_list.length == 0" class="card explr" data-aos="fade-up">
           No jobs found using your criteria.
         </div>
-        <div class="content">
+        <!-- <div class="content">
           <a
             *ngIf="loadmore"
             href="javascript:void(0);"
@@ -318,7 +325,7 @@
             class="btn loadBtn"
             >Load more
           </a>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
